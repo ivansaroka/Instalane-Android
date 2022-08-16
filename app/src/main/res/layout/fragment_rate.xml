@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mContResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_box_top"
+    android:paddingTop="@dimen/margin_app"
+    android:paddingBottom="@dimen/margin_app"
+    android:paddingHorizontal="@dimen/margin_app">
+
+    <ImageView
+        android:id="@+id/mClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_close"/>
+
+    <TextView
+        android:id="@+id/mTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        style="@style/TextStyleBold"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/text_size_big"
+        android:text="@string/how_was_your_experience"/>
+
+    <TextView
+        android:id="@+id/mDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:layout_marginTop="@dimen/margin_normal"
+        app:layout_constraintTop_toBottomOf="@+id/mTitle"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/textGray"
+        android:text="@string/description_rate"/>
+
+    <LinearLayout
+        android:id="@+id/mContRate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mDescription">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mRate1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star_rate"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_normal"
+                android:background="@drawable/circle_orange"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mRate2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star_rate"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_normal"
+                android:background="@drawable/circle_orange"/>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mRate3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star_rate"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_normal"
+                android:background="@drawable/circle_orange"/>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mRate4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star_rate"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_normal"
+                android:background="@drawable/circle_gray"/>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mRate5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_star_rate"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_normal"
+                android:background="@drawable/circle_gray"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mCommentLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:layout_marginTop="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mContRate"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/textGray"
+        android:text="@string/comment"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxBarCode"
+        style="@style/TextInputLayoutStyle"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:hintEnabled="false"
+        android:layout_width="match_parent"
+        android:layout_marginVertical="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mCommentLabel"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mComment"
+            style="@style/EditTextStyle"
+            android:gravity="top"
+            android:minLines="3"
+            android:maxLines="5"
+            android:inputType="textCapSentences|textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/boxBarCode"
+        android:layout_marginTop="@dimen/margin_app"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mConfirm"
+            android:layout_width="0dp"
+            android:enabled="false"
+            android:layout_weight="1"
+            style="@style/StyleButtonApp"
+            android:text="@string/continue_"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

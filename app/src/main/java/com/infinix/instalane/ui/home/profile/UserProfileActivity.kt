@@ -1,0 +1,78 @@
+package com.infinix.instalane.ui.home.profile
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.facebook.login.LoginManager
+import com.infinix.instalane.R
+import com.infinix.instalane.data.local.AppPreferences
+import com.infinix.instalane.databinding.ActivityUserProfileBinding
+import com.infinix.instalane.ui.base.ActivityAppBase
+import com.infinix.instalane.ui.home.MainActivity
+import com.infinix.instalane.ui.home.profile.changePassword.ChangePasswordActivity
+import com.infinix.instalane.ui.home.profile.editProfile.EditProfileActivity
+import com.infinix.instalane.ui.home.profile.memberships.MembershipsActivity
+import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingActivity
+import com.infinix.instalane.ui.home.profile.paymentMethods.PaymentMethodsActivity
+import com.infinix.instalane.ui.start.login.LoginActivity
+import com.infinix.instalane.ui.start.register.RegisterViewModel
+import com.infinix.instalane.utils.AppDialog
+
+class UserProfileActivity : ActivityAppBase() {
+
+    private val viewModel by lazy {
+        ViewModelProvider(this)[UserProfileViewModel::class.java].apply {
+            logoutLiveData.observe(this@UserProfileActivity) {}
+            onError.observe(this@UserProfileActivity) { hideProgressDialog() }
+        }
+    }
+
+    private val binding by lazy { ActivityUserProfileBinding.inflate(layoutInflater) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        setToolbar()
+
+        binding.mEdit.setOnClickListener { startActivity(Intent(this, EditProfileActivity::class.java)) }
+
+        binding.mContPayment.setOnClickListener { startActivity(Intent(this, PaymentMethodsActivity::class.java)) }
+        binding.mContMyShopping.setOnClickListener { startActivity(Intent(this, MyShoppingActivity::class.java)) }
+        binding.mContMemberships.setOnClickListener { startActivity(Intent(this, MembershipsActivity::class.java)) }
+        binding.mContPassword.setOnClickListener { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
+        binding.mLogout.setOnClickListener { logout() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        completeData()
+    }
+
+    private fun completeData() {
+        val user = AppPreferences.getUser()
+        binding.tvUsername.text = user?.fullname
+        binding.mEmail.text = user?.email
+        binding.mPhoto.clipToOutline = true
+        Glide.with(this).load(user?.profilePicture).placeholder(R.drawable.placeholder_user_profile).circleCrop().into(binding.mPhoto)
+    }
+
+    private fun logout() {
+        AppDialog.showDialog(this@UserProfileActivity,
+            title = getString(R.string.app_name),
+            body = getString(R.string.logout_description),
+            confirm = getString(R.string.ok),
+            cancel = getString(R.string.cancel),
+            confirmListener = object : AppDialog.ConfirmListener{
+                override fun onClick() {
+                    viewModel.logout()
+                    LoginManager.getInstance().logOut()
+                    AppPreferences.clearData()
+                    startActivity(Intent(this@UserProfileActivity, LoginActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                }
+            }
+        )
+    }
+}

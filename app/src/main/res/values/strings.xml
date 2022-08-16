@@ -1,0 +1,187 @@
+<resources>
+    <string name="app_name">Instalane</string>
+
+    <string name="facebook_app_id">420617202795316</string>
+    <string name="fb_login_protocol_scheme">fb420617202795316</string>
+    <string name="facebook_client_token">9785b015e3f3cffbd22ecf765ca10a9a</string>
+
+    <string name="notification_channel_id">instalane_notification_channel</string>
+    <string name="select_source">Select Source</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="remove">Remove</string>
+
+    <!-- Api Error -->
+    <string name="no_internet">No internet connection</string>
+    <string name="time_out">Time out error</string>
+    <string name="error_default">Something was wrong</string>
+    <string name="missing_permissions">Permission Error</string>
+    <string name="field_required">This field is required</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="not_match_password">Passwords don\'t match</string>
+    <string name="error_accept_terms">You must accept terms and conditions</string>
+
+    <!-- Sign In -->
+    <string name="description_splash">Create your Lane now\nInstalane now</string>
+    <string name="sign_in_description">Please sign in first to create your Lane.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="i_don_t_have_a_account_sign_up">I don\'t have an account? Sign up</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="send">Send</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_description">Please sign up first  to create your Lane.</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="i_accepted_all_terms_conditions"><![CDATA[I accepted all terms & conditions.]]></string>
+    <string name="i_have_an_account_sign_in">I have an account? Sign in</string>
+    <string name="phone_number">Phone Number</string>
+
+    <!-- HOME -->
+    <string name="near_you">Near you</string>
+    <string name="recommendations_near_you">Recommendations near you</string>
+    <string name="see_all">See all</string>
+    <string name="stores_visited">Stores visited</string>
+    <string name="your_location">Your Location</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="gps_description">We need to access your location to show you the stores around you</string>
+    <string name="turn_on_gps">Turn on GPS</string>
+
+    <!-- PROFILE -->
+    <string name="logout">Logout</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="manage_payment_methods">Manage payment methods</string>
+    <string name="my_shopping">My shopping</string>
+    <string name="history_of_your_purchases">History of your purchases</string>
+    <string name="memberships">Memberships</string>
+    <string name="add_your_memberships">Add your memberships</string>
+    <string name="change_password">Change Password</string>
+    <string name="manage_your_password">Manage your password</string>
+    <string name="_2_factor_authentication">2-factor authentication</string>
+    <string name="face_id">Face ID</string>
+    <string name="manage_your_face_id_access">Manage your Face ID access</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="add_an_extra_layer_of_security">Add an extra layer of security</string>
+    <string name="save">Save</string>
+    <string name="logout_description">Are you sure you want to logout?</string>
+
+    <!-- ADD CARD -->
+    <string name="add_new_card">Add New Card</string>
+    <string name="card_name">Card Name</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="cvu">CVV</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="set_as_principal">Set as principal</string>
+    <string name="add_card">Add Card</string>
+
+    <!-- ADD MEMBERSHIP -->
+    <string name="add_new_memberships">Add New Membership</string>
+    <string name="add_memberships">Add Membership</string>
+    <string name="membership_number">Membership number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="select_company">Select Company</string>
+    <string name="title_membership_success">Membership information saved</string>
+    <string name="description_membership_success">Waiting for club’s validation this will take some time but we’ll send you a notification once validated.\nThank you.</string>
+
+    <!-- STORE DETAIL -->
+    <string name="check_reviews">Check reviews</string>
+    <string name="distance">Distance</string>
+    <string name="good_service">Good service</string>
+    <string name="best_offers">Best Offers</string>
+    <string name="use">Use</string>
+    <string name="create_your_instalane_now">Create your Instalane now.</string>
+    <string name="total_reviews">%d reviews</string>
+
+    <!-- BARCODE READER -->
+    <string name="enter_the_code_manually">Enter the code manually</string>
+    <string name="add_to_basket">Add to basket</string>
+    <string name="confirm">Confirm</string>
+    <string name="please_enter_your_product_code">Please enter your product code.</string>
+    <string name="checkout">Checkout</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total_discount">Total Discount</string>
+    <string name="pay_cash">Pay Cash</string>
+    <string name="summary">Summary</string>
+    <string name="items_in_your_basket">Items in your basket</string>
+
+    <!-- CHECKOUT -->
+    <string name="product_list">Product list</string>
+    <string name="items_in_your_cart">Items in your basket</string>
+    <string name="coupon">Coupon</string>
+    <string name="coupons_applied">Coupons applied</string>
+    <string name="total">Total</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="change">Change</string>
+    <string name="you_didn_t_use_any_promo">You didn’t use any promo</string>
+    <string name="instalane_fee">Instalane Fee</string>
+    <string name="taxes">Taxes</string>
+    <string name="pay">Pay</string>
+    <string name="write_your_coupon_code">Write your coupon code</string>
+    <string name="please_enter_your_coupon_code_correctly_to_get_the_discount">Please enter your coupon code correctly to get the discount.</string>
+    <string name="redeem_code">Redeem code</string>
+    <string name="scanned_product">Scanned product</string>
+    <string name="your_payment_was_successful">Your payment was successful</string>
+    <string name="close">Close</string>
+    <string name="order_already_confirmed">Order already confirmed</string>
+    <string name="adriane_thuer">Adriane Thuer</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+
+    <!-- PURCHASE SUMMARY -->
+    <string name="purchase_summary">Purchase Summary</string>
+    <string name="please_show_this_qr_code_at_security">Please show this qr code at security</string>
+
+    <!-- HOME GUARD -->
+    <string name="lets_start_check">Lets start check</string>
+    <string name="start_check">Start check</string>
+    <string name="confirm_order">Confirm order</string>
+    <string name="add_note">Add note</string>
+    <string name="edit_note">Edit note</string>
+
+    <!-- PROFILE GUARD -->
+    <string name="company_name">Company Name</string>
+    <string name="store_name">Store Name</string>
+    <string name="store">#Store</string>
+    <string name="employeed_id">Employeed ID</string>
+    <string name="last_activity">Last activity</string>
+    <string name="login_time">Login time</string>
+    <string name="save_note">Save note</string>
+
+    <string name="order_confirmed">Order confirmed</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="role">Role</string>
+    <string name="description_forgot_password">Enter the email address you registered with and we will send you your password</string>
+    <string name="how_was_your_experience">How was your experience?</string>
+    <string name="continue_">Continue</string>
+    <string name="description_rate">If you don’t mind, tell us how was your food. This review will be used to improve your experience to be better.</string>
+    <string name="comment">Comment</string>
+    <string name="notification">Notification</string>
+    <string name="reviews">Reviews</string>
+    <string name="address">Address</string>
+    <string name="address_line_1">Address line 1</string>
+    <string name="billing_address">Billing address</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="use_as_mailing_address">Use as mailing address</string>
+    <string name="membership_require_store">Membership require store</string>
+    <string name="add_membership_information">Dear user this store requires you to be an active member please upload your membership’s information in your app following the instruction bellow\n\n-  Tab Profile\n- Then tab membership\n- Then tab on ADD NEW MEMBERSHIP\n- Fill out the require fields with your membership information\n-  Once you have added your membership’s information Tab on ADD CARD
+	Your card now will be shown and be saved under your profile – memberships\n\nNOTE = Your membership’s information will be send to your Wholesales Club’s management once its validated by them a notification will be sent to you and the create your Instalane tab will be available to you</string>
+
+    <!-- TUTORIAL -->
+    <string name="how_it_works">How It Works</string>
+    <string name="open">Open</string>
+    <string name="skip">Skip</string>
+    <string name="close_tutorial">Close tutorial</string>
+
+</resources>

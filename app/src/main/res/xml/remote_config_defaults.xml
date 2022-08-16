@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>client_secret</key>
+        <value>key1</value>
+    </entry>
+
+    <entry>
+        <key>server_client_id</key>
+        <value>key2</value>
+    </entry>
+
+    <entry>
+        <key>google_place_server_key</key>
+        <value>key3</value>
+    </entry>
+
+</defaultsMap>
+    <!-- END xml_defaults -->

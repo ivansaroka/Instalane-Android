@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mMotion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutDescription="@xml/motion_swipe_order_detail">
+
+        <ImageView
+            android:id="@+id/mPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/sample_store_big" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/mBackCircle"
+            android:layout_width="40dp"
+            android:layout_height="?attr/actionBarSize"
+            android:src="@drawable/ic_back_camera"
+            app:altSrc="@drawable/ic_back_camera_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mNameStore"
+            style="@style/TextStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Washington Food Plaza"
+            android:textSize="@dimen/text_size_big_title"
+            app:layout_constraintTop_toBottomOf="@+id/mPhoto"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/mContAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mNameStore">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="80dp"
+                android:paddingHorizontal="@dimen/margin_app">
+
+                <TextView
+                    android:id="@+id/mAddress"
+                    style="@style/TextStyleMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/textGray"
+                    android:drawableStart="@drawable/ic_pin_address"
+                    android:text="1337 Washington Ave, Miami Beach, FL 33139"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    style="@style/TextStyleBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_app"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:gravity="center_vertical"
+                    android:text="@string/product_list"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_product" />
+
+                <View style="@style/DividerStyle" />
+
+                <TextView
+                    style="@style/TextStyleBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:gravity="center_vertical"
+                    android:text="@string/total"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/subtotal"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        style="@style/TextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$38.50"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/total_discount"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        style="@style/TextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$2.80"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/instalane_fee"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        style="@style/TextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1.50"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/taxes"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        style="@style/TextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0.78"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <View style="@style/DividerStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/total"
+                        android:textColor="@color/textGray"
+                        android:textSize="@dimen/text_size_small" />
+
+                    <TextView
+                        style="@style/TextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$35.70"
+                        android:textSize="@dimen/text_size_big" />
+
+                </LinearLayout>
+
+                <View style="@style/DividerStyle" />
+
+                <TextView
+                    style="@style/TextStyleBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:gravity="center_vertical"
+                    android:text="@string/payment_method"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_card_size"
+                        android:layout_height="@dimen/ic_card_size"
+                        android:src="@drawable/sample_card"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/mProfileTitle1"
+                        style="@style/ProfileOptionTitleStyle"
+                        android:text="Visa Debit"
+                        app:layout_constraintBottom_toTopOf="@+id/mViewMiddle"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <View
+                        android:id="@+id/mViewMiddle"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        style="@style/ProfileOptionDescriptionStyle"
+                        android:text="2049 •••• 2049 3890 "
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mViewMiddle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/DividerStyle" />
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/sample_qr" />
+
+                <TextView
+                    style="@style/TextStyleSemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_app"
+                    android:gravity="center"
+                    android:text="@string/please_show_this_qr_code_at_security"
+                    android:textColor="@color/textGray"
+                    android:textSize="@dimen/text_size_small" />
+                
+                <View style="@style/DividerStyle"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mContResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FCFCFC"
+                    android:paddingHorizontal="@dimen/margin_app"
+                    android:paddingVertical="@dimen/margin_big"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-16dp">
+
+                    <TextView
+                        android:id="@+id/mTitleRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        style="@style/TextStyleBold"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/text_size_big"
+                        android:text="@string/how_was_your_experience"/>
+
+                    <TextView
+                        android:id="@+id/mDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyleSemiBold"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        app:layout_constraintTop_toBottomOf="@+id/mTitleRate"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/textGray"
+                        android:text="@string/description_rate"/>
+
+                    <LinearLayout
+                        android:id="@+id/mContRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_app"
+                        app:layout_constraintTop_toBottomOf="@+id/mDescription">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/mRate1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rate1"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/margin_normal"
+                                android:background="@drawable/circle_gray"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/mRate2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rate2"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/margin_normal"
+                                android:background="@drawable/circle_gray"/>
+
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/mRate3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rate3"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/margin_normal"
+                                android:background="@drawable/circle_gray"/>
+
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/mRate4"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rate4"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/margin_normal"
+                                android:background="@drawable/circle_gray"/>
+
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/mRate5"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rate5"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/margin_normal"
+                                android:background="@drawable/circle_gray"/>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/mCommentLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyleSemiBold"
+                        android:layout_marginTop="@dimen/margin_app"
+                        app:layout_constraintTop_toBottomOf="@+id/mContRate"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/textGray"
+                        android:text="@string/comment"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/boxBarCode"
+                        style="@style/TextInputLayoutStyle"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="@dimen/margin_app"
+                        app:layout_constraintTop_toBottomOf="@+id/mCommentLabel"
+                        app:boxStrokeWidth="1dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/mComment"
+                            style="@style/EditTextStyle"
+                            android:gravity="top"
+                            android:minLines="3"
+                            android:maxLines="5"
+                            android:inputType="textCapSentences|textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/boxBarCode"
+                        android:layout_marginTop="@dimen/margin_app"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/mConfirm"
+                            android:layout_width="0dp"
+                            android:enabled="false"
+                            android:layout_weight="1"
+                            style="@style/StyleButtonApp"
+                            android:text="@string/continue_"/>
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

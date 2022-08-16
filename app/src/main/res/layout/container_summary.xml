@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_app"
+        android:layout_marginTop="@dimen/height_swipe"
+        android:background="@drawable/bg_box_top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextStyleBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/items_in_your_basket"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_product"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+        <View style="@style/DividerStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subtotal"
+                android:textColor="@color/textGray"
+                android:textSize="@dimen/text_size_small"
+                style="@style/TextStyleSemiBold"/>
+
+            <TextView
+                android:id="@+id/mTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0.00"
+                android:textSize="@dimen/text_size_big"
+                style="@style/TextStyleBold"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mConfirm"
+            style="@style/StyleButtonApp"
+            android:text="@string/checkout"
+            android:layout_marginTop="@dimen/margin_app"
+            android:drawableEnd="@drawable/ic_instalane_now"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/margin_normal" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

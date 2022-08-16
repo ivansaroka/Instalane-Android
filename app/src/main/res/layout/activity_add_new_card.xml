@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include android:id="@+id/mToolBar"
+        layout="@layout/toolbar_app"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/mToolBar"
+        app:layout_constraintBottom_toTopOf="@+id/mConfirm">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_app"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/card_name"
+                style="@style/TitleEditTextStyle"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="Luca Millar"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/card_number"
+                style="@style/TitleEditTextStyle"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="2049 2371 2049 3890"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/expiration_date"
+                        style="@style/TitleEditTextStyle"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutStyle"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:boxStrokeWidth="1dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/EditTextStyle"
+                            android:hint="@string/mm_yy"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/cvu"
+                        style="@style/TitleEditTextStyle"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutStyle"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:boxStrokeWidth="1dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/EditTextStyle"
+                            android:hint="@string/mm_yy"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_as_principal"
+                style="@style/TextStyleMedium"
+                android:layout_marginTop="@dimen/margin_normal"/>
+
+
+            <!-- BILLING ADDRESS -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleBold"
+                android:textSize="@dimen/text_size_semi_big"
+                android:layout_marginTop="@dimen/margin_app"
+                android:text="@string/billing_address"/>
+
+            <TextView
+                android:text="@string/first_name"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="Luca"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/last_name"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="Millar"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/phone_number"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="(973) 413 - 7165"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/address"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="124 Home PI"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/address_line_1"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="Apt 1"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/zipcode"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="07055"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:text="@string/city"
+                android:layout_marginTop="@dimen/margin_normal"
+                style="@style/TitleEditTextStyle"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTextStyle"
+                    android:hint="Lody"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_normal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="@string/state"
+                        style="@style/TitleEditTextStyle"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutStyle"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:boxStrokeWidth="1dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/EditTextStyle"
+                            android:hint="NJ"
+                            android:inputType="textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="@string/country"
+                        style="@style/TitleEditTextStyle"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutStyle"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="false"
+                        app:boxStrokeWidth="1dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/EditTextStyle"
+                            android:hint="US"
+                            android:inputType="textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/use_as_mailing_address"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mConfirm"
+        style="@style/StyleButtonApp"
+        android:text="@string/add_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/margin_app"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/mPhoto"
+        android:layout_width="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sample_store"
+        android:background="@drawable/bg_store_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/margin_app"
+        android:layout_height="120dp"/>
+
+    <LinearLayout
+        android:id="@+id/mCont"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mPhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bg_store"
+        android:layout_marginTop="-15dp"
+        android:layout_marginStart="@dimen/margin_app"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/mTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginVertical="@dimen/margin_normal"
+            android:lines="1"
+            android:ellipsize="end"
+            style="@style/TextStyleBold"
+            android:text="Art Deco Market"/>
+
+
+        <TextView
+            android:id="@+id/mAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            style="@style/TextStyleMedium"
+            android:lines="2"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_micro_small"
+            android:textColor="@color/textGrayDark"
+            android:text="1435 Washington Ave,\nMiami Beach, FL 33139"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleMedium"
+                android:textSize="@dimen/text_size_micro_small"
+                android:textColor="@color/textGrayDark"
+                android:text="1.02 km"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleMedium"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:textSize="@dimen/text_size_micro_small"
+                android:textColor="@color/textGrayDark"
+                android:drawableStart="@drawable/ic_dot"
+                android:drawablePadding="@dimen/margin_normal"
+                android:text="8 min"/>
+
+            <TextView
+                android:id="@+id/mRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleMedium"
+                android:drawableStart="@drawable/ic_star"
+                android:textSize="@dimen/text_size_micro_small"
+                android:textColor="@color/textGray"
+                android:drawablePadding="@dimen/margin_small"
+                android:text="4.9"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/mBubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/mPhoto"
+        app:layout_constraintStart_toStartOf="@id/mPhoto"
+        android:layout_marginTop="@dimen/margin_app"
+        android:layout_marginStart="-10dp"
+        android:background="@drawable/ic_bubble"/>
+
+    <TextView
+        android:id="@+id/mBestDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/mBubble"
+        app:layout_constraintStart_toStartOf="@id/mBubble"
+        app:layout_constraintEnd_toEndOf="@+id/mBubble"
+        app:layout_constraintBottom_toBottomOf="@id/mBubble"
+        android:paddingBottom="@dimen/margin_app_middle"
+        android:text="40% off"
+        style="@style/TextStyleSemiBold"
+        android:textSize="@dimen/text_size_micro_small"
+        android:gravity="center"
+        android:textColor="@color/white"
+        />
+
+    <View
+        android:id="@+id/mExtraView"
+        android:visibility="gone"
+        android:layout_width="@dimen/margin_app"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mCont"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

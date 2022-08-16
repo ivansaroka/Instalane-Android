@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mContResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_box_top"
+    android:paddingTop="@dimen/margin_app"
+    android:paddingBottom="@dimen/margin_big"
+    android:paddingHorizontal="@dimen/margin_app">
+
+    <ImageView
+        android:id="@+id/mClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_close"/>
+
+    <ImageView
+        android:id="@+id/mPhoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/double_margin_app"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_write_coupon"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/mTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleBold"
+        android:layout_marginTop="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mPhoto"
+        android:textSize="@dimen/text_size_big"
+        android:gravity="center"
+        android:text="@string/write_your_coupon_code"/>
+
+    <TextView
+        android:id="@+id/mDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:layout_marginTop="@dimen/margin_normal"
+        app:layout_constraintTop_toBottomOf="@+id/mTitle"
+        android:textSize="@dimen/text_size_small"
+        android:gravity="center"
+        android:textColor="@color/textGray"
+        android:text="@string/please_enter_your_coupon_code_correctly_to_get_the_discount"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxBarCode"
+        style="@style/TextInputLayoutStyle"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:hintEnabled="false"
+        android:layout_width="match_parent"
+        android:layout_marginVertical="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mDescription"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mCode"
+            style="@style/EditTextStyle"
+            android:gravity="center"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/mBarCode"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/boxBarCode"
+        app:layout_constraintBottom_toBottomOf="@+id/boxBarCode"
+        android:layout_marginHorizontal="@dimen/margin_app"
+        android:src="@drawable/ic_bar_code_coupon"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/boxBarCode"
+        android:layout_marginTop="@dimen/margin_app"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mConfirm"
+            android:layout_width="0dp"
+            android:enabled="false"
+            android:layout_weight="1"
+            style="@style/StyleButtonApp"
+            android:text="@string/redeem_code"/>
+
+        <ProgressBar
+            android:id="@+id/mProgress"
+            android:visibility="gone"
+            android:indeterminateTint="@color/orange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

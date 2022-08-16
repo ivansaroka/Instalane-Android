@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/card_elevation"
+    android:layout_marginVertical="@dimen/margin_normal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/mRateBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="#ffaa2c"
+        android:numStars="5"
+        android:rating="4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/mFace"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintTop_toBottomOf="@+id/mRateBar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/rate4"/>
+
+
+    <TextView
+        android:id="@+id/mTitle"
+        style="@style/TextStyleBold"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="Maude Hamilton"
+        app:layout_constraintStart_toEndOf="@+id/mFace"
+        app:layout_constraintTop_toTopOf="@+id/mFace" />
+
+    <TextView
+        android:id="@+id/mComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/TextStyleRegular"
+        android:layout_marginTop="@dimen/margin_small"
+        android:textSize="@dimen/text_size_micro_small"
+        android:textColor="@color/textGray"
+        android:text="Luxury is something everyone deserves"/>
+
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/mComment"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/DividerStyle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

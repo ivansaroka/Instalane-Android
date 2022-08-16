@@ -1,0 +1,53 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+
+    <dimen name="border_width">1dp</dimen>
+    <dimen name="radius">15dp</dimen>
+    <dimen name="radius_button">10dp</dimen>
+    <dimen name="radius_capsule">20dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <dimen name="height_small_button">40dp</dimen>
+    <dimen name="height_button">48dp</dimen>
+    <dimen name="custom_cluster_size">50dp</dimen>
+    <dimen name="tab_icon_size">25dp</dimen>
+    <dimen name="shadow">2dp</dimen>
+
+    <dimen name="margin_shopping">16dp</dimen>
+    <dimen name="margin_app">16dp</dimen>
+    <dimen name="margin_app_middle">8dp</dimen>
+    <dimen name="margin_big">25dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_normal">10dp</dimen>
+    <dimen name="double_margin_app">32dp</dimen>
+    <dimen name="margin_message">80dp</dimen>
+    <dimen name="margin_chat_bubble">12dp</dimen>
+
+    <dimen name="text_size_micro_small">12dp</dimen>
+    <dimen name="text_size_small">14dp</dimen>
+    <dimen name="text_size_normal">16dp</dimen>
+    <dimen name="text_size_semi_big">18dp</dimen>
+    <dimen name="text_size_big">20dp</dimen>
+    <dimen name="text_size_big_title">20dp</dimen>
+    <dimen name="text_size_super_big">25dp</dimen>
+    <dimen name="text_size_toolbar">25dp</dimen>
+    <dimen name="text_size_header_start">25dp</dimen>
+
+    <dimen name="width_data">80dp</dimen>
+
+    <dimen name="ic_profile_size">25dp</dimen>
+    <dimen name="margin_profile">40dp</dimen>
+    <dimen name="ic_card_size">30dp</dimen>
+
+    <dimen name="width_photo_membership">100dp</dimen>
+    <dimen name="height_photo_membership">35dp</dimen>
+    <dimen name="height_item_membership">90dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="height_swipe">80dp</dimen>
+
+</resources>

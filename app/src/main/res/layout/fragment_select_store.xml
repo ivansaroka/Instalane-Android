@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mContResult"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_box_top"
+    android:paddingTop="@dimen/margin_app"
+    android:paddingBottom="@dimen/margin_big"
+    android:paddingHorizontal="@dimen/margin_app">
+
+    <ImageView
+        android:id="@+id/mClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_close"/>
+
+    <TextView
+        android:id="@+id/mTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        style="@style/TextStyleBold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/text_size_big"
+        android:gravity="center"
+        android:text="@string/select_company"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mTitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/boxSearch"
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="@dimen/margin_app"
+
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mSearch"
+                    style="@style/EditTextStyle"
+                    android:gravity="center_vertical"
+                    android:hint="Search"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ProgressBar
+                android:id="@+id/mProgress"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:indeterminateTint="@color/orange"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_app"
+                tools:itemCount="10"
+                android:layout_marginBottom="100dp"
+                tools:listitem="@layout/item_company"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/boxSearch"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

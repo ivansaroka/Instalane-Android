@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_box_top"
+    android:orientation="vertical"
+    tools:ignore="contentDescription">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/margin_app"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <ImageView
+                android:id="@+id/mPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/sample_store_big"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="-16dp"
+                android:layout_marginStart="-16dp"
+                android:background="@drawable/bg_box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/mTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleBold"
+                android:background="@color/white"
+                android:layout_marginTop="-16dp"
+                android:cropToPadding="false"
+                android:clipToOutline="true"
+                android:paddingHorizontal="@dimen/margin_app"
+                android:layout_marginEnd="-16dp"
+                android:layout_marginStart="-16dp"
+                android:paddingTop="@dimen/margin_normal"
+                android:textSize="@dimen/text_size_semi_big"
+                android:text="Washington Food Plaza"/>
+
+            <TextView
+                android:id="@+id/mAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleMedium"
+                android:textColor="@color/textGray"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_pin_address"
+                android:textSize="@dimen/text_size_small"
+                android:text="1337 Washington Ave, Miami Beach, FL 33139"/>
+
+            <View style="@style/DividerStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/mContCheckReview"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyleBold"
+                        android:drawableStart="@drawable/ic_star"
+                        android:textSize="@dimen/text_size_small"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="4.9"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/check_reviews"
+                        style="@style/TextStyleMedium"
+                        android:textSize="@dimen/text_size_small"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/green"/>
+
+                </LinearLayout>
+
+                <View style="@style/DividerVerticalStyle"
+                    android:layout_marginHorizontal="@dimen/margin_small"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyleBold"
+                        android:drawableStart="@drawable/ic_distance"
+                        android:textSize="@dimen/text_size_small"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="2.69 km"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/distance"
+                        style="@style/TextStyleMedium"
+                        android:textSize="@dimen/text_size_small"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/textGray"/>
+
+                </LinearLayout>
+
+                <View style="@style/DividerVerticalStyle"
+                    android:layout_marginHorizontal="@dimen/margin_small"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyleBold"
+                        android:visibility="gone"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_service"
+                        android:textSize="@dimen/text_size_small"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="4.9"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/good_service"
+                        style="@style/TextStyleMedium"
+                        android:visibility="gone"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/textGray"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mContBestOffers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:textSize="@dimen/text_size_semi_big"
+                    android:text="@string/best_offers"/>
+
+                <TextView
+                    android:id="@+id/mSeeAllOffers"
+                    style="@style/SeeAllStyle"
+                    android:visibility="invisible"
+                    android:layout_margin="0dp"
+                    android:text="@string/see_all"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="2"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_offer"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleBold"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_app"
+                android:textSize="@dimen/text_size_semi_big"
+                android:text="@string/reviews"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_app"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:textSize="@dimen/text_size_semi_big"
+                    android:text="224 ratings"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/textGray"
+                    android:text="4.5 OUT OF 5 STARS"/>
+
+            </LinearLayout>
+
+            <!-- 5 STARS-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:drawableEnd="@drawable/ic_star"
+                    android:textSize="@dimen/text_size_small"
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:text="5"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progressTint="@color/orange"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:progress="67"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="67%"/>
+
+            </LinearLayout>
+
+            <!-- 4 STARS-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:drawableEnd="@drawable/ic_star"
+                    android:textSize="@dimen/text_size_small"
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:text="4"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:progressTint="@color/orange"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:progress="14"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="14%"/>
+
+            </LinearLayout>
+
+            <!-- 3 STARS-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:drawableEnd="@drawable/ic_star"
+                    android:textSize="@dimen/text_size_small"
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:text="3"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progressTint="@color/orange"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:progress="5"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="5%"/>
+
+            </LinearLayout>
+
+            <!-- 2 STARS-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:drawableEnd="@drawable/ic_star"
+                    android:textSize="@dimen/text_size_small"
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:text="2"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:progressTint="@color/orange"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:progress="3"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="3%"/>
+
+            </LinearLayout>
+
+            <!-- 1 STARS-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:drawableEnd="@drawable/ic_star"
+                    android:textSize="@dimen/text_size_small"
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:drawablePadding="@dimen/margin_small"
+                    android:text="1"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:progressTint="@color/orange"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:layout_marginStart="@dimen/margin_app"
+                    android:progress="1"/>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="end"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleSemiBold"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="1%"/>
+
+            </LinearLayout>
+
+            <View style="@style/DividerStyle"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mTotalReviews"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyleBold"
+                    android:textSize="@dimen/text_size_semi_big"
+                    android:text="@string/total_reviews"/>
+
+                <TextView
+                    android:id="@+id/mSeeAllReviews"
+                    style="@style/SeeAllStyle"
+                    android:layout_margin="0dp"
+                    android:visibility="invisible"
+                    android:text="@string/see_all"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mListReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="2"
+                android:visibility="gone"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_review"/>
+
+            <View style="@style/StyleButtonApp"
+                android:visibility="invisible"
+                android:layout_marginTop="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_app"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm"
+        style="@style/StyleButtonApp"
+        android:layout_margin="@dimen/margin_app"
+        android:text="@string/create_your_instalane_now"
+        android:drawableEnd="@drawable/ic_instalane_now"
+        android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/margin_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mAddMembership"
+        style="@style/StyleButtonApp"
+        android:background="@drawable/bg_button"
+        android:backgroundTint="@color/gray"
+        android:layout_margin="@dimen/margin_app"
+        android:visibility="gone"
+        android:text="@string/add_memberships"
+        android:paddingHorizontal="@dimen/margin_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

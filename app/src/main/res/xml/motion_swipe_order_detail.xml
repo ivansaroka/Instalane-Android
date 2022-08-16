@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/mContAll"
+            motion:touchAnchorSide="bottom" />
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/mContAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@+id/parent"
+            motion:layout_constraintTop_toBottomOf="@+id/mNameStore">
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="1"
+            motion:layout_constraintTop_toTopOf="parent">
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mNameStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_app"
+            android:layout_marginEnd="@dimen/margin_app"
+            android:layout_marginStart="@dimen/margin_app"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/mPhoto">
+
+            <CustomAttribute
+                app:attributeName="singleLine"
+                app:customBoolean="false" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mBackCircle"
+            android:layout_width="40dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="@dimen/margin_normal"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                motion:attributeName="crossfade"
+                motion:customFloatValue="0" />
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/mContAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@+id/parent"
+            motion:layout_constraintTop_toBottomOf="@+id/mPhoto">
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:alpha="0"
+            motion:layout_constraintTop_toTopOf="parent">
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mNameStore"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/mBackCircle">
+
+            <CustomAttribute
+                app:attributeName="singleLine"
+                app:customBoolean="true" />
+
+            <CustomAttribute
+                app:attributeName="ellipsize"
+                app:customStringValue="end" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/mBackCircle"
+            android:layout_width="40dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="@dimen/margin_normal"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent">
+
+            <CustomAttribute
+                motion:attributeName="crossfade"
+                motion:customFloatValue="1" />
+
+        </Constraint>
+
+    </ConstraintSet>
+</MotionScene>

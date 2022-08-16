@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="@dimen/card_elevation"
+        android:paddingBottom="@dimen/card_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/mBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_app_middle"
+                android:padding="@dimen/margin_app_middle"
+                android:src="@drawable/ic_back" />
+
+            <ImageView
+                android:id="@+id/mClose"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_app_middle"
+                android:padding="@dimen/margin_small"
+                android:src="@drawable/ic_close" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/mBack">
+
+                <TextView
+                    android:id="@+id/mTitle"
+                    style="@style/TextStyleBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toStartOf="@+id/mContProfile"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:textSize="@dimen/text_size_big_title"
+                    tools:text="Title" />
+
+                <TextView
+                    android:id="@+id/mExtraMenuButton"
+                    style="@style/TextStyleBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/mTitle"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_app"
+                    android:enabled="true"
+                    android:paddingLeft="@dimen/margin_small"
+                    android:paddingTop="@dimen/margin_small"
+                    android:text="Next"
+                    android:visibility="gone"
+                    android:textSize="@dimen/text_size_normal" />
+
+
+                <LinearLayout
+                    android:id="@+id/mContProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="@dimen/margin_app_middle"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/mUsername"
+                        style="@style/TextStyleSemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:maxWidth="90dp"
+                        android:layout_toStartOf="@+id/mPhotoProfile"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:ellipsize="end"
+                        android:text="Omer Johnson"
+                        android:textSize="@dimen/text_size_micro_small" />
+
+                    <ImageView
+                        android:id="@+id/mPhotoProfile"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/margin_app_middle"
+                        android:src="@drawable/ic_profile_guard"/>
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</RelativeLayout>
+
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green">
+
+    <ImageView
+        android:id="@+id/mClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="@dimen/margin_normal"
+        android:layout_margin="@dimen/margin_app"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_close_white"/>
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_success"
+        android:layout_marginBottom="@dimen/margin_big"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mTitle"/>
+
+    <TextView
+        android:id="@+id/mTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleBold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_big_title"
+        android:gravity="center"
+        android:text="@string/your_payment_was_successful"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/mDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/margin_app"
+        android:textSize="@dimen/text_size_small"
+        android:layout_marginTop="@dimen/margin_big"
+        android:text="Vitae viverra amet, maecenas quam felis purus maecenas placerat feugiat. Iaculis pellentesque bibendum lectus."
+        app:layout_constraintTop_toBottomOf="@+id/mTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

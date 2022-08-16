@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/transparent"
+    android:gravity="center"
+    android:padding="@dimen/margin_app">
+
+    <LinearLayout
+        android:id="@+id/mBackgroundTheme"
+        style="@style/StyleDialogBackground"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_big"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_app"
+            android:paddingRight="@dimen/margin_app">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextStyleBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_app"
+                android:gravity="center_horizontal"
+                android:includeFontPadding="false"
+                android:text="@string/how_it_works"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_super_big" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_start_tutorial" />
+
+            <TextView
+                android:id="@+id/body"
+                style="@style/TextStyleRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/margin_big"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed."
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mOpen"
+            style="@style/StyleButtonApp"
+            android:text="@string/open" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mSkip"
+            style="@style/StyleButtonApp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:background="@drawable/bg_button_border_white"
+            android:text="@string/skip"
+            android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/mCheckShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do not show again"
+            android:buttonTint="@color/white"
+            android:layout_marginTop="@dimen/margin_app"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+

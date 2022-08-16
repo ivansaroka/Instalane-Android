@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <TextView
+        android:id="@+id/labelLocation"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/textGray"
+        style="@style/TextStyleMedium"
+        android:textSize="@dimen/text_size_micro_small"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin_app"
+        android:layout_marginStart="@dimen/margin_app"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/your_location"/>
+
+    <TextView
+        android:id="@+id/mLocation"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:textSize="@dimen/text_size_micro_small"
+        app:layout_constraintTop_toBottomOf="@+id/labelLocation"
+        android:layout_marginStart="@dimen/margin_app"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Miami Florida"/>
+
+    <LinearLayout
+        android:id="@+id/mContProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mUsername"
+            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            style="@style/TextStyleSemiBold"
+            android:textSize="@dimen/text_size_micro_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/margin_app_middle"
+            android:text="Omer Johnson"/>
+
+
+        <ImageView
+            android:id="@+id/mProfile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="@dimen/margin_app"
+            android:layout_marginVertical="@dimen/margin_app_middle"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/bg_gray"
+            android:src="@drawable/placeholder_user_profile"
+            android:background="@drawable/bg_circle"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_home"
+        android:gravity="center"
+        android:padding="@dimen/margin_app"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/mContProfile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/margin_app">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginVertical="@dimen/margin_app"
+            android:src="@drawable/sample_logo_store"/>
+
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginVertical="@dimen/margin_big"
+            android:src="@drawable/ic_qr_home"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextStyleBold"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/margin_app"
+            android:textSize="@dimen/text_size_big_title"
+            android:text="@string/lets_start_check"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/TextStyleMedium"
+            android:gravity="center_horizontal"
+            android:textColor="@color/textGray"
+            android:text="Vitae viverra amet, maecenas quam felis purus maecenas placerat feugiat. Iaculis pellentesque bibendum lectus."/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mStartCheck"
+            style="@style/StyleButtonApp"
+            android:text="@string/start_check"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:drawableEnd="@drawable/ic_instalane_now"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/margin_normal" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:padding="@dimen/margin_app">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textSize="@dimen/text_size_header_start"
+            style="@style/TextStyleBold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textGray"
+            android:text="@string/sign_up_description"
+            android:layout_marginTop="@dimen/margin_normal"
+            style="@style/TextStyleMedium"/>
+
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:text="@string/full_name"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxFullName"
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFullName"
+                style="@style/EditTextStyle"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/email"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxEmail"
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                style="@style/EditTextStyle"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/password"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxPassword"
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/gray"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                style="@style/EditTextStyle"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/confirm_password"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxConfirmPassword"
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/gray"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
+                style="@style/EditTextStyle"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/phone_number"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhoneNumber"
+                style="@style/EditTextStyle"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/role"
+            android:visibility="gone"
+            style="@style/TitleEditTextStyle"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/mSpinnerRole"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_small"
+            android:overlapAnchor="false"
+            android:visibility="gone"
+            android:background="@drawable/bg_spinner"
+            android:layout_height="55dp"/>
+
+        <CheckBox
+            android:id="@+id/mSwitchAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextStyleRegular"
+            android:textSize="@dimen/text_size_small"
+            android:text="@string/i_accepted_all_terms_conditions"/>
+
+        <com.infinix.instalane.utils.transitionButton.TransitionButton
+            android:id="@+id/mSignUp"
+            style="@style/StyleButtonApp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/margin_big"
+            android:text="@string/sign_up"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textGray"
+            android:gravity="center"
+            android:layout_marginVertical="@dimen/margin_app"
+            android:text="@string/i_have_an_account_sign_in"
+            style="@style/TextStyleMedium"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

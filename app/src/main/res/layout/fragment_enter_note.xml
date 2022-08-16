@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mContResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_box_top"
+    android:paddingTop="@dimen/margin_app"
+    android:paddingBottom="@dimen/margin_app"
+    android:paddingHorizontal="@dimen/margin_app">
+
+    <ImageView
+        android:id="@+id/mClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_small"
+        android:src="@drawable/ic_close"/>
+
+    <TextView
+        android:id="@+id/mTitle"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        style="@style/TextStyleBold"
+        app:layout_constraintTop_toBottomOf="@+id/mClose"
+        android:textSize="@dimen/text_size_big"
+        android:gravity="center_vertical"
+        android:text="Add Note"/>
+
+    <LinearLayout
+        android:id="@+id/mContProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mClose"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mUsername"
+            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            style="@style/TextStyleSemiBold"
+            android:textSize="@dimen/text_size_micro_small"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:text="Omer Johnson"/>
+
+
+        <ImageView
+            android:id="@+id/mPhotoProfile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="@dimen/margin_app_middle"
+            android:padding="@dimen/margin_app_middle"
+            android:src="@drawable/ic_profile_guard"/>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxBarCode"
+        style="@style/TextInputLayoutStyle"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:hintEnabled="false"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginVertical="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/mTitle"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mNote"
+            style="@style/EditTextStyle"
+            android:gravity="top"
+            android:lines="5"
+            android:inputType="textMultiLine|textCapSentences" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/mContStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/margin_app"
+        app:layout_constraintTop_toBottomOf="@+id/boxBarCode">
+
+        <TextView
+            android:id="@+id/mStatus1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/TextStyleSemiBold"
+            android:textSize="@dimen/text_size_micro_small"
+            android:gravity="center"
+            android:alpha="0.5"
+            android:drawableTop="@drawable/circle_green"
+            android:drawablePadding="@dimen/margin_normal"
+            android:textColor="@color/textGray"
+            android:text="All items scanned\nand paid for"/>
+
+        <TextView
+            android:id="@+id/mStatus2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/TextStyleSemiBold"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:textSize="@dimen/text_size_micro_small"
+            android:gravity="center"
+            android:alpha="0.5"
+            android:drawableTop="@drawable/circle_yellow"
+            android:drawablePadding="@dimen/margin_normal"
+            android:textColor="@color/textGray"
+            android:text="1 item was not\nscanned or paid for"/>
+
+        <TextView
+            android:id="@+id/mStatus3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/TextStyleSemiBold"
+            android:textSize="@dimen/text_size_micro_small"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:drawableTop="@drawable/circle_red"
+            android:drawablePadding="@dimen/margin_normal"
+            android:textColor="@color/textGray"
+            android:text="2 or more items\nwere not scanned\nor paid for"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mContStatus"
+        android:layout_marginTop="@dimen/margin_app"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mConfirm"
+            android:layout_width="0dp"
+            android:enabled="false"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_weight="1"
+            style="@style/StyleButtonApp"
+            android:text="@string/save_note"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

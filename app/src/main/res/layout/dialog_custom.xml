@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/transparent"
+    android:gravity="center"
+    android:padding="@dimen/margin_app">
+
+    <LinearLayout
+        android:id="@+id/mBackgroundTheme"
+        style="@style/StyleDialogBackground"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_app"
+            android:paddingRight="@dimen/margin_app">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextStyleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_app"
+                android:gravity="center_horizontal"
+                android:includeFontPadding="false"
+                android:text="Title"
+                android:textSize="@dimen/text_size_big" />
+
+            <TextView
+                android:id="@+id/body"
+                style="@style/TextStyleRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_app"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Description"
+                android:textSize="@dimen/text_size_normal" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm"
+            style="@style/StyleButtonApp"
+            android:text="@string/ok" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel"
+            style="@style/StyleButtonApp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/cancel"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+

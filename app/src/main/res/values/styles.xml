@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/line</item>
+        <item name="android:layout_marginBottom">@dimen/margin_app</item>
+        <item name="android:layout_marginTop">@dimen/margin_app</item>
+    </style>
+
+    <style name="DividerVerticalStyle">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/line</item>
+        <item name="android:layout_marginStart">@dimen/margin_app</item>
+        <item name="android:layout_marginEnd">@dimen/margin_app</item>
+    </style>
+
+    <style name="ProfileOptionTitleStyle" parent="TextStyleBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_profile</item>
+    </style>
+
+    <style name="ProfileGuardOptionTitleStyle" parent="TextStyleBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textGray</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="ProfileGuardOptionDescriptionStyle" parent="TextStyleSemiBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="ProfileOptionDescriptionStyle" parent="TextStyleSemiBold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textGray</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_profile</item>
+    </style>
+
+    <style name="PasswordLineLevelStyle">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">#dcdfe5</item>
+    </style>
+
+    <style name="SeeAllStyle" parent="TextStyleSemiBold">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/margin_app</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:background">@drawable/bg_capsule_see_all</item>
+        <item name="android:paddingTop">@dimen/margin_small</item>
+        <item name="android:paddingBottom">@dimen/margin_small</item>
+        <item name="android:paddingEnd">@dimen/margin_normal</item>
+        <item name="android:paddingStart">@dimen/margin_normal</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="datePickerTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:datePickerStyle">@style/CustomDatePickerStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/DatePickerTheme.ButtonBarButtonStyle
+        </item>
+        <item name="android:buttonBarPositiveButtonStyle">
+            @style/DatePickerTheme.ButtonBarButtonStyle
+        </item>
+        <item name="android:windowBackground">#424242</item>
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/green</item>
+        <item name="colorAccent">@color/green</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+    </style>
+
+    <style name="DatePickerTheme.ButtonBarButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="CustomDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/green</item>
+        <item name="android:headerMonthTextAppearance">@style/HeaderTextStyle</item>
+        <item name="android:headerYearTextAppearance">@style/HeaderTextStyle</item>
+    </style>
+
+    <style name="HeaderTextStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>
