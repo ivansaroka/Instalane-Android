@@ -104,7 +104,7 @@
             style="@style/TextStyleMedium"
             android:gravity="center_horizontal"
             android:textColor="@color/textGray"
-            android:text="Vitae viverra amet, maecenas quam felis purus maecenas placerat feugiat. Iaculis pellentesque bibendum lectus."/>
+            android:text="@string/instruction_check"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mStartCheck"
