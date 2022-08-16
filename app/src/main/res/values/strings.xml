@@ -154,7 +154,7 @@
     <string name="last_activity">Last activity</string>
     <string name="login_time">Login time</string>
     <string name="save_note">Save note</string>
-
+    <string name="instruction_check">1. Tap the START CHECK below.\n 2. Scan customers QR codes.\n 3. Check all items in cart and confirm items in the App by tapping in circle next to the item.\n 4. Once all items have been confirm tap on ADD NOTE.\n 5. Add notes based on your findings after the check process.\n 6. After inputting notes select a light code based on your findings after check process.\n 7. Last step confirm customers order.</string>
     <string name="order_confirmed">Order confirmed</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
