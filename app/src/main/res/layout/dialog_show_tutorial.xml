@@ -51,7 +51,7 @@
                 android:layout_marginVertical="@dimen/margin_big"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed."
+                android:text="@string/message_welcome_instalane_expert"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_normal" />
         </LinearLayout>
