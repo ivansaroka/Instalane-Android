@@ -183,5 +183,6 @@
     <string name="open">Open</string>
     <string name="skip">Skip</string>
     <string name="close_tutorial">Close tutorial</string>
+    <string name="message_welcome_instalane_expert">Welcome to your Instatutorial. \nPlease tab on Open become an Instalane expert</string>
 
 </resources>
