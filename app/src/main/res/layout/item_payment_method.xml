@@ -9,17 +9,10 @@
     android:layout_marginHorizontal="@dimen/margin_app"
     android:background="@drawable/bg_box_border">
 
-    <ImageView
-        android:layout_width="@dimen/ic_card_size"
-        android:layout_height="@dimen/ic_card_size"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/sample_card"/>
 
     <TextView
         android:id="@+id/mProfileTitle1"
-        android:text="Visa Debit"
+        android:text="Stripe"
         style="@style/ProfileOptionTitleStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/mViewMiddle" />
@@ -30,13 +23,6 @@
         android:layout_height="1dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:text="2049 •••• 2049 3890 "
-        style="@style/ProfileOptionDescriptionStyle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mViewMiddle"
-        />
 
     <ImageView
         android:id="@+id/mButtonRadio"
