@@ -16,6 +16,7 @@ object AppPreferences {
     private const val GOOGLE_PLACE_SERVER_KEY = "GOOGLE_PLACE_SERVER_KEY"
 
     private const val SHOW_TUTORIAL = "SHOW_TUTORIAL"
+    private const val HAS_BIOMETRIC = "HAS_BIOMETRIC"
 
     private fun getPreferences() =
         InstalaneApplication.instance.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -52,4 +53,8 @@ object AppPreferences {
     fun getGoogleServerPlaceKey(): String { return getPreferences().getString(GOOGLE_PLACE_SERVER_KEY, "")?:"" }
 
     fun clearData() = getPreferences().edit()?.clear()?.apply()
+
+    fun hasBiometric(): Boolean = getPreferences().getBoolean(HAS_BIOMETRIC, false)
+
+    fun setBiometric(hasBiometric: Boolean) = getPreferences().edit()?.putBoolean(HAS_BIOMETRIC, hasBiometric)?.apply()
 }

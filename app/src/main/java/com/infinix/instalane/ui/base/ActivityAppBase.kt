@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -14,8 +17,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.infinix.instalane.R
 import com.infinix.instalane.data.local.AppPreferences
+import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.LoaderDialog
 import com.infinix.instalane.utils.showErrorMessage
+import com.infinix.instalane.utils.showMessage
 
 open class ActivityAppBase : AppCompatActivity() {
 
@@ -91,6 +96,36 @@ open class ActivityAppBase : AppCompatActivity() {
         }
     }
 
+    protected fun showErrorAlert(text:String){
+        AppDialog.showDialog(this,getString(R.string.app_name), text)
+    }
 
+    protected fun showBiometricDialog(onSuccess: () -> Unit) {
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle(getString(R.string.app_name))
+            //.setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText(getString(R.string.not_now))
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .build()
+
+        val biometricPrompt = BiometricPrompt(this, ContextCompat.getMainExecutor(this),
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS){
+                        showErrorAlert("Please config your biometric authentication from setting")
+                    }
+                    showMessage("Authentication error: $errString")
+                }
+
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    onSuccess.invoke()
+                }
+
+                override fun onAuthenticationFailed() {
+                    showMessage("Authentication failed")
+                }
+            })
+        biometricPrompt.authenticate(promptInfo)
+    }
 
 }

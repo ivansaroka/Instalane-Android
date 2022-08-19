@@ -64,58 +64,74 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bg_home"
-        android:gravity="center"
-        android:padding="@dimen/margin_app"
-        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/mContProfile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/margin_app">
+        app:layout_constraintBottom_toTopOf="@+id/mContButton">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginVertical="@dimen/margin_app"
-            android:src="@drawable/sample_logo_store"/>
-
-        <ImageView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_marginVertical="@dimen/margin_big"
-            android:src="@drawable/ic_qr_home"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextStyleBold"
             android:gravity="center"
-            android:layout_marginVertical="@dimen/margin_app"
-            android:textSize="@dimen/text_size_big_title"
-            android:text="@string/lets_start_check"/>
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_app"
+            android:layout_marginTop="@dimen/margin_app">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/TextStyleMedium"
-            android:gravity="center_horizontal"
-            android:textColor="@color/textGray"
-            android:text="@string/instruction_check"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/margin_app"
+                android:src="@drawable/sample_logo_store"/>
+
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/ic_qr_home"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleBold"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_app"
+                android:textSize="@dimen/text_size_big_title"
+                android:text="@string/lets_start_check"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                style="@style/TextStyleMedium"
+                android:gravity="center_horizontal"
+                android:textColor="@color/textGray"
+                android:paddingHorizontal="@dimen/margin_app"
+                android:layout_marginBottom="@dimen/margin_app"
+                android:text="@string/instruction_check"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/mContButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mStartCheck"
             style="@style/StyleButtonApp"
             android:text="@string/start_check"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_app"
             android:drawableEnd="@drawable/ic_instalane_now"
             android:gravity="start|center_vertical"
             android:paddingHorizontal="@dimen/margin_normal" />
 
-    </LinearLayout>
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

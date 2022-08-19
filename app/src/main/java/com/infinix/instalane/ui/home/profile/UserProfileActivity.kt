@@ -42,6 +42,7 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mContMyShopping.setOnClickListener { startActivity(Intent(this, MyShoppingActivity::class.java)) }
         binding.mContMemberships.setOnClickListener { startActivity(Intent(this, MembershipsActivity::class.java)) }
         binding.mContPassword.setOnClickListener { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
+        binding.mContAuth.setOnClickListener { showBiometricDialog {  } }
         binding.mLogout.setOnClickListener { logout() }
     }
 

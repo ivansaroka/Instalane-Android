@@ -253,6 +253,7 @@
             <View style="@style/DividerStyle" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mContAuth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
