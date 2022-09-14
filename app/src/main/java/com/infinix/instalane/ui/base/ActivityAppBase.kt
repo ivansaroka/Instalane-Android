@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.infinix.instalane.InstalaneApplication
 import com.infinix.instalane.R
 import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.utils.AppDialog
@@ -27,6 +28,24 @@ open class ActivityAppBase : AppCompatActivity() {
     private var mDialog: LoaderDialog? = null
     lateinit var mGoogleSignInClient: GoogleSignInClient
     var onGoogleAuthSuccess: ((GoogleSignInAccount, String?) -> Unit?)? = null
+    var isInBackground = false
+
+    override fun onResume() {
+        super.onResume()
+        val myApp = this.application as InstalaneApplication
+        if (myApp.wasInBackground) {
+            if (AppPreferences.getUser()!= null && AppPreferences.hasBiometric()){
+                showBiometricDialog( {  }, { if (!it) finishAffinity() } )
+            }
+        }
+        myApp.stopActivityTransitionTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (this.application as InstalaneApplication).startActivityTransitionTimer()
+    }
+
 
     fun setToolbar(title:String?=null){
         findViewById<View>(R.id.mBack)?.setOnClickListener { finish() }
@@ -100,12 +119,13 @@ open class ActivityAppBase : AppCompatActivity() {
         AppDialog.showDialog(this,getString(R.string.app_name), text)
     }
 
-    protected fun showBiometricDialog(onSuccess: () -> Unit) {
+    protected fun showBiometricDialog(onSuccess: () -> Unit, onError:(isFailed:Boolean)->Unit) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle(getString(R.string.app_name))
-            //.setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText(getString(R.string.not_now))
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .setSubtitle(getString(R.string.biometric_description))
+            //.setNegativeButtonText(getString(R.string.not_now))
+            //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
             .build()
 
         val biometricPrompt = BiometricPrompt(this, ContextCompat.getMainExecutor(this),
@@ -113,7 +133,8 @@ open class ActivityAppBase : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS){
                         showErrorAlert("Please config your biometric authentication from setting")
-                    }
+                    } else
+                        onError(false)
                     showMessage("Authentication error: $errString")
                 }
 
@@ -123,6 +144,7 @@ open class ActivityAppBase : AppCompatActivity() {
 
                 override fun onAuthenticationFailed() {
                     showMessage("Authentication failed")
+                    onError(true)
                 }
             })
         biometricPrompt.authenticate(promptInfo)

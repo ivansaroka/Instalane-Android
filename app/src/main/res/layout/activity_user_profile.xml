@@ -295,6 +295,7 @@
             <View style="@style/DividerStyle" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mContFaceId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -321,14 +322,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/mProfileTitle6"
                     />
 
-                <ImageView
-                    android:layout_width="@dimen/ic_profile_size"
-                    android:layout_height="@dimen/ic_profile_size"
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/mSwitchFaceId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:padding="3dp"
-                    android:src="@drawable/ic_arrow_right"/>
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

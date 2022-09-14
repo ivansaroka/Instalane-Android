@@ -42,8 +42,22 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mContMyShopping.setOnClickListener { startActivity(Intent(this, MyShoppingActivity::class.java)) }
         binding.mContMemberships.setOnClickListener { startActivity(Intent(this, MembershipsActivity::class.java)) }
         binding.mContPassword.setOnClickListener { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
-        binding.mContAuth.setOnClickListener { showBiometricDialog {  } }
         binding.mLogout.setOnClickListener { logout() }
+
+        binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
+        binding.mSwitchFaceId.setOnClickListener {
+            if (!AppPreferences.hasBiometric()){
+                showBiometricDialog({
+                    AppPreferences.setBiometric(true)
+                    binding.mSwitchFaceId.isChecked = true
+                }, { binding.mSwitchFaceId.isChecked = false })
+            } else {
+                showBiometricDialog({
+                    AppPreferences.setBiometric(false)
+                    binding.mSwitchFaceId.isChecked = false
+                }, { binding.mSwitchFaceId.isChecked = true })
+            }
+        }
     }
 
     override fun onResume() {

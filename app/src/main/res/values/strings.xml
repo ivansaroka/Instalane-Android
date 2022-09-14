@@ -12,6 +12,7 @@
     <string name="remove">Remove</string>
     <string name="start">START</string>
     <string name="not_now">NOT NOW</string>
+    <string name="biometric_description">Biometric credential is required</string>
 
     <!-- Api Error -->
     <string name="no_internet">No internet connection</string>
