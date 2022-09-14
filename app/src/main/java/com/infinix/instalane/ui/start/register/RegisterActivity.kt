@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -53,8 +54,14 @@ class RegisterActivity : ActivityAppBase() {
         setContentView(binding.root)
         configRegister()
         setSpinner()
-
         mRole = intent?.getStringExtra(ARG_ROLE)
+
+        binding.mPasscodeTitle.visibility = View.GONE
+        binding.mContPasscode.visibility = View.GONE
+        if (mRole == User.ROLE_GUARD){
+            binding.mPasscodeTitle.visibility = View.VISIBLE
+            binding.mContPasscode.visibility = View.VISIBLE
+        }
 
         binding.tvLogin.setOnClickListener { finish() }
         binding.mSignUp.setOnClickListener { register() }
@@ -107,6 +114,7 @@ class RegisterActivity : ActivityAppBase() {
         val password = binding.etPassword.text.toString()
         val confirmPassword = binding.etConfirmPassword.text.toString()
         val phoneNumber = binding.etPhoneNumber.text.toString()
+        val passcode = binding.etPasscode.text.toString()
 
         when {
             fullName.isBlank() -> binding.etFullName.error = getString(R.string.field_required)
@@ -122,13 +130,13 @@ class RegisterActivity : ActivityAppBase() {
             }
             password != confirmPassword -> { showMessage(getString(R.string.not_match_password)) }
             phoneNumber.isBlank() -> binding.etPhoneNumber.error = getString(R.string.field_required)
+            mRole == User.ROLE_GUARD && passcode.isEmpty() -> showMessage(getString(R.string.error_passcode))
             !binding.mSwitchAccept.isChecked -> showMessage(getString(R.string.error_accept_terms))
 
             else -> {
-                //showProgressDialog()
                 hideKeyboard()
                 binding.mSignUp.startAnimation()
-                viewModel.register(fullName, email, password, phoneNumber, mRole!!)
+                viewModel.register(fullName, email, password, phoneNumber, mRole!!, passcode)
             }
         }
     }

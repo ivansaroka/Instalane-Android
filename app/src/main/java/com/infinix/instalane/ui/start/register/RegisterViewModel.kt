@@ -17,14 +17,15 @@ class RegisterViewModel(application: Application) : BaseViewModel(application) {
     val registerLiveData = MutableLiveData<Result<User>>()
 
 
-    fun register(fullName: String, email: String, password: String, phoneNumber: String, role: String) =
+    fun register(fullName: String, email: String, password: String, phoneNumber: String, role: String, guardCode:String) =
         viewModelScope.launch {
             val request = RegisterRequest(
                 fullName = fullName,
                 email = email,
                 password = password,
                 mobileNumber = phoneNumber,
-                userRole = role
+                userRole = role,
+                guardCode = guardCode
             )
 
             ApiClient.service::register.callApi(request).collect {

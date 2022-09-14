@@ -22,6 +22,7 @@
     <string name="invalid_email">Invalid Email</string>
     <string name="not_match_password">Passwords don\'t match</string>
     <string name="error_accept_terms">You must accept terms and conditions</string>
+    <string name="error_passcode">You need a passcode to register as guard.</string>
 
     <!-- Sign In -->
     <string name="description_splash">Create your Lane now\nInstalane now</string>
@@ -43,6 +44,7 @@
     <string name="i_accepted_all_terms_conditions"><![CDATA[I accepted all terms & conditions.]]></string>
     <string name="i_have_an_account_sign_in">I have an account? Sign in</string>
     <string name="phone_number">Phone Number</string>
+    <string name="passcode">Passcode</string>
 
     <!-- HOME -->
     <string name="near_you">Near you</string>

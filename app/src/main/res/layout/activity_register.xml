@@ -122,6 +122,26 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/mPasscodeTitle"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/passcode"
+            style="@style/TitleEditTextStyle"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mContPasscode"
+            style="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPasscode"
+                style="@style/EditTextStyle"
+                android:hint="******"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
             android:layout_marginTop="@dimen/margin_normal"
             android:text="@string/role"
             android:visibility="gone"
