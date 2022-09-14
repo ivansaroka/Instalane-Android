@@ -45,6 +45,8 @@ class Store {
     @SerializedName("region_id")
     var region: Region? = null
 
+    @SerializedName("region_tax")
+    var regionTax: Float? = null
 
     class Region {
         @SerializedName("id")

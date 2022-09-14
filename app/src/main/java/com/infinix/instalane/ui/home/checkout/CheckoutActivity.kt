@@ -9,16 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonProduct
-import com.infinix.instalane.data.remote.response.Coupon
-import com.infinix.instalane.data.remote.response.Order
-import com.infinix.instalane.data.remote.response.Product
-import com.infinix.instalane.data.remote.response.Store
+import com.infinix.instalane.data.remote.response.*
 import com.infinix.instalane.databinding.ActivityCheckoutBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.barcode.ProductAdapter
 import com.infinix.instalane.ui.home.checkout.changePayment.ChangePaymentDialogFragment
 import com.infinix.instalane.ui.home.checkout.couponLector.ScannedCouponDialogFragment
 import com.infinix.instalane.ui.home.checkout.paymentResult.PaymentSuccessfulActivity
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
 
 class CheckoutActivity : ActivityAppBase() {
 
@@ -33,7 +33,8 @@ class CheckoutActivity : ActivityAppBase() {
     private val viewModel by lazy {
         ViewModelProvider(this)[CheckoutViewModel::class.java].apply {
             productsLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::showData)
-            orderLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::paymentSuccessful)
+            orderLiveData.observe(this@CheckoutActivity){ mNewOrder = it }
+            paymentIntentLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::onPaymentIntentSuccess)
             onError.observe(this@CheckoutActivity) { hideProgressDialog() }
         }
     }
@@ -48,11 +49,17 @@ class CheckoutActivity : ActivityAppBase() {
     private var taxes = 0f
     private var total = 0f
 
+    lateinit var paymentSheet: PaymentSheet
+    lateinit var customerConfig: PaymentSheet.CustomerConfiguration
+    lateinit var paymentIntentClientSecret: String
+    var mNewOrder: Order?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar(getString(R.string.checkout))
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
+        paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
 
         binding.mListCoupons.adapter = CouponAppliedAdapter(ArrayList())
         (binding.mListCoupons.adapter as CouponAppliedAdapter).onRemoveAll = {
@@ -75,7 +82,7 @@ class CheckoutActivity : ActivityAppBase() {
         subtotal = SingletonProduct.instance.getSubtotal()
         discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
         fee = 0f
-        taxes = 0f
+        taxes = if (mStore?.regionTax!=null) mStore?.regionTax!! else 0f
 
         val discountBasket = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).calculateDiscount() else 0f
         discount += discountBasket
@@ -152,6 +159,48 @@ class CheckoutActivity : ActivityAppBase() {
             completeTotal()
         }
         binding.mList.adapter = adapter
+    }
+
+    private fun onPaymentIntentSuccess(paymentIntentResponse: PaymentIntentResponse){
+        hideProgressDialog()
+        paymentIntentClientSecret = paymentIntentResponse.paymentIntent!!
+        customerConfig = PaymentSheet.CustomerConfiguration(
+            paymentIntentResponse.customer!!,
+            paymentIntentResponse.ephemeralKey!!
+        )
+        val publishableKey = paymentIntentResponse.publishableKey
+        PaymentConfiguration.init(this, publishableKey!!)
+
+        presentPaymentSheet()
+    }
+
+    private fun presentPaymentSheet() {
+        paymentSheet.presentWithPaymentIntent(
+            paymentIntentClientSecret,
+            PaymentSheet.Configuration(
+                merchantDisplayName = "Order",
+                customer = customerConfig,
+                // Set `allowsDelayedPaymentMethods` to true if your business
+                // can handle payment methods that complete payment after a delay, like SEPA Debit and Sofort.
+                allowsDelayedPaymentMethods = false
+            )
+        )
+    }
+
+    private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult){
+        when(paymentSheetResult) {
+            is PaymentSheetResult.Canceled -> {
+                print("Canceled")
+            }
+            is PaymentSheetResult.Failed -> {
+                print("Error: ${paymentSheetResult.error}")
+            }
+            is PaymentSheetResult.Completed -> {
+                if (mNewOrder!=null)
+                    paymentSuccessful(mNewOrder!!)
+                //changeStatus(Order.STATUS_COMPLETED, mOrder)
+            }
+        }
     }
 
 }

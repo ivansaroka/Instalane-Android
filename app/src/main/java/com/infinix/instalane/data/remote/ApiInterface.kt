@@ -78,4 +78,7 @@ interface ApiInterface {
 
     @POST("confirm_order")
     suspend fun confirmOrder(@Body request: ConfirmOrderRequest): Any
+
+    @POST("payment_intent")
+    suspend fun paymentIntent(@Body request: PaymentRequest): PaymentIntentResponse
 }

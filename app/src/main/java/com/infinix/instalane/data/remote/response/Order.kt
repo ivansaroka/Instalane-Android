@@ -7,6 +7,8 @@ class Order {
 
     companion object {
         const val STATE_DELIVERED = "delivered"
+        const val STATE_PAID = "paid"
+        const val STATE_FAILED = "failed"
     }
 
     @SerializedName("id")
