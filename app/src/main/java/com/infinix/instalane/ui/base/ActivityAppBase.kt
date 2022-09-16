@@ -124,18 +124,22 @@ open class ActivityAppBase : AppCompatActivity() {
             .setTitle(getString(R.string.app_name))
             .setSubtitle(getString(R.string.biometric_description))
             //.setNegativeButtonText(getString(R.string.not_now))
-            //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL or BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
             .build()
 
         val biometricPrompt = BiometricPrompt(this, ContextCompat.getMainExecutor(this),
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS){
-                        showErrorAlert("Please config your biometric authentication from setting")
-                    } else
+                    if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS)
+                        showErrorAlert("You need to configure biometric unlock in your device")
+                    else
                         onError(false)
-                    showMessage("Authentication error: $errString")
+                    if (errString.isNotEmpty())
+                        showMessage("Authentication error: $errString")
+                    else
+                        showMessage("Authentication error")
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {

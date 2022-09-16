@@ -76,7 +76,7 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
             binding.mCouponApplied.visibility = View.GONE
             binding.mRemoveCoupon.visibility = View.GONE
             binding.mLineDivider.visibility = View.GONE
-            if(isCheckout!=null && isCheckout){
+            if(isCheckout!=null && isCheckout) {
                 binding.mLineDivider.visibility = View.VISIBLE
                 binding.mAddCoupon.visibility = View.VISIBLE
                 if (data.couponApplied != null) {
@@ -84,6 +84,11 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
                     binding.mCouponApplied.visibility = View.VISIBLE
                     binding.mRemoveCoupon.visibility = View.VISIBLE
                     binding.mCouponApplied.text = "INSTA${data.couponApplied!!.discount?.toInt()}%OFF"
+                } else {
+                    if (data.hasCoupons())
+                        binding.mAddCoupon.visibility = View.VISIBLE
+                    else
+                        binding.mAddCoupon.visibility = View.GONE
                 }
             }
 

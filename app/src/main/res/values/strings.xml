@@ -133,6 +133,8 @@
     <string name="redeem_code">Redeem code</string>
     <string name="scanned_product">Scanned product</string>
     <string name="your_payment_was_successful">Your payment was successful</string>
+    <string name="thank_you_for_your_purchase">Thank you for your purchase</string>
+    <string name="please_keep_the_instalane_app_open_and_show_your_receipt_to_the_store_s_guard">Please keep the Instalane app open and show your receipt to the Store\'s guard</string>
     <string name="close">Close</string>
     <string name="order_already_confirmed">Order already confirmed</string>
     <string name="adriane_thuer">Adriane Thuer</string>

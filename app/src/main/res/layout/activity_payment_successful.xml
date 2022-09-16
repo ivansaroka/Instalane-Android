@@ -35,6 +35,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_big_title"
         android:gravity="center"
+        android:layout_marginHorizontal="@dimen/margin_app"
         android:text="@string/your_payment_was_successful"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -46,10 +47,24 @@
         style="@style/TextStyleSemiBold"
         android:textColor="@color/white"
         android:gravity="center"
-        android:layout_marginHorizontal="@dimen/margin_app"
+        android:layout_marginHorizontal="@dimen/margin_big"
         android:textSize="@dimen/text_size_small"
-        android:layout_marginTop="@dimen/margin_big"
-        android:text="Vitae viverra amet, maecenas quam felis purus maecenas placerat feugiat. Iaculis pellentesque bibendum lectus."
+        android:layout_marginTop="@dimen/margin_app"
+        android:text="@string/thank_you_for_your_purchase"
         app:layout_constraintTop_toBottomOf="@+id/mTitle"/>
+
+    <TextView
+        android:id="@+id/mDescription2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyleSemiBold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:alpha="0.6"
+        android:layout_marginHorizontal="@dimen/margin_big"
+        android:textSize="@dimen/text_size_micro_small"
+        android:layout_marginTop="@dimen/margin_app"
+        android:text="@string/please_keep_the_instalane_app_open_and_show_your_receipt_to_the_store_s_guard"
+        app:layout_constraintTop_toBottomOf="@+id/mDescription"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
