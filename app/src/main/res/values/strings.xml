@@ -45,7 +45,7 @@
     <string name="i_accepted_all_terms_conditions"><![CDATA[I accepted all terms & conditions.]]></string>
     <string name="i_have_an_account_sign_in">I have an account? Sign in</string>
     <string name="phone_number">Phone Number</string>
-    <string name="passcode">Passcode</string>
+    <string name="passcode">Guard Code</string>
 
     <!-- HOME -->
     <string name="near_you">Near you</string>
@@ -68,8 +68,8 @@
     <string name="change_password">Change Password</string>
     <string name="manage_your_password">Manage your password</string>
     <string name="_2_factor_authentication">2-factor authentication</string>
-    <string name="face_id">Face ID</string>
-    <string name="manage_your_face_id_access">Manage your Face ID access</string>
+    <string name="face_id">Biometric ID</string>
+    <string name="manage_your_face_id_access">Manage your Biometric ID access</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add_an_extra_layer_of_security">Add an extra layer of security</string>
     <string name="save">Save</string>

@@ -87,7 +87,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mContPayment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="@dimen/ic_profile_size"
@@ -124,7 +125,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/DividerStyle"/>
+            <View style="@style/DividerStyle"
+                android:visibility="gone"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mContMyShopping"

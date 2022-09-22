@@ -61,7 +61,7 @@ class TutorialActivity : ActivityAppBase() {
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut4 })
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut5 })
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut6 })
-        list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut7 })
+        //list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut7 })
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut8 })
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut9 })
         list.add(TutorialEntity().apply { this.drawableID = R.drawable.tut10 })

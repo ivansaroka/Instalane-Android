@@ -103,7 +103,7 @@
         android:drawableStart="@drawable/ic_calendar_expired"
         android:layout_marginTop="@dimen/margin_small"
         android:textSize="@dimen/text_size_micro_small"
-        android:text="Expired  Jan 25, 2022"/>
+        android:text="Expires  Jan 25, 2022"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

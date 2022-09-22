@@ -22,8 +22,8 @@ class Coupon {
     @SerializedName("discount")
     val discount: Float? = null
 
-    @SerializedName("first_purchase")
-    val firstPurchase: Boolean? = null
+    @SerializedName("only_first_purchase")
+    val firstPurchase: Boolean? = false
 
     @SerializedName("init_time")
     val initTime: String? = null

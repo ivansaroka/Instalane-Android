@@ -28,7 +28,9 @@ class StoreDialogViewModel(application: Application) : BaseViewModel(application
         viewModelScope.launch {
             ApiClient.service::getCoupons.callApi(AppPreferences.getUser()!!.accessToken!!, store.id, null).collect {
                 if (it.isSuccess)
-                    it.getOrNull()?.let { stores -> couponLiveData.postValue(stores) }
+                    it.getOrNull()?.let { stores ->
+                        couponLiveData.postValue(stores.filter { it.firstPurchase != true })
+                    }
                 else
                     onError.postValue(it.exceptionOrNull())
             }

@@ -266,10 +266,12 @@
 
             </LinearLayout>
 
-            <View style="@style/DividerStyle" />
+            <View style="@style/DividerStyle"
+                android:visibility="gone"/>
 
             <TextView
                 style="@style/TextStyleBold"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_normal"
@@ -279,7 +281,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp">
+                android:layout_height="90dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="@dimen/ic_card_size"
@@ -326,6 +329,11 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/DividerStyle" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/mConfirm"

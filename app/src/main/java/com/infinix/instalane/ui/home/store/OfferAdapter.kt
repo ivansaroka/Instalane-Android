@@ -27,8 +27,8 @@ class OfferAdapter(val list : List<Coupon>) : RecyclerView.Adapter<OfferAdapter.
             binding.mTitle.text = "${data.discount?.toInt()}% off"
 
             if (!data.finishTime.isNullOrEmpty()){
-                val sExpire = DateUtils().convertDate(data.finishTime, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_EXPIRED)
-                binding.mExpire.text = "Expired $sExpire"
+                val sExpire = DateUtils().convertDate(data.finishTime, DateUtils.FORMAT_EXPIRED_API, DateUtils.FORMAT_EXPIRED)
+                binding.mExpire.text = "Expires $sExpire"
             }
 
         }

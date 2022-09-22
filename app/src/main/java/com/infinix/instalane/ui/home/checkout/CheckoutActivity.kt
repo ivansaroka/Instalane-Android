@@ -103,13 +103,12 @@ class CheckoutActivity : ActivityAppBase() {
         binding.mTaxes.text = "$${String.format("%.2f", taxes)}"
         binding.mTotal.text = "$${String.format("%.2f", total)}"
 
-        /*
+
         couponList.clear()
         val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
-        val productCouponList = (binding.mListCoupons.adapter as ProductAdapter).getCouponIdList()
+        val productCouponList = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).getCouponIdList() else ArrayList()
         couponList.addAll(generalCouponList)
         couponList.addAll(productCouponList)
-         */
     }
 
     private fun createOrder() {

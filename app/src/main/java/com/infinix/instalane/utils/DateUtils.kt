@@ -35,6 +35,7 @@ class DateUtils {
         const val FORMAT_MESSAGE_WEEK = "EEEE"
         const val FORMAT_MESSAGE_OLD = "MMM dd, yyyy"
 
+        const val FORMAT_EXPIRED_API = "MM-dd-yyyy"
         const val FORMAT_EXPIRED = "MMM dd, yyyy"
 
         const val FORMAT_NOTIFICATION_API = "yyyy-MM-dd hh:mm:ss"
