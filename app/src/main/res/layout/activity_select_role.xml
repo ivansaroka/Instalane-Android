@@ -63,14 +63,14 @@
         android:orientation="horizontal"
         android:elevation="@dimen/card_elevation"
         app:layout_constraintBottom_toTopOf="@+id/mView"
-        android:padding="@dimen/margin_normal">
+        android:paddingVertical="@dimen/margin_normal"
+        android:paddingHorizontal="@dimen/margin_small">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_vertical"
             android:paddingTop="5dp"
-            android:layout_marginEnd="@dimen/margin_normal"
             android:src="@drawable/ic_role_user"/>
 
         <LinearLayout
@@ -88,14 +88,14 @@
                 android:text="Client"/>
 
             <TextView
+                style="@style/TextStyleRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextStyleRegular"
                 android:gravity="center_vertical"
-                android:lines="3"
-                android:textSize="@dimen/text_size_micro_small"
+                android:lines="6"
+                android:text="@string/description_client_type"
                 android:textColor="@color/white"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"/>
+                android:textSize="@dimen/text_size_micro_small" />
         </LinearLayout>
 
 
@@ -110,14 +110,14 @@
         android:orientation="horizontal"
         android:elevation="@dimen/card_elevation"
         app:layout_constraintTop_toBottomOf="@+id/mView"
-        android:padding="@dimen/margin_normal">
+        android:paddingVertical="@dimen/margin_normal"
+        android:paddingHorizontal="@dimen/margin_small">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:paddingTop="5dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/margin_normal"
             android:src="@drawable/ic_role_guard"/>
 
         <LinearLayout
@@ -138,10 +138,10 @@
                 android:layout_height="wrap_content"
                 style="@style/TextStyleRegular"
                 android:gravity="center_vertical"
-                android:lines="3"
+                android:lines="6"
                 android:textSize="@dimen/text_size_micro_small"
                 android:textColor="@color/white"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"/>
+                android:text="@string/description_guard_type"/>
 
         </LinearLayout>
 

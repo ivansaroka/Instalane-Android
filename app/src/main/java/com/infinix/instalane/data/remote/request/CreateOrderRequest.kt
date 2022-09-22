@@ -15,6 +15,7 @@ class CreateOrderRequest {
         @SerializedName("fee") var fee: Float? = null
         @SerializedName("taxes") var taxes: Float? = null
         @SerializedName("products") var products: List<ProductOrderRequest>? = null
+        @SerializedName("coupon_ids") var couponIds: List<String>? = null
     }
 
     class ProductOrderRequest {

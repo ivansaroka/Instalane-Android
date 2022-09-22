@@ -125,6 +125,7 @@
     <string name="payment_method">Payment Method</string>
     <string name="change">Change</string>
     <string name="you_didn_t_use_any_promo">You didn’t use any promo</string>
+    <string name="stripe_fee">Stripe Fee</string>
     <string name="instalane_fee">Instalane Fee</string>
     <string name="taxes">Taxes</string>
     <string name="pay">Pay</string>
@@ -191,5 +192,7 @@
     <string name="skip">Skip</string>
     <string name="close_tutorial">Close tutorial</string>
     <string name="message_welcome_instalane_expert">Welcome to your Instatutorial. \nPlease tab on Open become an Instalane expert</string>
+    <string name="description_client_type">Time is money. Get ready to start saving both by creating your own self-checkout lines with INSTALANE.</string>
+    <string name="description_guard_type">Note= In order to have a GUARD account you need to be an authorized personnel of a participating store.\n\n*Approval required. Please talk to your management team.</string>
 
 </resources>

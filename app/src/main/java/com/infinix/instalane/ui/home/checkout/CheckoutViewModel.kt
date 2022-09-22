@@ -28,7 +28,7 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
             productsLiveData.postValue(SingletonProduct.instance.productList)
         }
 
-    fun createOrder(subtotal: Float, discount: Float, fee: Float, taxes: Float, total: Float, storeId:String){
+    fun createOrder(subtotal: Float, discount: Float, fee: Float, taxes: Float, total: Float, storeId:String, couponIds : ArrayList<String>){
         viewModelScope.launch {
             val bodyRequest = CreateOrderRequest.Body().apply {
                 this.accessToken = AppPreferences.getUser()!!.accessToken!!
@@ -39,6 +39,7 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
                 this.taxes = taxes
                 this.total = total
                 this.products = SingletonProduct.instance.getProductRequest()
+                this.couponIds = couponIds
             }
 
             ApiClient.service::createOrder.callApi(bodyRequest).collect {
@@ -60,7 +61,7 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
             val request = PaymentRequest().apply {
                 this.accessToken = AppPreferences.getUser()!!.accessToken
                 this.orderId = order.id
-                this.amount = order.amount!!.times(100)
+                this.amount = order.amount!!.times(100).toInt()
             }
             ApiClient.service::paymentIntent.callApi(request).collect{
                 if(it.isSuccess)

@@ -49,6 +49,10 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
         }
     }
 
+    fun getCouponIdList(): List<String>{
+       return list.filter { it.couponApplied != null && it.couponApplied!!.id != null }.map { it.couponApplied!!.id!! }
+    }
+
     fun calculateDiscount() : Float {
         var total = 0f
 

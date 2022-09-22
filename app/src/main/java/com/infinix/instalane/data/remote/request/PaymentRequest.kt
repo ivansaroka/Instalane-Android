@@ -10,5 +10,5 @@ class PaymentRequest {
     var orderId: String? = null
 
     @SerializedName("amount")
-    var amount: Float? = null
+    var amount: Int? = null
 }

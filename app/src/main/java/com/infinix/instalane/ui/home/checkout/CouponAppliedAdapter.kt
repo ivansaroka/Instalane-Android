@@ -29,6 +29,10 @@ class CouponAppliedAdapter(val list : ArrayList<Coupon>) : RecyclerView.Adapter<
         return totalDiscount
     }
 
+    fun getCouponIdList() : List<String> {
+        return list.filter { it.id != null }.map { it.id!! }
+    }
+
     fun addCoupon(coupon: Coupon, context: Context){
         val couponFound = list.find { it.id == coupon.id }
         if (couponFound==null){

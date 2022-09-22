@@ -45,9 +45,11 @@ class CheckoutActivity : ActivityAppBase() {
 
     private var subtotal = 0f
     private var discount = 0f
+    private var mStripeFee = 0f
     private var fee = 0f
     private var taxes = 0f
     private var total = 0f
+    private var couponList = ArrayList<String>()
 
     lateinit var paymentSheet: PaymentSheet
     lateinit var customerConfig: PaymentSheet.CustomerConfiguration
@@ -81,26 +83,38 @@ class CheckoutActivity : ActivityAppBase() {
     private fun completeTotal() {
         subtotal = SingletonProduct.instance.getSubtotal()
         discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
-        fee = 0f
-        taxes = if (mStore?.regionTax!=null) mStore?.regionTax!! else 0f
+        mStripeFee = (subtotal * 2.9f) / 100
+        fee = 1.5f
+        taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
 
         val discountBasket = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).calculateDiscount() else 0f
         discount += discountBasket
-        total = subtotal - discount + fee + taxes
+        total = subtotal - discount + mStripeFee + fee + taxes
+        total = String.format("%.2f", total).replace(",", ".").toFloat()
 
         binding.mSubtotal.text = "$${String.format("%.2f", subtotal)}"
         if (discount == 0f)
             binding.mDiscount.text = "$${String.format("%.2f", discount)}"
         else
             binding.mDiscount.text = "-$${String.format("%.2f", discount)}"
+
+        binding.mStripeFee.text = "$${String.format("%.2f", mStripeFee)}"
         binding.mFee.text = "$${String.format("%.2f", fee)}"
         binding.mTaxes.text = "$${String.format("%.2f", taxes)}"
         binding.mTotal.text = "$${String.format("%.2f", total)}"
+
+        /*
+        couponList.clear()
+        val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
+        val productCouponList = (binding.mListCoupons.adapter as ProductAdapter).getCouponIdList()
+        couponList.addAll(generalCouponList)
+        couponList.addAll(productCouponList)
+         */
     }
 
     private fun createOrder() {
         showProgressDialog()
-        viewModel.createOrder(subtotal, discount, fee, taxes, total, mStore!!.id!!)
+        viewModel.createOrder(subtotal, discount, fee, taxes, total, mStore!!.id!!, couponList)
     }
 
     private fun paymentSuccessful(order: Order) {
