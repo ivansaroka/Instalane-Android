@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.infinix.instalane.R
@@ -84,12 +85,14 @@ class CheckoutActivity : ActivityAppBase() {
         subtotal = SingletonProduct.instance.getSubtotal()
         discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
         mStripeFee = (subtotal * 2.9f) / 100
+        subtotal += mStripeFee
+
         fee = 1.5f
         taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
 
         val discountBasket = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).calculateDiscount() else 0f
         discount += discountBasket
-        total = subtotal - discount + mStripeFee + fee + taxes
+        total = subtotal - discount + fee + taxes
         total = String.format("%.2f", total).replace(",", ".").toFloat()
 
         binding.mSubtotal.text = "$${String.format("%.2f", subtotal)}"
@@ -102,7 +105,6 @@ class CheckoutActivity : ActivityAppBase() {
         binding.mFee.text = "$${String.format("%.2f", fee)}"
         binding.mTaxes.text = "$${String.format("%.2f", taxes)}"
         binding.mTotal.text = "$${String.format("%.2f", total)}"
-
 
         couponList.clear()
         val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
@@ -127,10 +129,15 @@ class CheckoutActivity : ActivityAppBase() {
     private fun showCouponDialog(){
         val dialog = AddCouponDialogFragment(mStore!!)
         dialog.onConfirm = {coupon, mustShowConfirmation ->
-            if (mustShowConfirmation)
-                showScannedCoupon(coupon)
-            else
-                addCoupon(coupon)
+
+            if (mProduct==null && !coupon.couponProducts.isNullOrEmpty()){
+                showErrorAlert("This coupon is available just for some products")
+            } else {
+                if (mustShowConfirmation)
+                    showScannedCoupon(coupon)
+                else
+                    addCoupon(coupon)
+            }
         }
         dialog.show(supportFragmentManager, "")
     }

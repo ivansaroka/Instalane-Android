@@ -16,8 +16,8 @@ class Coupon {
     @SerializedName("store_id")
     val storeId: String? = null
 
-    @SerializedName("product_id")
-    val productId: String? = null
+    @SerializedName("coupon_products")
+    val couponProducts: List<String>? = null
 
     @SerializedName("discount")
     val discount: Float? = null
