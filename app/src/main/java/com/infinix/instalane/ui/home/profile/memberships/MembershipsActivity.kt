@@ -9,6 +9,7 @@ import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Memberships
 import com.infinix.instalane.databinding.ActivityMembershipsBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
+import com.infinix.instalane.ui.base.EmptyAdapter
 import com.infinix.instalane.ui.home.profile.memberships.addMembership.AddMembershipActivity
 
 class MembershipsActivity : ActivityAppBase() {
@@ -34,7 +35,10 @@ class MembershipsActivity : ActivityAppBase() {
 
     private fun showData(list:List<Memberships>){
         hideProgressDialog()
-        binding.mList.adapter = MembershipAdapter(list)
+        if (list.isEmpty())
+            binding.mList.adapter = EmptyAdapter(getString(R.string.empty_membership))
+        else
+            binding.mList.adapter = MembershipAdapter(list)
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

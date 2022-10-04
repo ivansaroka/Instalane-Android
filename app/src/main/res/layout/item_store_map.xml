@@ -7,13 +7,13 @@
     <ImageView
         android:id="@+id/mPhoto"
         android:layout_width="250dp"
+        android:layout_height="180dp"
         android:scaleType="centerCrop"
         android:src="@drawable/sample_store"
         android:background="@drawable/bg_store_top"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/margin_app"
-        android:layout_height="120dp"/>
+        android:layout_marginStart="@dimen/margin_app" />
 
     <LinearLayout
         android:id="@+id/mCont"
@@ -37,7 +37,6 @@
             style="@style/TextStyleBold"
             android:text="Art Deco Market"/>
 
-
         <TextView
             android:id="@+id/mAddress"
             android:layout_width="match_parent"
@@ -51,7 +50,6 @@
             android:textSize="@dimen/text_size_micro_small"
             android:textColor="@color/textGrayDark"
             android:text="1435 Washington Ave,\nMiami Beach, FL 33139"/>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +90,6 @@
                 android:text="4.9"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

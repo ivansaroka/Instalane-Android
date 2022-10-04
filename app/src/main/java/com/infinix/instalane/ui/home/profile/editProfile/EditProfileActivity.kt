@@ -9,6 +9,7 @@ import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.databinding.ActivityEditProfileBinding
 import com.infinix.instalane.ui.base.ActivityAppBasePhotoProfile
 import com.infinix.instalane.ui.home.profile.UserProfileViewModel
+import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.ChoosePhotoDialog
 import com.infinix.instalane.utils.isValidEmail
 import com.infinix.instalane.utils.showErrorMessage
@@ -20,7 +21,16 @@ class EditProfileActivity : ActivityAppBasePhotoProfile() {
         ViewModelProvider(this)[UserProfileViewModel::class.java].apply {
             editLiveData.observe(this@EditProfileActivity) {
                 hideProgressDialog()
-                finish()
+                AppDialog.showDialog(this@EditProfileActivity,
+                    title = getString(R.string.app_name),
+                    body = getString(R.string.successfully_edited),
+                    confirm = getString(R.string.ok),
+                    confirmListener = object : AppDialog.ConfirmListener{
+                        override fun onClick() {
+                            finish()
+                        }
+                    }
+                )
             }
             onError.observe(this@EditProfileActivity) {
                 hideProgressDialog()

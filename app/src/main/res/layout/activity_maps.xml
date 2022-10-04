@@ -14,7 +14,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/mStoreList"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="290dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/margin_big"/>
 

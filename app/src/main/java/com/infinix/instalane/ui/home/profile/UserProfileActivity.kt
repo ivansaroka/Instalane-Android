@@ -45,24 +45,45 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mLogout.setOnClickListener { logout() }
 
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
-        binding.mSwitchFaceId.setOnClickListener {
-            if (!AppPreferences.hasBiometric()){
-                showBiometricDialog({
-                    AppPreferences.setBiometric(true)
-                    binding.mSwitchFaceId.isChecked = true
-                }, { binding.mSwitchFaceId.isChecked = false })
-            } else {
-                showBiometricDialog({
-                    AppPreferences.setBiometric(false)
-                    binding.mSwitchFaceId.isChecked = false
-                }, { binding.mSwitchFaceId.isChecked = true })
-            }
-        }
+        binding.mSwitchFaceId.setOnClickListener { openBiometricDialog() }
     }
 
     override fun onResume() {
         super.onResume()
         completeData()
+    }
+
+    private fun openBiometricDialog(){
+
+        if (!AppPreferences.hasBiometric()){
+
+            AppDialog.showDialog(this@UserProfileActivity,
+                title = getString(R.string.app_name),
+                body = getString(R.string.want_to_add_biometric),
+                confirm = getString(R.string.ok),
+                cancel = getString(R.string.cancel),
+                cancelListener = object : AppDialog.CancelListener{
+                    override fun onCancel() {
+                        binding.mSwitchFaceId.isChecked = false
+                    }
+                },
+                confirmListener = object : AppDialog.ConfirmListener{
+                    override fun onClick() {
+                        showBiometricDialog({
+                            AppPreferences.setBiometric(true)
+                            binding.mSwitchFaceId.isChecked = true
+                        }, { binding.mSwitchFaceId.isChecked = false })
+                    }
+                }
+            )
+        } else {
+            showBiometricDialog({
+                AppPreferences.setBiometric(false)
+                binding.mSwitchFaceId.isChecked = false
+            }, { binding.mSwitchFaceId.isChecked = true })
+        }
+
+
     }
 
     private fun completeData() {

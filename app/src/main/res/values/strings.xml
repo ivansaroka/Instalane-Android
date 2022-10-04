@@ -74,6 +74,10 @@
     <string name="add_an_extra_layer_of_security">Add an extra layer of security</string>
     <string name="save">Save</string>
     <string name="logout_description">Are you sure you want to logout?</string>
+    <string name="successfully_edited">The user was successfully edited</string>
+    <string name="want_to_add_biometric">Want to add Biometric ID?</string>
+    <string name="empty_shopping">At the moment, you have no purchase history. Make a purchase and you will see it here.</string>
+    <string name="empty_membership">At the moment, you have no memberships.</string>
 
     <!-- ADD CARD -->
     <string name="add_new_card">Add New Card</string>

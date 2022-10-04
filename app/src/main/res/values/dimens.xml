@@ -45,7 +45,7 @@
     <dimen name="width_photo_membership">100dp</dimen>
     <dimen name="height_photo_membership">35dp</dimen>
     <dimen name="height_item_membership">90dp</dimen>
-    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="app_bar_height">270dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="height_swipe">80dp</dimen>
