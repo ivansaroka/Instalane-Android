@@ -31,7 +31,7 @@ class Coupon {
     @SerializedName("finish_time")
     val finishTime: String? = null
 
-    @SerializedName("category")
+    @SerializedName("category_id")
     val category: Category? = null
 
 }

@@ -9,9 +9,7 @@ import com.infinix.instalane.data.remote.ApiClient
 import com.infinix.instalane.data.remote.ApiClient.callApi
 import com.infinix.instalane.data.remote.request.CreateOrderRequest
 import com.infinix.instalane.data.remote.request.PaymentRequest
-import com.infinix.instalane.data.remote.response.Order
-import com.infinix.instalane.data.remote.response.PaymentIntentResponse
-import com.infinix.instalane.data.remote.response.Product
+import com.infinix.instalane.data.remote.response.*
 import com.infinix.instalane.utils.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,11 +19,23 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
     val productsLiveData = MutableLiveData<List<Product>>()
     val orderLiveData = MutableLiveData<Order>()
     val paymentIntentLiveData = MutableLiveData<PaymentIntentResponse>()
-
+    val couponLiveData = MutableLiveData<List<Coupon>>()
 
     fun getProducts() =
         viewModelScope.launch {
             productsLiveData.postValue(SingletonProduct.instance.productList)
+        }
+
+    fun getCoupons(store: Store) =
+        viewModelScope.launch {
+            ApiClient.service::getCoupons.callApi(AppPreferences.getUser()!!.accessToken!!, store.id, null).collect {
+                if (it.isSuccess)
+                    it.getOrNull()?.let { stores ->
+                        couponLiveData.postValue(stores.filter { it.firstPurchase != true })
+                    }
+                else
+                    couponLiveData.postValue(ArrayList())
+            }
         }
 
     fun createOrder(subtotal: Float, discount: Float, fee: Float, taxes: Float, total: Float, storeId:String, couponIds : ArrayList<String>){

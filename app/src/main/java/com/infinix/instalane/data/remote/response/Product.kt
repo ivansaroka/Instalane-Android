@@ -28,9 +28,6 @@ class Product {
     @SerializedName("bar_code")
     var barCode: String? = null
 
-    @SerializedName("coupon")
-    var coupon: Coupon? = null
-
     @SerializedName("quantity")
     var quantity: Int? = 1
 
@@ -38,6 +35,8 @@ class Product {
     var relatedCoupons: List<RelatedCoupon>? = null
 
     var couponApplied :Coupon?=null
+    var coupon: Coupon? = null
+    var isSponsoredBrand: Boolean = false
 
     fun hasPriceForThisRegion(region: Store.Region?) : Boolean{
         if (region==null) return false
@@ -58,7 +57,8 @@ class Product {
     }
 
     fun hasCoupons():Boolean{
-        return !relatedCoupons.isNullOrEmpty()
+        return coupon!=null
+    //return !relatedCoupons.isNullOrEmpty()
     }
 
     class PriceRegion{

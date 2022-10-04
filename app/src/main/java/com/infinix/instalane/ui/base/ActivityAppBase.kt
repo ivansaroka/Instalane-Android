@@ -119,11 +119,19 @@ open class ActivityAppBase : AppCompatActivity() {
         AppDialog.showDialog(this,getString(R.string.app_name), text)
     }
 
+    protected fun showErrorAlertDismiss(text:String){
+        AppDialog.showDialog(this,getString(R.string.app_name), text, confirmListener = object : AppDialog.ConfirmListener{
+            override fun onClick() {
+                finish()
+            }
+        })
+    }
+
     protected fun showBiometricDialog(onSuccess: () -> Unit, onError:(isFailed:Boolean)->Unit) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle(getString(R.string.app_name))
             .setSubtitle(getString(R.string.biometric_description))
-            //.setNegativeButtonText(getString(R.string.not_now))
+            .setNegativeButtonText(getString(R.string.not_now))
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
             //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL or BiometricManager.Authenticators.BIOMETRIC_WEAK)
             //.setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
@@ -134,8 +142,13 @@ open class ActivityAppBase : AppCompatActivity() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS)
                         showErrorAlert("You need to configure biometric unlock in your device")
-                    else
+                    else if (errorCode == BiometricPrompt.ERROR_LOCKOUT){
+                        showErrorAlertDismiss("Access to de application has been blocked. You can try again in 30s")
+                        onError(true)
+                        return
+                    } else
                         onError(false)
+
                     if (errString.isNotEmpty())
                         showMessage("Authentication error: $errString")
                     else

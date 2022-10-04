@@ -17,6 +17,7 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
     lateinit var onRemove:(Product)->Unit
     lateinit var onAddCoupon:(Product)->Unit
     lateinit var onRemoveCoupon:()->Unit
+    lateinit var onAddLocalCoupon:()->Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
@@ -49,6 +50,21 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
         }
     }
 
+    fun addCouponToProducts(coupon: Coupon){
+        coupon.couponProducts?.forEach { couponId ->
+            list.forEachIndexed { index, prod ->
+                prod.relatedCoupons?.forEach { relatedCoupon ->
+                    if (relatedCoupon.id == couponId && prod.id == relatedCoupon.productId){
+                        prod.coupon = coupon
+                        prod.couponApplied = coupon
+                        prod.isSponsoredBrand = true
+                        notifyItemChanged(index)
+                    }
+                }
+            }
+        }
+    }
+
     fun getCouponIdList(): List<String>{
        return list.filter { it.couponApplied != null && it.couponApplied!!.id != null }.map { it.couponApplied!!.id!! }
     }
@@ -75,19 +91,43 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
             binding.mName.text = data.name
             binding.mPrice.text = "$${data.getPriceByRegion(store?.region)}"
 
-            binding.mAddCoupon.setOnClickListener { onAddCoupon.invoke(data) }
+            //binding.mAddCoupon.setOnClickListener { onAddCoupon.invoke(data) }
+            binding.mAddCoupon.setOnClickListener {
+                data.couponApplied = data.coupon
+                notifyItemChanged(bindingAdapterPosition)
+                onAddLocalCoupon.invoke()
+            }
+
             binding.mAddCoupon.visibility = View.GONE
             binding.mCouponApplied.visibility = View.GONE
             binding.mRemoveCoupon.visibility = View.GONE
             binding.mLineDivider.visibility = View.GONE
+            binding.mContButtons.isEnabled = true
             if(isCheckout!=null && isCheckout) {
+                binding.mContButtons.isEnabled = false
                 binding.mLineDivider.visibility = View.VISIBLE
-                binding.mAddCoupon.visibility = View.VISIBLE
+                binding.mAddCoupon.isEnabled = true
+                binding.mAddCoupon.text = "Add coupon"
+
                 if (data.couponApplied != null) {
+
+                    if (data.isSponsoredBrand){
+                        binding.mCouponApplied.visibility = View.VISIBLE
+                        binding.mCouponApplied.text = "INSTA${data.couponApplied!!.discount?.toInt()}%OFF"
+                        binding.mAddCoupon.visibility = View.INVISIBLE
+
+                    } else {
+                        binding.mAddCoupon.visibility = View.VISIBLE
+                        binding.mCouponApplied.visibility = View.GONE
+                        binding.mAddCoupon.isEnabled = false
+                        binding.mAddCoupon.text = "Coupon added"
+                    }
+                    /*
                     binding.mAddCoupon.visibility = View.INVISIBLE
                     binding.mCouponApplied.visibility = View.VISIBLE
-                    binding.mRemoveCoupon.visibility = View.VISIBLE
+                    //binding.mRemoveCoupon.visibility = View.VISIBLE
                     binding.mCouponApplied.text = "INSTA${data.couponApplied!!.discount?.toInt()}%OFF"
+                     */
                 } else {
                     if (data.hasCoupons())
                         binding.mAddCoupon.visibility = View.VISIBLE

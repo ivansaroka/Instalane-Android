@@ -33,14 +33,13 @@ class CouponAppliedAdapter(val list : ArrayList<Coupon>) : RecyclerView.Adapter<
         return list.filter { it.id != null }.map { it.id!! }
     }
 
-    fun addCoupon(coupon: Coupon, context: Context){
+    fun addCoupon(coupon: Coupon, context: Context) {
         val couponFound = list.find { it.id == coupon.id }
-        if (couponFound==null){
+        if (couponFound == null) {
             list.add(coupon)
             notifyItemInserted(list.size-1)
-        }else{
-            Toast.makeText(context, "This coupon was already added", Toast.LENGTH_SHORT).show()
-        }
+        } else
+            Toast.makeText(context, "This coupon has been already used.", Toast.LENGTH_SHORT).show()
     }
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_coupon_applied)) {

@@ -33,6 +33,10 @@ class CheckoutActivity : ActivityAppBase() {
 
     private val viewModel by lazy {
         ViewModelProvider(this)[CheckoutViewModel::class.java].apply {
+            couponLiveData.observe(this@CheckoutActivity) {
+                mCouponList.addAll(it)
+                getProducts()
+            }
             productsLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::showData)
             orderLiveData.observe(this@CheckoutActivity){ mNewOrder = it }
             paymentIntentLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::onPaymentIntentSuccess)
@@ -40,6 +44,7 @@ class CheckoutActivity : ActivityAppBase() {
         }
     }
 
+    private var mCouponList = ArrayList<Coupon>()
     private var mStore:Store?=null
     private var mProduct:Product?=null
     private val binding by lazy { ActivityCheckoutBinding.inflate(layoutInflater) }
@@ -64,12 +69,15 @@ class CheckoutActivity : ActivityAppBase() {
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
 
+        /*
         binding.mListCoupons.adapter = CouponAppliedAdapter(ArrayList())
         (binding.mListCoupons.adapter as CouponAppliedAdapter).onRemoveAll = {
             binding.mTitleCouponApplied.visibility = View.GONE
             binding.mListCoupons.visibility = View.GONE
             completeTotal()
         }
+         */
+
         binding.mCoupon.setOnClickListener {
             mProduct = null
             showCouponDialog()
@@ -77,21 +85,26 @@ class CheckoutActivity : ActivityAppBase() {
         binding.mChangeCard.setOnClickListener { showChangePaymentDialog() }
         binding.mConfirm.setOnClickListener { createOrder() }
 
-        viewModel.getProducts()
+
+        viewModel.getCoupons(mStore!!)
         completeTotal()
     }
 
+
     private fun completeTotal() {
         subtotal = SingletonProduct.instance.getSubtotal()
-        discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
-        mStripeFee = (subtotal * 2.9f) / 100
-        subtotal += mStripeFee
+        //discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
+
 
         fee = 1.5f
         taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
 
         val discountBasket = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).calculateDiscount() else 0f
-        discount += discountBasket
+        discount = discountBasket
+
+        mStripeFee = ((subtotal - discount) * 2.9f) / 100
+        subtotal += mStripeFee
+
         total = subtotal - discount + fee + taxes
         total = String.format("%.2f", total).replace(",", ".").toFloat()
 
@@ -107,9 +120,9 @@ class CheckoutActivity : ActivityAppBase() {
         binding.mTotal.text = "$${String.format("%.2f", total)}"
 
         couponList.clear()
-        val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
+        //val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
         val productCouponList = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).getCouponIdList() else ArrayList()
-        couponList.addAll(generalCouponList)
+        //couponList.addAll(generalCouponList)
         couponList.addAll(productCouponList)
     }
 
@@ -130,8 +143,8 @@ class CheckoutActivity : ActivityAppBase() {
         val dialog = AddCouponDialogFragment(mStore!!)
         dialog.onConfirm = {coupon, mustShowConfirmation ->
 
-            if (mProduct==null && !coupon.couponProducts.isNullOrEmpty()){
-                showErrorAlert("This coupon is available just for some products")
+            if (mProduct==null && coupon.category==null){
+                showErrorAlert("The coupon you want to use is for products only.")
             } else {
                 if (mustShowConfirmation)
                     showScannedCoupon(coupon)
@@ -153,9 +166,12 @@ class CheckoutActivity : ActivityAppBase() {
     private fun addCoupon(coupon: Coupon) {
 
         if (mProduct==null){
+            (binding.mList.adapter as ProductAdapter).addCouponToProducts(coupon)
+            /*
             binding.mTitleCouponApplied.visibility = View.VISIBLE
             binding.mListCoupons.visibility = View.VISIBLE
             (binding.mListCoupons.adapter as CouponAppliedAdapter).addCoupon(coupon, this)
+             */
         } else{
             (binding.mList.adapter as ProductAdapter).addCoupon(coupon, mProduct!!)
             mProduct = null
@@ -170,12 +186,34 @@ class CheckoutActivity : ActivityAppBase() {
     }
 
     private fun showData(list : List<Product>){
+
+        if (mCouponList.isNotEmpty() && list.isNotEmpty()){
+
+            mCouponList.forEach { coupon ->
+
+                if (coupon.category == null) {
+                    list.forEach { product ->
+                        if (!product.relatedCoupons.isNullOrEmpty()){
+                            product.relatedCoupons!!.forEach {  relatedCoupon ->
+                                if (coupon.couponProducts!!.contains(relatedCoupon.id)) {
+                                    product.coupon = coupon
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         val adapter = ProductAdapter(ArrayList(list), mStore, true)
         adapter.onAddCoupon = {
             mProduct = it
             showCouponDialog()
         }
         adapter.onRemoveCoupon = {
+            completeTotal()
+        }
+        adapter.onAddLocalCoupon = {
             completeTotal()
         }
         binding.mList.adapter = adapter

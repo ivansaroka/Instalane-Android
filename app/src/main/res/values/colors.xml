@@ -24,6 +24,7 @@
     <color name="red">#e74343</color>
     <color name="yellow">#FFC107</color>
     <color name="disable">#60FF782C</color>
+    <color name="disableGreen">#035525</color>
 
     <!--animated button-->
     <color name="colorTransitionEnd">#ff782c</color>
