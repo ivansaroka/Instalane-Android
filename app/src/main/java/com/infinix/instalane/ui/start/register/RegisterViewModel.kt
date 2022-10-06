@@ -29,8 +29,12 @@ class RegisterViewModel(application: Application) : BaseViewModel(application) {
             )
 
             ApiClient.service::register.callApi(request).collect {
-                if (it.isSuccess) it.getOrNull()?.let { user -> AppPreferences.setUser(user) }
-                registerLiveData.postValue(it)
+                if (it.isSuccess){
+                    it.getOrNull()?.let { user -> AppPreferences.setUser(user) }
+                    registerLiveData.postValue(it)
+                }else{
+                    onError.postValue(it.exceptionOrNull())
+                }
             }
         }
 }

@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task
 import com.infinix.instalane.InstalaneApplication
 import com.infinix.instalane.R
 import com.infinix.instalane.data.local.AppPreferences
+import com.infinix.instalane.data.remote.ApiErrorParser
 import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.LoaderDialog
 import com.infinix.instalane.utils.showErrorMessage
@@ -116,6 +117,11 @@ open class ActivityAppBase : AppCompatActivity() {
     }
 
     protected fun showErrorAlert(text:String){
+        AppDialog.showDialog(this,getString(R.string.app_name), text)
+    }
+
+    protected fun showErrorAlert(throwable: Throwable?){
+        val text = ApiErrorParser.parseErrorInstalane(this, throwable)
         AppDialog.showDialog(this,getString(R.string.app_name), text)
     }
 

@@ -42,7 +42,7 @@ class RegisterActivity : ActivityAppBase() {
             registerLiveData.observe(this@RegisterActivity, this@RegisterActivity::registerResult)
             onError.observe(this@RegisterActivity) {
                 binding.mSignUp.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null)
-                showErrorMessage(it)
+                showErrorAlert(it)
             }
         }
     }

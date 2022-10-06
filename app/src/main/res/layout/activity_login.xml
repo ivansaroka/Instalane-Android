@@ -29,7 +29,7 @@
 
         <TextView
             android:layout_marginTop="50dp"
-            android:text="@string/email"
+            android:text="@string/_email"
             style="@style/TitleEditTextStyle"/>
 
         <com.google.android.material.textfield.TextInputLayout
