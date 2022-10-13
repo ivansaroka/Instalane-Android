@@ -12,6 +12,8 @@
     <string name="remove">Remove</string>
     <string name="start">START</string>
     <string name="not_now">NOT NOW</string>
+    <string name="_yes">Yes</string>
+    <string name="_no">No</string>
     <string name="biometric_description">Biometric credential is required</string>
 
     <!-- Api Error -->

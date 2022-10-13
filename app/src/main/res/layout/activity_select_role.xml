@@ -70,7 +70,9 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center_vertical"
-            android:paddingTop="5dp"
+            android:padding="10dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@drawable/circle_select_type"
             android:src="@drawable/ic_role_user"/>
 
         <LinearLayout
@@ -116,7 +118,9 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:paddingTop="5dp"
+            android:padding="10dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@drawable/circle_select_type"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_role_guard"/>
 

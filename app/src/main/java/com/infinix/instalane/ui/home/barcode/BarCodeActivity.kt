@@ -55,7 +55,7 @@ class BarCodeActivity : ActivityAppBase() {
         setupScanner()
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
 
-        binding.mBack.setOnClickListener { finish() }
+        binding.mBack.setOnClickListener { onBackPressed() }
         binding.mEnterCode.setOnClickListener { showEnterCodeDialog() }
 
         val adapter = ProductAdapter(ArrayList(), mStore, isBasket = true)
@@ -73,6 +73,17 @@ class BarCodeActivity : ActivityAppBase() {
             val intent = CheckoutActivity.getIntent(this, mStore!!)
             resultLauncher.launch(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        AppDialog.showDialog(this@BarCodeActivity, getString(R.string.app_name),
+            "Are you sure you want to go back? This action will clean your list of scanned products.",
+            getString(R.string._yes), getString(R.string._no), confirmListener = object :
+                AppDialog.ConfirmListener {
+                override fun onClick() {
+                    super@BarCodeActivity.onBackPressed()
+                }
+            })
     }
 
     private fun showRemoveAlert(product: Product){

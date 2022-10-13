@@ -52,7 +52,15 @@ object AppPreferences {
 
     fun getGoogleServerPlaceKey(): String { return getPreferences().getString(GOOGLE_PLACE_SERVER_KEY, "")?:"" }
 
-    fun clearData() = getPreferences().edit()?.clear()?.apply()
+    fun clearData() {
+        val tutorial = mustShowTutorial()
+        val biometric = hasBiometric()
+
+        getPreferences().edit()?.clear()?.apply()
+
+        setShowTutorial(tutorial)
+        setBiometric(biometric)
+    }
 
     fun hasBiometric(): Boolean = getPreferences().getBoolean(HAS_BIOMETRIC, false)
 
