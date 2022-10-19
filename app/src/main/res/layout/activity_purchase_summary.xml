@@ -176,7 +176,8 @@
 
             </LinearLayout>
 
-            <View style="@style/DividerStyle" />
+            <View style="@style/DividerStyle"
+                android:visibility="gone"/>
 
             <TextView
                 style="@style/TextStyleBold"
@@ -184,11 +185,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:text="@string/payment_method"
                 android:textSize="@dimen/text_size_normal" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="90dp">
 
                 <ImageView
@@ -226,8 +229,8 @@
 
             <ImageView
                 android:id="@+id/mQR"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView

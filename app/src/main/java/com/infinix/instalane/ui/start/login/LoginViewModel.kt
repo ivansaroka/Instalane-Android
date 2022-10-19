@@ -20,6 +20,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     val onErrorLogin = MutableLiveData<Throwable?>()
     val loginSocialNetLiveData = MutableLiveData<Any>()
     val forgetPasswordLiveData = MutableLiveData<Any>()
+    val changePasswordLiveData = MutableLiveData<Any>()
 
     fun login(email: String, password: String) =
         viewModelScope.launch {
@@ -39,6 +40,23 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             ApiClient.service::forgotPassword.callApi(ForgotPasswordRequest(email)).collect {
                 if (it.isSuccess)
                     forgetPasswordLiveData.postValue(it)
+                else
+                    onError.postValue(it.exceptionOrNull())
+            }
+        }
+    }
+
+    fun changePassword(password:String) {
+        viewModelScope.launch {
+
+            val request = EditRequest(
+                accessToken = AppPreferences.getUser()?.accessToken,
+                password = password
+            )
+
+            ApiClient.service::changePassword.callApi(request).collect {
+                if (it.isSuccess)
+                    changePasswordLiveData.postValue(it)
                 else
                     onError.postValue(it.exceptionOrNull())
             }

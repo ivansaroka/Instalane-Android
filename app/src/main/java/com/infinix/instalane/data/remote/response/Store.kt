@@ -19,6 +19,9 @@ class Store {
     @SerializedName("picture")
     var picture: String? = null
 
+    @SerializedName("icon")
+    var icon: String? = null
+
     @SerializedName("best_discount")
     var bestDiscount: Int? = null
 

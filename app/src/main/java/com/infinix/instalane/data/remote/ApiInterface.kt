@@ -31,6 +31,9 @@ interface ApiInterface {
     @PUT("edit_profile")
     suspend fun editProfile(@Body body: MultipartBody): User
 
+    @PUT("edit_profile")
+    suspend fun changePassword(@Body body: EditRequest): User
+
     @GET("get_profile")
     suspend fun getProfile(@Query("access_token") accessToken: String): User
 

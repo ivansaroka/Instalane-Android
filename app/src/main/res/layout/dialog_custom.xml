@@ -57,7 +57,7 @@
             style="@style/StyleButtonApp"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/margin_normal"
-            android:text="@string/cancel"
+            android:text="@string/_cancel"
             android:visibility="visible" />
 
     </LinearLayout>

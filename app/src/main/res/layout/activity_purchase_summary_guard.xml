@@ -53,7 +53,7 @@
                 android:gravity="center_vertical"
                 android:layout_gravity="end"
                 android:textColor="@color/green"
-                android:text="@string/cancel"
+                android:text="@string/_cancel"
                 android:textSize="@dimen/text_size_normal" />
 
         </LinearLayout>

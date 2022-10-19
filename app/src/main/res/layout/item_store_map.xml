@@ -59,6 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/mDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TextStyleMedium"
@@ -69,6 +70,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:visibility="invisible"
                 android:layout_height="wrap_content"
                 style="@style/TextStyleMedium"
                 android:layout_marginStart="@dimen/margin_normal"

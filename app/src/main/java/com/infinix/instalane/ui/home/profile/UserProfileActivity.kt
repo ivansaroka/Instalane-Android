@@ -2,7 +2,6 @@ package com.infinix.instalane.ui.home.profile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.facebook.login.LoginManager
@@ -10,14 +9,12 @@ import com.infinix.instalane.R
 import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.databinding.ActivityUserProfileBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
-import com.infinix.instalane.ui.home.MainActivity
 import com.infinix.instalane.ui.home.profile.changePassword.ChangePasswordActivity
 import com.infinix.instalane.ui.home.profile.editProfile.EditProfileActivity
 import com.infinix.instalane.ui.home.profile.memberships.MembershipsActivity
 import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingActivity
 import com.infinix.instalane.ui.home.profile.paymentMethods.PaymentMethodsActivity
 import com.infinix.instalane.ui.start.login.LoginActivity
-import com.infinix.instalane.ui.start.register.RegisterViewModel
 import com.infinix.instalane.utils.AppDialog
 
 class UserProfileActivity : ActivityAppBase() {
@@ -61,7 +58,7 @@ class UserProfileActivity : ActivityAppBase() {
                 title = getString(R.string.app_name),
                 body = getString(R.string.want_to_add_biometric),
                 confirm = getString(R.string.ok),
-                cancel = getString(R.string.cancel),
+                cancel = getString(R.string._cancel),
                 cancelListener = object : AppDialog.CancelListener{
                     override fun onCancel() {
                         binding.mSwitchFaceId.isChecked = false
@@ -99,7 +96,7 @@ class UserProfileActivity : ActivityAppBase() {
             title = getString(R.string.app_name),
             body = getString(R.string.logout_description),
             confirm = getString(R.string.ok),
-            cancel = getString(R.string.cancel),
+            cancel = getString(R.string._cancel),
             confirmListener = object : AppDialog.ConfirmListener{
                 override fun onClick() {
                     viewModel.logout()

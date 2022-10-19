@@ -37,6 +37,7 @@ class StoreMapAdapter(val list : List<Store>) : RecyclerView.Adapter<StoreMapAda
             binding.mPhoto.clipToOutline = true
             Glide.with(itemView.context).load(data.picture).into(binding.mPhoto)
             binding.mTitle.text = data.name
+            binding.mDistance.text ="${String.format("%.0f", data.distance)} miles"
 
             binding.mBubble.visibility = View.GONE
             binding.mBestDiscount.visibility = View.GONE

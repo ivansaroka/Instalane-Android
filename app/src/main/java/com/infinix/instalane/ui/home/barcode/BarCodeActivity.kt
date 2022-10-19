@@ -5,13 +5,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.gson.Gson
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonProduct
+import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ActivityBarCodeBinding
@@ -21,6 +21,7 @@ import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.showMessage
 import com.tbruyelle.rxpermissions3.RxPermissions
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 
 
 class BarCodeActivity : ActivityAppBase() {
@@ -47,12 +48,13 @@ class BarCodeActivity : ActivityAppBase() {
     private val binding by lazy { ActivityBarCodeBinding.inflate(layoutInflater) }
     private var qrScanned = false
     private var mStore:Store?=null
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         SingletonProduct.instance.clearList()
-        setupScanner()
+
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
 
         binding.mBack.setOnClickListener { onBackPressed() }
@@ -73,6 +75,21 @@ class BarCodeActivity : ActivityAppBase() {
             val intent = CheckoutActivity.getIntent(this, mStore!!)
             resultLauncher.launch(intent)
         }
+
+        checkDraftChart()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setupScanner()
+    }
+
+    private fun checkDraftChart(){
+        if (mStore!=null){
+            val draftList = AppPreferences.getDraftProductsByStore(mStore!!)
+            (binding.mContSummary.mList.adapter as ProductAdapter).addProducts(draftList)
+            checkSubtotal()
+        }
     }
 
     override fun onBackPressed() {
@@ -81,6 +98,7 @@ class BarCodeActivity : ActivityAppBase() {
             getString(R.string._yes), getString(R.string._no), confirmListener = object :
                 AppDialog.ConfirmListener {
                 override fun onClick() {
+                    AppPreferences.cleanDraft(mStore!!)
                     super@BarCodeActivity.onBackPressed()
                 }
             })
@@ -89,10 +107,11 @@ class BarCodeActivity : ActivityAppBase() {
     private fun showRemoveAlert(product: Product){
         AppDialog.showDialog(this,
             getString(R.string.app_name),
-            "Do you want to delete this item?", getString(R.string.remove), getString(R.string.cancel), confirmListener = object :
+            "Do you want to delete this item?", getString(R.string._remove), getString(R.string._cancel), confirmListener = object :
                 AppDialog.ConfirmListener {
                 override fun onClick() {
                     (binding.mContSummary.mList.adapter as ProductAdapter).removeProduct(product)
+                    AppPreferences.removeFromDraft(mStore!!, product)
                     checkSubtotal()
                 }
             })
@@ -109,12 +128,17 @@ class BarCodeActivity : ActivityAppBase() {
                 Manifest.permission.CAMERA
             ).subscribe { granted: Boolean? ->
                 if (granted != null && granted) {
-                    val mDisposable = binding.scannerView
+                    disposable = binding.scannerView
                         .getObservable()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::showInfo, this::showError)
                 }
             }
+    }
+
+    override fun onStop() {
+        disposable?.dispose()
+        super.onStop()
     }
 
     private fun showError(throwable: Throwable) = showMessage("Camera initialization error: ${throwable.message}")
@@ -133,6 +157,7 @@ class BarCodeActivity : ActivityAppBase() {
         dialog.onAdd = {
             qrScanned = false
             (binding.mContSummary.mList.adapter as ProductAdapter).addProduct(product)
+            AppPreferences.addToDraft(mStore!!, product)
             checkSubtotal()
         }
         dialog.onCancel = { qrScanned = false }

@@ -45,7 +45,7 @@ class GuardProfileActivity : ActivityAppBase() {
             title = getString(R.string.app_name),
             body = getString(R.string.logout_description),
             confirm = getString(R.string.ok),
-            cancel = getString(R.string.cancel),
+            cancel = getString(R.string._cancel),
             confirmListener = object : AppDialog.ConfirmListener{
                 override fun onClick() {
                     LoginManager.getInstance().logOut()

@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonProduct
+import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Store
@@ -17,7 +18,7 @@ import com.infinix.instalane.ui.home.barcode.ProductAdapter
 import com.infinix.instalane.utils.showErrorMessage
 import com.infinix.instalane.utils.showMessage
 import net.glxn.qrgen.android.QRCode
-import net.glxn.qrgen.core.scheme.VCard
+import net.glxn.qrgen.core.image.ImageType
 
 class PurchaseSummaryActivity : ActivityAppBase() {
 
@@ -64,13 +65,12 @@ class PurchaseSummaryActivity : ActivityAppBase() {
 
         completeTotal()
         generateQR()
+        AppPreferences.cleanDraft(mStore!!)
     }
 
     private fun generateQR(){
-        val vCard = VCard(mOrder!!.id!!)
-        val qrImage = QRCode.from(vCard).bitmap()
-        if (qrImage!=null)
-            Glide.with(this).load(qrImage).into(binding.mQR)
+        val bitmapQR = QRCode.from(mOrder!!.id!!).to(ImageType.PNG).withSize(300, 300).bitmap()
+        Glide.with(this).load(bitmapQR).into(binding.mQR)
     }
 
     private fun completeTotal() {

@@ -7,9 +7,9 @@
 
     <string name="notification_channel_id">instalane_notification_channel</string>
     <string name="select_source">Select Source</string>
-    <string name="cancel">Cancel</string>
+    <string name="_cancel">Cancel</string>
     <string name="ok">Ok</string>
-    <string name="remove">Remove</string>
+    <string name="_remove">Remove</string>
     <string name="start">START</string>
     <string name="not_now">NOT NOW</string>
     <string name="_yes">Yes</string>
@@ -168,7 +168,7 @@
     <string name="last_activity">Last activity</string>
     <string name="login_time">Login time</string>
     <string name="save_note">Save note</string>
-    <string name="instruction_check">1. Tap the START CHECK below.\n 2. Scan customers QR codes.\n 3. Check all items in cart and confirm items in the App by tapping in circle next to the item.\n 4. Once all items have been confirm tap on ADD NOTE.\n 5. Add notes based on your findings after the check process.\n 6. After inputting notes select a light code based on your findings after check process.\n 7. Last step confirm customers order.</string>
+    <string name="instruction_check">1. Tap the START CHECK below.\n2. Scan customers QR codes.\n3. Check all items in cart and confirm items in the App by tapping in circle next to the item.\n4. Once all items have been confirm tap on ADD NOTE.\n5. Add notes based on your findings after the check process.\n6. After inputting notes select a light code based on your findings after check process.\n7. Last step confirm customers order.</string>
     <string name="order_confirmed">Order confirmed</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>

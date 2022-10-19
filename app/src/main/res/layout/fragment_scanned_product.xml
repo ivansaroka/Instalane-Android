@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 style="@style/StyleButtonAppCancel"
-                android:text="@string/cancel"/>
+                android:text="@string/_cancel"/>
 
         </LinearLayout>
 

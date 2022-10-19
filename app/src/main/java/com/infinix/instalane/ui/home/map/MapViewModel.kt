@@ -40,21 +40,6 @@ class MapViewModel(application: Application) : BaseViewModel(application) {
                 else
                     onError.postValue(it.exceptionOrNull())
             }
-
-            /*
-            val list = ArrayList<Store>()
-            for (i in 0.. 5){
-                val store = Store().apply {
-                    id = i.toString()
-                    val loc = getRandomLocation(location, 10000)
-                    latitude = loc.latitude
-                    longitude = loc.longitude
-                }
-                list.add(store)
-            }
-            nearStoreLiveData.postValue(list)
-             */
-
         }
 
 

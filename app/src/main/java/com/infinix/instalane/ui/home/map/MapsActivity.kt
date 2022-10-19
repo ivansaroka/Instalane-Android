@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
@@ -12,6 +14,10 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -96,13 +102,33 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
 
         listFilter.forEach {
             if (it.hasLocation()){
-                val bitmap = ResourcesCompat.getDrawable(resources, R.drawable.ic_pin_store, null)!!.toBitmap()
-                val markerOption = MarkerOptions().position(it.getLocation()!!).icon(
-                    BitmapDescriptorFactory.fromBitmap(bitmap))
-                markerOption.title(it.id.toString())
-                mMap.addMarker(markerOption)
+                if (it.icon.isNullOrEmpty())
+                    loadIconStore(it, R.drawable.ic_pin_store)
+                else
+                    loadIconStore(it, it.icon!!)
             }
         }
+    }
+
+    private fun loadIconStore(store: Store, dataToLoad:Any){
+        Glide.with(this@MapsActivity)
+            .asBitmap().load(dataToLoad)
+            .circleCrop()
+            .apply(RequestOptions().override(80, 80))
+            .into(object : CustomTarget<Bitmap>(){
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    val markerOption = MarkerOptions().position(store.getLocation()!!).icon(BitmapDescriptorFactory.fromBitmap(resource))
+                    markerOption.title(store.id.toString())
+                    mMap.addMarker(markerOption)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    loadIconStore(store, R.drawable.ic_pin_store)
+                }
+            })
     }
 
     private fun showPreview(marker: Marker) {

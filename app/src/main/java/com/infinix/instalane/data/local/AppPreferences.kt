@@ -3,6 +3,8 @@ package com.infinix.instalane.data.local
 import android.content.Context
 import com.google.gson.Gson
 import com.infinix.instalane.InstalaneApplication
+import com.infinix.instalane.data.remote.response.Product
+import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.data.remote.response.User
 
 object AppPreferences {
@@ -18,6 +20,8 @@ object AppPreferences {
     private const val SHOW_TUTORIAL = "SHOW_TUTORIAL"
     private const val HAS_BIOMETRIC = "HAS_BIOMETRIC"
 
+    private const val DRAFT_PRODUCTS = "DRAFT_PRODUCTS"
+
     private fun getPreferences() =
         InstalaneApplication.instance.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -27,6 +31,52 @@ object AppPreferences {
     }
 
     fun setUser(user: User) = getPreferences().edit()?.putString(USER, Gson().toJson(user))?.apply()
+
+
+    private fun setDraftProduct(draftProducts: DraftProducts?) = getPreferences().edit()?.putString(DRAFT_PRODUCTS, Gson().toJson(draftProducts))?.apply()
+
+    private fun getDraftProduct(): DraftProducts? {
+        val json = getPreferences().getString(DRAFT_PRODUCTS, "")
+        return Gson().fromJson(json, DraftProducts::class.java)
+    }
+
+    fun getDraftProductsByStore(store: Store) : ArrayList<Product>?{
+        val draft = getDraftProduct()
+        if (draft!=null){
+            if (draft.store?.id == store.id) return draft.productList
+        }
+        return null
+    }
+
+    fun addToDraft(store: Store, product: Product){
+        var draft = getDraftProduct()
+        if (draft==null) draft = DraftProducts().apply {
+            this.store = store
+            this.productList = ArrayList()
+        }
+
+        if (draft.store?.id != store.id)
+            draft.productList?.clear()
+        draft.productList!!.add(product)
+
+        setDraftProduct(draft)
+    }
+
+    fun removeFromDraft(store: Store, product: Product){
+        var draft = getDraftProduct()
+        if (draft==null) draft = DraftProducts().apply {
+            this.store = store
+            this.productList = ArrayList()
+        }
+        draft.productList?.removeIf { it.id == product.id }
+        setDraftProduct(draft)
+    }
+
+    fun cleanDraft(store: Store) {
+        val draft = getDraftProduct()
+        if (draft!=null && draft.store?.id == store.id)
+            setDraftProduct(null)
+    }
 
     fun setDeviceToken(deviceToken:String){
         getPreferences().edit()?.putString(DEVICE_TOKEN, deviceToken)?.apply()

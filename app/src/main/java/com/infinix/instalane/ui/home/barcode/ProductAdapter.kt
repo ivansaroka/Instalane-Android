@@ -25,6 +25,13 @@ class ProductAdapter(val list : ArrayList<Product>, val store: Store?=null, val 
 
     override fun getItemCount() = list.size
 
+    fun addProducts(product: List<Product>?){
+        if (product!=null){
+            list.addAll(product)
+            notifyDataSetChanged()
+        }
+    }
+
     fun addProduct(product: Product){
         list.add(product)
         notifyItemInserted(list.size-1)
