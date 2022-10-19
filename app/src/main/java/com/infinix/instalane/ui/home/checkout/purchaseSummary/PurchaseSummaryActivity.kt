@@ -61,8 +61,11 @@ class PurchaseSummaryActivity : ActivityAppBase() {
         intent.getStringExtra(ARG_ORDER)?.let { mOrder = Gson().fromJson(it, Order::class.java) }
 
         binding.mToolBar.mClose.setOnClickListener {showRateDialog()}
-        viewModel.getProducts()
 
+        binding.mTitleStore.text = mStore?.name
+        binding.mAddress.text = mStore?.address
+
+        viewModel.getProducts()
         completeTotal()
         generateQR()
         AppPreferences.cleanDraft(mStore!!)

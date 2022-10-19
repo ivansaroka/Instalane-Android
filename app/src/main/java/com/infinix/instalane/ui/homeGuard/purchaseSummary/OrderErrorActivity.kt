@@ -2,13 +2,13 @@ package com.infinix.instalane.ui.homeGuard.purchaseSummary
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.databinding.ActivityPaymentErrorBinding
-import com.infinix.instalane.databinding.ActivityPaymentSuccessfulBinding
-import com.infinix.instalane.ui.home.checkout.paymentResult.PaymentSuccessfulActivity
 import com.infinix.instalane.utils.DateUtils
 
 class OrderErrorActivity : AppCompatActivity() {
@@ -36,5 +36,8 @@ class OrderErrorActivity : AppCompatActivity() {
         val sTime = DateUtils().convertDate(mOrder!!.updatedAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_HOUR)
         binding.mDate.text = sDate
         binding.mTime.text = sTime
+
+        val mediaPlayer = MediaPlayer.create(this, R.raw.error_payment)
+        mediaPlayer.start()
     }
 }

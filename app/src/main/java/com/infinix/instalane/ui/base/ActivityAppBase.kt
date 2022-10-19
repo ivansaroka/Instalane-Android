@@ -125,6 +125,11 @@ open class ActivityAppBase : AppCompatActivity() {
         AppDialog.showDialog(this,getString(R.string.app_name), text)
     }
 
+    protected fun showErrorAlertString(throwable: Throwable?){
+        val text = ApiErrorParser.parseErrorInstalaneTextError(this, throwable)
+        AppDialog.showDialog(this,getString(R.string.app_name), text)
+    }
+
     protected fun showErrorAlertDismiss(text:String){
         AppDialog.showDialog(this,getString(R.string.app_name), text, confirmListener = object : AppDialog.ConfirmListener{
             override fun onClick() {

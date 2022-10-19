@@ -31,7 +31,10 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
         ViewModelProvider(this)[PurchaseViewModel::class.java].apply {
             addNoteLiveData.observe(this@PurchaseSummaryGuardActivity){onAddNoteSuccess()}
             orderLiveData.observe(this@PurchaseSummaryGuardActivity, this@PurchaseSummaryGuardActivity::showData)
-            onError.observe(this@PurchaseSummaryGuardActivity) { hideProgressDialog() }
+            onError.observe(this@PurchaseSummaryGuardActivity) {
+                hideProgressDialog()
+                showErrorAlertString(it)
+            }
             confirmOrderLiveData.observe(this@PurchaseSummaryGuardActivity) { onSuccess() }
         }
     }

@@ -2,6 +2,7 @@ package com.infinix.instalane.ui.home.checkout.paymentResult
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,8 +13,8 @@ import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ActivityPaymentSuccessfulBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
-import com.infinix.instalane.ui.home.checkout.CheckoutActivity
 import com.infinix.instalane.ui.home.checkout.purchaseSummary.PurchaseSummaryActivity
+
 
 class PaymentSuccessfulActivity : ActivityAppBase() {
 
@@ -48,6 +49,9 @@ class PaymentSuccessfulActivity : ActivityAppBase() {
             binding.mTitle.text = getString(R.string.your_payment_was_successful)
         else
             binding.mTitle.text = getString(R.string.order_confirmed)
+
+        val mediaPlayer = MediaPlayer.create(this, R.raw.success_payment)
+        mediaPlayer.start()
 
         Handler(Looper.myLooper()!!).postDelayed({
             if (AppPreferences.getUser()?.isUser()==true)

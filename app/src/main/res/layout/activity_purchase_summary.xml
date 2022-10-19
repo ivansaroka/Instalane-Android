@@ -22,6 +22,35 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/mTitleStore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleBold"
+                android:background="@color/white"
+                android:layout_marginTop="-16dp"
+                android:cropToPadding="false"
+                android:clipToOutline="true"
+                android:paddingHorizontal="@dimen/margin_app"
+                android:layout_marginEnd="-16dp"
+                android:layout_marginStart="-16dp"
+                android:paddingTop="@dimen/margin_normal"
+                android:textSize="@dimen/text_size_normal"
+                android:text="Washington Food Plaza"/>
+
+            <TextView
+                android:id="@+id/mAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyleMedium"
+                android:textColor="@color/textGray"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_pin_address"
+                android:textSize="@dimen/text_size_small"
+                android:text="1337 Washington Ave, Miami Beach, FL 33139"/>
+
+            <View style="@style/DividerStyle" />
+
+            <TextView
                 style="@style/TextStyleBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
