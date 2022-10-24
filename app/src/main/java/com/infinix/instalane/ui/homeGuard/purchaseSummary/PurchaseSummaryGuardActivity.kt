@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.infinix.instalane.R
+import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Note
 import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.databinding.ActivityPurchaseSummaryGuardBinding
@@ -56,6 +58,14 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
 
     private fun showData(order: Order){
         hideProgressDialog()
+
+        binding.mContClient.visibility = View.GONE
+        if (order.client!=null){
+            binding.mContClient.visibility = View.VISIBLE
+            binding.mUsernameClient.text = order.client?.fullname
+            binding.mProfileClient.clipToOutline = true
+            Glide.with(this).load(order.client?.profilePicture).circleCrop().placeholder(R.drawable.placeholder_user_profile).into(binding.mProfileClient)
+        }
 
         if(order.status == Order.STATE_DELIVERED) {
             startActivity(OrderErrorActivity.getIntent(this, order))

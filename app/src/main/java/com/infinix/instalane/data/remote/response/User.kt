@@ -43,6 +43,29 @@ class User {
     @SerializedName("device_token")
     var deviceToken: String? = null
 
+    @SerializedName("region_id")
+    var region: Region? = null
+
     fun isUser():Boolean { return userRole == ROLE_USER }
+
+    class Region {
+        @SerializedName("id")
+        var id: String? = null
+
+        @SerializedName("company_id")
+        var company: Company? = null
+    }
+
+    class Company{
+        @SerializedName("id")
+        var id: String? = null
+
+        @SerializedName("name")
+        var name: String? = null
+
+        @SerializedName("picture")
+        var picture: String? = null
+
+    }
 
 }

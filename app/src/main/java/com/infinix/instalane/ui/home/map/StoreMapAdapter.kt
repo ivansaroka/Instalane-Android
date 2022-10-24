@@ -38,6 +38,7 @@ class StoreMapAdapter(val list : List<Store>) : RecyclerView.Adapter<StoreMapAda
             Glide.with(itemView.context).load(data.picture).into(binding.mPhoto)
             binding.mTitle.text = data.name
             binding.mDistance.text ="${String.format("%.0f", data.distance)} miles"
+            binding.mAddress.text = data.address
 
             binding.mBubble.visibility = View.GONE
             binding.mBestDiscount.visibility = View.GONE

@@ -54,6 +54,8 @@ class MainGuardActivity : ActivityAppBase() {
         binding.mUsername.text = user.fullname
         binding.mProfile.clipToOutline = true
         Glide.with(this).load(user.profilePicture).circleCrop().placeholder(R.drawable.placeholder_user_profile).into(binding.mProfile)
+
+        binding.mCompanyName.text = user.region?.company?.name
     }
 
     @SuppressLint("MissingPermission")

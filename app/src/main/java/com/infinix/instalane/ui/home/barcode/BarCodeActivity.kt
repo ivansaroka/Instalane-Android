@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
@@ -146,6 +147,8 @@ class BarCodeActivity : ActivityAppBase() {
     private fun showInfo(barcode: Barcode) {
         if (qrScanned) return
         qrScanned = true
+        val mediaPlayer = MediaPlayer.create(this, R.raw.scan_product)
+        mediaPlayer.start()
         showProgressDialog()
         viewModel.getProduct(barcode.displayValue, mStore!!)
     }

@@ -58,6 +58,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/mContClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/margin_normal">
+
+            <ImageView
+                android:id="@+id/mProfileClient"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/placeholder_user_profile"
+                android:background="@drawable/bg_circle"/>
+
+            <TextView
+                android:id="@+id/mUsernameClient"
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                style="@style/TextStyleSemiBold"
+                android:textSize="@dimen/text_size_micro_small"
+                android:layout_marginStart="@dimen/margin_normal"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                android:text="John Doe"/>
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mList"
             android:layout_width="match_parent"
