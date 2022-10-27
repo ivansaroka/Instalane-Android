@@ -18,7 +18,7 @@ import kotlin.reflect.KSuspendFunction5
 
 object ApiClient {
     private const val BASE_DEV_URL = "https://instalane.xanthops.com/api/v1/"
-    private const val BASE_PROD_URL = "https://admin.instalane.com/instalane/api/"
+    private const val BASE_PROD_URL = "https://admin.instalaneusa.com/api/v1/"
 
     val service = createService()
 
