@@ -14,6 +14,7 @@ import com.infinix.instalane.ui.home.profile.editProfile.EditProfileActivity
 import com.infinix.instalane.ui.home.profile.memberships.MembershipsActivity
 import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingActivity
 import com.infinix.instalane.ui.home.profile.paymentMethods.PaymentMethodsActivity
+import com.infinix.instalane.ui.home.profile.twoFactorAuth.TwoFactorAuthActivity
 import com.infinix.instalane.ui.start.login.LoginActivity
 import com.infinix.instalane.utils.AppDialog
 
@@ -43,6 +44,8 @@ class UserProfileActivity : ActivityAppBase() {
 
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
         binding.mSwitchFaceId.setOnClickListener { openBiometricDialog() }
+
+        binding.mContAuth.setOnClickListener { startActivity(Intent(this, TwoFactorAuthActivity::class.java)) }
     }
 
     override fun onResume() {

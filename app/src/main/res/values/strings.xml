@@ -1,9 +1,4 @@
 <resources>
-    <string name="app_name">Instalane</string>
-
-    <string name="facebook_app_id">420617202795316</string>
-    <string name="fb_login_protocol_scheme">fb420617202795316</string>
-    <string name="facebook_client_token">9785b015e3f3cffbd22ecf765ca10a9a</string>
 
     <string name="notification_channel_id">instalane_notification_channel</string>
     <string name="select_source">Select Source</string>
@@ -200,5 +195,8 @@
     <string name="message_welcome_instalane_expert">Welcome to your Instatutorial. \nPlease tab on Open become an Instalane expert</string>
     <string name="description_client_type">Time is money. Get ready to start saving both by creating your own self-checkout lines with INSTALANE.</string>
     <string name="description_guard_type">Note= In order to have a GUARD account you need to be an authorized personnel of a participating store.\n\n*Approval required. Please talk to your management team.</string>
+
+    <!-- 2 FACTOR AUTH -->
+    <string name="validate">Validate</string>
 
 </resources>

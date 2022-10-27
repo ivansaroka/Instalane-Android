@@ -11,7 +11,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.infinix.instalane"
+        applicationId "com.instalane.app"
         minSdk 24
         targetSdk 32
         versionCode 1
@@ -24,14 +24,52 @@ android {
         debug {
             storeFile file('.//infinixDebug.keystore')
         }
+
+        release {
+            keyAlias 'InstalaneAndroid'
+            keyPassword 'InstalaneAndroid'
+            storeFile file('../app/keystore/keystore')
+            storePassword 'InstalaneAndroid'
+        }
     }
 
+    /*
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+     */
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            // PROD
+            resValue "string", "app_name", "Instalane"
+            resValue 'string', 'base_url', '"https://admin.instalaneusa.com/api/v1/"'
+            resValue "string", "app_preference", "INSTALANE_PREFENCES_PROD"
+            resValue "string", "facebook_app_id", "420617202795316"
+            resValue "string", "fb_login_protocol_scheme", "fb420617202795316"
+            resValue "string", "facebook_client_token", "9785b015e3f3cffbd22ecf765ca10a9a"
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // DEV
+            resValue "string", "app_name", "InstalaneDev"
+            applicationIdSuffix '.dev'
+            resValue 'string', 'base_url', '"https://instalane.xanthops.com/api/v1/"'
+            resValue "string", "app_preference", "INSTALANE_PREFENCES_DEV"
+            resValue "string", "facebook_app_id", "420617202795316"
+            resValue "string", "fb_login_protocol_scheme", "fb420617202795316"
+            resValue "string", "facebook_client_token", "9785b015e3f3cffbd22ecf765ca10a9a"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

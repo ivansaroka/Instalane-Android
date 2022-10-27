@@ -19,11 +19,18 @@ class ProductViewModel(application: Application) : BaseViewModel(application) {
 
     fun getProduct(code:String, store: Store) =
         viewModelScope.launch {
-            ApiClient.service::getProduct.callApi(AppPreferences.getUser()!!.accessToken!!, store.id!! , null, code).collect {
+
+            if (store.region?.company?.id.isNullOrEmpty()){
+                onError.postValue(Throwable("This store doesn't have a related company"))
+                return@launch
+            }
+
+            ApiClient.service::getProduct.callApi(AppPreferences.getUser()!!.accessToken!!, store.region?.company?.id!! , null, code).collect {
                 if (it.isSuccess)
                     it.getOrNull()?.let { product ->
                         if (product.isEmpty())
-                            onError.postValue(it.exceptionOrNull())
+                            onError.postValue(Throwable("This product is not available for this store in this region"))
+                            //onError.postValue(it.exceptionOrNull())
                         else {
                             if (product[0].hasPriceForThisRegion(store.region))
                                 productLiveData.postValue(product[0])

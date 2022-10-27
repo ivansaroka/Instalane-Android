@@ -39,12 +39,6 @@ class Store {
 
     var distance: Float = 0f
 
-    @SerializedName("company_id")
-    var companyId: String? = null
-
-    @SerializedName("company")
-    var company: Memberships.Company? = null
-
     @SerializedName("region_id")
     var region: Region? = null
 

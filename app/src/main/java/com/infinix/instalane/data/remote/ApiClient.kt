@@ -2,23 +2,17 @@ package com.infinix.instalane.data.remote
 
 import android.util.Log
 import com.infinix.instalane.BuildConfig
+import com.infinix.instalane.InstalaneApplication
+import com.infinix.instalane.R
 import kotlinx.coroutines.flow.flow
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
-import kotlin.reflect.KSuspendFunction1
-import kotlin.reflect.KSuspendFunction0
-import kotlin.reflect.KSuspendFunction2
-import kotlin.reflect.KSuspendFunction3
-import kotlin.reflect.KSuspendFunction4
-import kotlin.reflect.KSuspendFunction5
+import kotlin.reflect.*
 
 object ApiClient {
-    private const val BASE_DEV_URL = "https://instalane.xanthops.com/api/v1/"
-    private const val BASE_PROD_URL = "https://admin.instalaneusa.com/api/v1/"
 
     val service = createService()
 
@@ -26,7 +20,9 @@ object ApiClient {
         val httpClient = getOkHttpClient()
 
         val sRestAdapter = Retrofit.Builder()
-            .baseUrl(BASE_DEV_URL)
+            .baseUrl(
+                InstalaneApplication.appContext.getString(
+                    R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient)
             .build()

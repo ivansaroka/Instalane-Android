@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "163864324001",
+    "project_id": "instalane",
+    "storage_bucket": "instalane.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163864324001:android:dacd39364df665705e8de0",
+        "android_client_info": {
+          "package_name": "com.infinix.instalane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163864324001-purtrfmtbe1nq1v6d22h9dcelvt4hpu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.infinix.instalane",
+            "certificate_hash": "e5f48f9befa97f0db6281d0915641db431d8a9d7"
+          }
+        },
+        {
+          "client_id": "163864324001-u6ist36tn7rl0uefq8aupog0kljr3isp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXP9X9kJBT3kKUslhvSmSzzZ5BKT3hHmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163864324001-mivdjbg6jqvtvjpoqaaacodmnv5cb3k1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163864324001-h1emgd523cod41lc0is6fbfcu8isr3bh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.infinix.instalane"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163864324001:android:9c34058d4ce4455f5e8de0",
+        "android_client_info": {
+          "package_name": "com.instalane.app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163864324001-u6ist36tn7rl0uefq8aupog0kljr3isp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXP9X9kJBT3kKUslhvSmSzzZ5BKT3hHmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163864324001-mivdjbg6jqvtvjpoqaaacodmnv5cb3k1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163864324001-h1emgd523cod41lc0is6fbfcu8isr3bh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.infinix.instalane"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

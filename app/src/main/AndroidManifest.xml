@@ -21,9 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instalane">
         <activity
+            android:name=".ui.home.profile.twoFactorAuth.TwoFactorAuthActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.start.tutorial.TutorialActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.store.ReviewActivity"
             android:exported="false"

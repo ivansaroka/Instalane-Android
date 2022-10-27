@@ -56,7 +56,7 @@ interface ApiInterface {
     suspend fun getCoupons(@Query("access_token") accessToken: String, @Query("store_id") storeId: String?, @Query("code") code:String?): List<Coupon>
 
     @GET("get_product")
-    suspend fun getProduct(@Query("access_token") accessToken: String, @Query("store_id") storeId: String, @Query("product_id") productId: Int?=null, @Query("code") code:String?=null): List<Product>
+    suspend fun getProduct(@Query("access_token") accessToken: String, @Query("company_id") companyId: String, @Query("product_id") productId: Int?=null, @Query("code") code:String?=null): List<Product>
 
     @GET("get_categories")
     suspend fun getCategories(@Query("access_token") accessToken: String): List<Category>
@@ -84,4 +84,12 @@ interface ApiInterface {
 
     @POST("payment_intent")
     suspend fun paymentIntent(@Body request: PaymentRequest): PaymentIntentResponse
+
+    @POST("send_code")
+    suspend fun sendCode(@Body request: Any): Any
+
+    @POST("validate_code")
+    suspend fun validateCode(@Body request: ValidateCodeRequest): Any
+
+
 }

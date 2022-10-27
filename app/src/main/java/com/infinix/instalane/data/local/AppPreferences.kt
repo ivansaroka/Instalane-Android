@@ -3,6 +3,7 @@ package com.infinix.instalane.data.local
 import android.content.Context
 import com.google.gson.Gson
 import com.infinix.instalane.InstalaneApplication
+import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.data.remote.response.User
@@ -23,7 +24,7 @@ object AppPreferences {
     private const val DRAFT_PRODUCTS = "DRAFT_PRODUCTS"
 
     private fun getPreferences() =
-        InstalaneApplication.instance.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        InstalaneApplication.instance.getSharedPreferences(InstalaneApplication.appContext.getString(R.string.app_preference), Context.MODE_PRIVATE)
 
     fun getUser(): User? {
         val json = getPreferences().getString(USER, "")

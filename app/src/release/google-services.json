@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "968627653309",
+    "project_id": "instalane-68432",
+    "storage_bucket": "instalane-68432.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968627653309:android:83ac65adea1443ec28c5d4",
+        "android_client_info": {
+          "package_name": "com.instalane.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968627653309-iuqu6vf5s31q0ctvt9ljrmpghtc36nh3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.instalane.app",
+            "certificate_hash": "e5f48f9befa97f0db6281d0915641db431d8a9d7"
+          }
+        },
+        {
+          "client_id": "968627653309-kcud63i5do4ai31v49bjj60fpeb7b80n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaFpbEmPht8SdHtmxLetekkO1xGRPBmts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968627653309-kcud63i5do4ai31v49bjj60fpeb7b80n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

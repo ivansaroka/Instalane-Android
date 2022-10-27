@@ -1,6 +1,7 @@
 package com.infinix.instalane
 
 import android.app.Application
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.infinix.instalane.utils.createNotificationChannel
 import java.util.*
@@ -14,10 +15,12 @@ class InstalaneApplication : Application() {
     companion object {
         lateinit var instance: InstalaneApplication
         const val MAX_ACTIVITY_TRANSITION_TIME_MS: Long = 2000
+        lateinit  var appContext: Context
     }
 
     override fun onCreate() {
         super.onCreate()
+        appContext = applicationContext
         instance = this
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         createNotificationChannel()
