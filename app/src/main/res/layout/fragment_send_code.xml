@@ -14,6 +14,16 @@
         android:layout_margin="@dimen/margin_app">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            style="@style/TextStyleBold"
+            android:gravity="center_horizontal"
+            android:text="Te enviaremos un SMS para validar tu número de celular"
+            android:textSize="20sp" />
+
+        <TextView
             android:layout_marginTop="@dimen/margin_app"
             android:text="@string/phone_number"
             style="@style/TitleEditTextStyle"/>

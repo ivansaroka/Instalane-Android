@@ -1,5 +1,7 @@
 package com.infinix.instalane.ui.home.profile.twoFactorAuth
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.infinix.instalane.R
@@ -14,7 +16,7 @@ class TwoFactorAuthActivity : ActivityAppBase() {
     private val viewModel by lazy {
         ViewModelProvider(this)[TwoFactorAuthViewModel::class.java].apply {
             sendCodeLiveData.observe(this@TwoFactorAuthActivity) { goToValidateCode() }
-            validateCodeLiveData.observe(this@TwoFactorAuthActivity, {})
+            validateCodeLiveData.observe(this@TwoFactorAuthActivity, { onSuccess() })
             onError.observe(this@TwoFactorAuthActivity) {
                 hideProgressDialog()
                 showErrorMessage(it)
@@ -40,6 +42,12 @@ class TwoFactorAuthActivity : ActivityAppBase() {
     fun validateCode(code:String){
         showProgressDialog()
         viewModel.validateCode(code)
+    }
+
+    fun onSuccess(){
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun goToValidateCode(){

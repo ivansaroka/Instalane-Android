@@ -1,7 +1,10 @@
 package com.infinix.instalane.ui.home.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.facebook.login.LoginManager
@@ -45,7 +48,13 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
         binding.mSwitchFaceId.setOnClickListener { openBiometricDialog() }
 
-        binding.mContAuth.setOnClickListener { startActivity(Intent(this, TwoFactorAuthActivity::class.java)) }
+        binding.mContAuth.setOnClickListener { result2FactorAuthLauncher.launch(Intent(this, TwoFactorAuthActivity::class.java)) }
+    }
+
+    private var result2FactorAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onResume() {
