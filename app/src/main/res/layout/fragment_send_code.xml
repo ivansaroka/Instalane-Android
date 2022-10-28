@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,17 +27,34 @@
             android:text="@string/phone_number"
             style="@style/TitleEditTextStyle"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayoutStyle"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:hintEnabled="false"
-            app:boxStrokeWidth="1dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPhoneNumber"
-                style="@style/EditTextStyle"
-                android:inputType="phone" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                android:id="@+id/ccp"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_countryPreference="US,CA,AR"
+                app:ccp_defaultNameCode="US"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:hintEnabled="false"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhoneNumber"
+                    style="@style/EditTextStyle"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
