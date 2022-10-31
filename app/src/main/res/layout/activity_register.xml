@@ -27,7 +27,6 @@
             android:layout_marginTop="@dimen/margin_normal"
             style="@style/TextStyleMedium"/>
 
-
         <TextView
             android:layout_marginTop="50dp"
             android:text="@string/full_name"
@@ -156,12 +155,61 @@
             android:background="@drawable/bg_spinner"
             android:layout_height="55dp"/>
 
+        <!--
+            <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/mSwitchTerms"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                style="@style/TextStyleRegular"/>
+
+            <TextView
+                android:id="@+id/mContTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                style="@style/TextStyleRegular"
+                android:paddingStart="40dp"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/terms_and_conditions"/>
+
+        </RelativeLayout>
+-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/mSwitchAccept"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                style="@style/TextStyleRegular"/>
+
+            <TextView
+                android:id="@+id/mContPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_small"
+                style="@style/TextStyleRegular"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/i_accepted_all_terms_conditions"/>
+
+        </LinearLayout>
+
+
         <CheckBox
-            android:id="@+id/mSwitchAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextStyleRegular"
             android:textSize="@dimen/text_size_small"
+            android:visibility="gone"
             android:text="@string/i_accepted_all_terms_conditions"/>
 
         <com.infinix.instalane.utils.transitionButton.TransitionButton

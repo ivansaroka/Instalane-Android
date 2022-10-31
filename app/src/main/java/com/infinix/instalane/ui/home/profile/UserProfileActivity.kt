@@ -26,7 +26,11 @@ class UserProfileActivity : ActivityAppBase() {
     private val viewModel by lazy {
         ViewModelProvider(this)[UserProfileViewModel::class.java].apply {
             logoutLiveData.observe(this@UserProfileActivity) {}
-            onError.observe(this@UserProfileActivity) { hideProgressDialog() }
+            deleteLiveData.observe(this@UserProfileActivity) { goOut() }
+            onError.observe(this@UserProfileActivity) {
+                hideProgressDialog()
+                showErrorAlert(it)
+            }
         }
     }
 
@@ -43,6 +47,12 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mContMyShopping.setOnClickListener { startActivity(Intent(this, MyShoppingActivity::class.java)) }
         binding.mContMemberships.setOnClickListener { startActivity(Intent(this, MembershipsActivity::class.java)) }
         binding.mContPassword.setOnClickListener { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
+        binding.mContDelete.setOnClickListener {
+            if (AppPreferences.hasBiometric())
+                showBiometricDialog( { delete() }, { } )
+            else
+                delete()
+        }
         binding.mLogout.setOnClickListener { logout() }
 
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
@@ -103,19 +113,40 @@ class UserProfileActivity : ActivityAppBase() {
         Glide.with(this).load(user?.profilePicture).placeholder(R.drawable.placeholder_user_profile).circleCrop().into(binding.mPhoto)
     }
 
+    private fun delete() {
+        AppDialog.showDialog(this,
+            title = getString(R.string.app_name),
+            body = getString(R.string.delete_description),
+            confirm = getString(R.string._yes),
+            cancel = getString(R.string._no),
+            confirmListener = object : AppDialog.ConfirmListener{
+                override fun onClick() {
+                    showProgressDialog()
+                    viewModel.deleteAccount()
+                }
+            }
+        )
+    }
+
+    private fun goOut(){
+        hideProgressDialog()
+        LoginManager.getInstance().logOut()
+        AppPreferences.clearData()
+        startActivity(
+            Intent(this@UserProfileActivity, LoginActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+    }
+
     private fun logout() {
         AppDialog.showDialog(this@UserProfileActivity,
             title = getString(R.string.app_name),
             body = getString(R.string.logout_description),
-            confirm = getString(R.string.ok),
-            cancel = getString(R.string._cancel),
+            confirm = getString(R.string._yes),
+            cancel = getString(R.string._no),
             confirmListener = object : AppDialog.ConfirmListener{
                 override fun onClick() {
                     viewModel.logout()
-                    LoginManager.getInstance().logOut()
-                    AppPreferences.clearData()
-                    startActivity(Intent(this@UserProfileActivity, LoginActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                    goOut()
                 }
             }
         )

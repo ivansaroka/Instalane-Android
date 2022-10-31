@@ -19,6 +19,7 @@ import java.io.File
 class UserProfileViewModel(application: Application) : BaseViewModel(application) {
 
     val logoutLiveData = MutableLiveData<Any>()
+    val deleteLiveData = MutableLiveData<Any>()
     val editLiveData = MutableLiveData<Any>()
 
     fun logout() =
@@ -29,6 +30,19 @@ class UserProfileViewModel(application: Application) : BaseViewModel(application
             )
             ApiClient.service::logout.callApi(request).collect { logoutLiveData.postValue("") }
         }
+
+    fun deleteAccount() = viewModelScope.launch {
+        val request = LogoutRequest(
+            accessToken = AppPreferences.getUser()?.accessToken,
+            deviceToken = null
+        )
+        ApiClient.service::deleteAccount.callApi(request).collect {
+            if (it.isSuccess)
+                deleteLiveData.postValue("")
+            else
+                onError.postValue(it.exceptionOrNull())
+        }
+    }
 
     fun editUser(fullName: String, email: String, mobileNumber: String, fileSelected: File?) {
         viewModelScope.launch {

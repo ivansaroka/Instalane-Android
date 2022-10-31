@@ -21,7 +21,7 @@ class SendCodeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.ccp.registerPhoneNumberTextView(binding.etPhoneNumber)
+        //binding.ccp.registerPhoneNumberTextView(binding.etPhoneNumber)
 
         binding.etPhoneNumber.listenerAfterTextChanged {
             binding.mContinue.isEnabled = it.isNotEmpty()
@@ -29,7 +29,7 @@ class SendCodeFragment : Fragment() {
 
         binding.mContinue.setOnClickListener {
 
-            val countryCode = binding.ccp.selectedCountryCodeWithPlus
+            //val countryCode = binding.ccp.selectedCountryCodeWithPlus
             val phoneNumber = binding.etPhoneNumber.text.toString().trim().replace(" ", "").replace("-", "")
 
             (activity as TwoFactorAuthActivity).sendCode(phoneNumber)

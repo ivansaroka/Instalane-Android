@@ -335,6 +335,34 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View style="@style/DividerStyle" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mContDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_profile_size"
+                    android:layout_height="@dimen/ic_profile_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/delete_account"/>
+
+                <TextView
+                    android:id="@+id/mDeleteAccount"
+                    android:text="@string/delete_account"
+                    style="@style/ProfileOptionTitleStyle"
+                    android:lines="2"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

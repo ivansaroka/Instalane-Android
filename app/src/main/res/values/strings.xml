@@ -39,10 +39,12 @@
     <string name="sign_up_description">Please sign up first  to create your Lane.</string>
     <string name="full_name">Full Name</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="i_accepted_all_terms_conditions"><![CDATA[I accepted all terms & conditions.]]></string>
+    <string name="i_accepted_all_terms_conditions">I accepted all <u><b>Privacy Policy</b></u> and <u><b>Terms &amp; Conditions</b></u>.</string>
     <string name="i_have_an_account_sign_in">I have an account? Sign in</string>
     <string name="phone_number">Phone Number</string>
     <string name="passcode">Guard Code</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_conditions">Terms &amp; Conditions</string>
 
     <!-- HOME -->
     <string name="near_you">Near you</string>
@@ -70,7 +72,9 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="add_an_extra_layer_of_security">Add an extra layer of security</string>
     <string name="save">Save</string>
+    <string name="delete_account">Delete Account</string>
     <string name="logout_description">Are you sure you want to logout?</string>
+    <string name="delete_description">Are you sure you want to delete your account?</string>
     <string name="successfully_edited">The user was successfully edited</string>
     <string name="want_to_add_biometric">Want to add Biometric ID?</string>
     <string name="empty_shopping">At the moment, you have no purchase history. Make a purchase and you will see it here.</string>
@@ -198,5 +202,6 @@
 
     <!-- 2 FACTOR AUTH -->
     <string name="validate">Validate</string>
+    <string name="i_accept">I accept</string>
 
 </resources>

@@ -16,11 +16,20 @@ interface ApiInterface {
     @POST("register_fb")
     suspend fun registerWithFacebook(@Body request: RegisterFacebookRequest): User
 
+    @GET("get_privacy_policy")
+    suspend fun getPrivacy(): Legal
+
+    @GET("get_terms_of_use")
+    suspend fun getTerms(): Legal
+
     @POST("login")
     suspend fun login(@Body request: LoginRequest): User
 
     @POST("logout")
     suspend fun logout(@Body request: LogoutRequest): Any
+
+    @POST("delete_account")
+    suspend fun deleteAccount(@Body request: LogoutRequest): Any
 
     @POST("forgot_password")
     suspend fun forgotPassword(@Body request: ForgotPasswordRequest): Any

@@ -51,9 +51,9 @@ android {
             resValue "string", "app_name", "Instalane"
             resValue 'string', 'base_url', '"https://admin.instalaneusa.com/api/v1/"'
             resValue "string", "app_preference", "INSTALANE_PREFENCES_PROD"
-            resValue "string", "facebook_app_id", "420617202795316"
-            resValue "string", "fb_login_protocol_scheme", "fb420617202795316"
-            resValue "string", "facebook_client_token", "9785b015e3f3cffbd22ecf765ca10a9a"
+            resValue "string", "facebook_app_id", "840129157345473"
+            resValue "string", "fb_login_protocol_scheme", "fb840129157345473"
+            resValue "string", "facebook_client_token", "67bc9e22b69d5dca1e7d38324a6ab34b"
         }
 
         debug {

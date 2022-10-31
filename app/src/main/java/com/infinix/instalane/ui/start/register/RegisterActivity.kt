@@ -7,6 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ArrayAdapter
@@ -21,9 +25,10 @@ import com.infinix.instalane.databinding.ActivityRegisterBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.MainActivity
 import com.infinix.instalane.ui.homeGuard.MainGuardActivity
+import com.infinix.instalane.ui.start.legal.LegalActivity
 import com.infinix.instalane.utils.*
-import retrofit2.HttpException
 import com.infinix.instalane.utils.transitionButton.TransitionButton
+import retrofit2.HttpException
 
 
 class RegisterActivity : ActivityAppBase() {
@@ -53,6 +58,7 @@ class RegisterActivity : ActivityAppBase() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         configRegister()
+        configLegal()
         setSpinner()
         mRole = intent?.getStringExtra(ARG_ROLE)
 
@@ -68,7 +74,27 @@ class RegisterActivity : ActivityAppBase() {
 
         binding.etPassword.listenerAfterTextChanged { binding.boxPassword.isPasswordVisibilityToggleEnabled = true }
         binding.etConfirmPassword.listenerAfterTextChanged { binding.boxConfirmPassword.isPasswordVisibilityToggleEnabled = true }
+
+        /*
+        binding.mContTerms.setOnClickListener { resultTerms.launch(LegalActivity.getIntent(this, false)) }
+        binding.mContPrivacy.setOnClickListener { resultPrivacy.launch(LegalActivity.getIntent(this, true)) }
+
+         */
     }
+
+    /*
+    private var resultTerms = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            binding.mSwitchTerms.isChecked = true
+        }
+    }
+
+    private var resultPrivacy = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            binding.mSwitchPrivacy.isChecked = true
+        }
+    }
+     */
 
     private fun setSpinner() {
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
@@ -167,6 +193,54 @@ class RegisterActivity : ActivityAppBase() {
             Intent(this, MainGuardActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         )
+    }
+
+    private fun configLegal(){
+        val completeText = getString(R.string.i_accepted_all_terms_conditions)
+        val sPrivacy = getString(R.string.privacy_policy)
+        val sTerms = getString(R.string.terms_and_conditions)
+
+        val spannable = SpannableStringBuilder(completeText)
+
+        val csPrivacy: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(v: View) {
+                startActivity(LegalActivity.getIntent(this@RegisterActivity, true))
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = this@RegisterActivity.resources.getColor(R.color.black)
+                ds.linkColor = this@RegisterActivity.resources.getColor(R.color.black)
+                ds.typeface = Typeface.DEFAULT_BOLD
+            }
+        }
+
+        val csTerms: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(v: View) {
+                startActivity(LegalActivity.getIntent(this@RegisterActivity, false))
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = this@RegisterActivity.resources.getColor(R.color.black)
+                ds.linkColor = this@RegisterActivity.resources.getColor(R.color.black)
+                ds.typeface = Typeface.DEFAULT_BOLD
+            }
+        }
+
+        spannable.setSpan(csPrivacy,
+            completeText.indexOf(sPrivacy),
+            completeText.indexOf(sPrivacy) + sPrivacy.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        spannable.setSpan(csTerms,
+            completeText.indexOf(sTerms),
+            completeText.indexOf(sTerms) + sTerms.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.mContPrivacy.setText(spannable, TextView.BufferType.SPANNABLE)
+        binding.mContPrivacy.movementMethod = LinkMovementMethod.getInstance()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

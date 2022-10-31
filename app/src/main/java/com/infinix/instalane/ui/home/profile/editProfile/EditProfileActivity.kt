@@ -32,6 +32,7 @@ class EditProfileActivity : ActivityAppBasePhotoProfile() {
                     }
                 )
             }
+            deleteLiveData.observe(this@EditProfileActivity) {}
             onError.observe(this@EditProfileActivity) {
                 hideProgressDialog()
                 showErrorMessage(it)
@@ -55,7 +56,9 @@ class EditProfileActivity : ActivityAppBasePhotoProfile() {
             dialog.show(supportFragmentManager, "")
         }
         binding.mConfirm.setOnClickListener { edit() }
+
     }
+
 
     private fun edit() {
         binding.etFullName.error = null

@@ -21,6 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instalane">
         <activity
+            android:name=".ui.start.legal.LegalActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.home.profile.twoFactorAuth.TwoFactorAuthActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
