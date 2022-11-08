@@ -76,7 +76,9 @@
     <string name="logout_description">Are you sure you want to logout?</string>
     <string name="delete_description">Are you sure you want to delete your account?</string>
     <string name="successfully_edited">The user was successfully edited</string>
-    <string name="want_to_add_biometric">Want to add Biometric ID?</string>
+    <string name="want_to_add_biometric">Do you want to enable Biometric ID?</string>
+    <string name="want_to_remove_biometric">Do you want to remote the Biometric ID?</string>
+    <string name="biometric_successfully">Biometric ID has been successfully added!</string>
     <string name="empty_shopping">At the moment, you have no purchase history. Make a purchase and you will see it here.</string>
     <string name="empty_membership">At the moment, you have no memberships.</string>
 
@@ -108,6 +110,10 @@
     <string name="use">Use</string>
     <string name="create_your_instalane_now">Create your Instalane now.</string>
     <string name="total_reviews">%d reviews</string>
+    <string name="use_coupon">Use Coupon</string>
+    <string name="copy_">Copy</string>
+    <string name="your_coupon_code">YOUR COUPON CODE</string>
+    <string name="description_discount_coupon">Cannot be used in conjunction with other discount or offer.</string>
 
     <!-- BARCODE READER -->
     <string name="enter_the_code_manually">Enter the code manually</string>
@@ -163,7 +169,7 @@
     <string name="company_name">Company Name</string>
     <string name="store_name">Store Name</string>
     <string name="store">#Store</string>
-    <string name="employeed_id">Employeed ID</string>
+    <string name="employeed_id">Employee ID</string>
     <string name="last_activity">Last activity</string>
     <string name="login_time">Login time</string>
     <string name="save_note">Save note</string>

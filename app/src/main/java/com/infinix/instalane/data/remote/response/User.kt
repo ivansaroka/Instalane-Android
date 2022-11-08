@@ -43,6 +43,9 @@ class User {
     @SerializedName("device_token")
     var deviceToken: String? = null
 
+    @SerializedName("employee_id")
+    var employeeId: String? = null
+
     @SerializedName("region_id")
     var region: Region? = null
 

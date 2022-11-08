@@ -6,10 +6,13 @@ import com.bumptech.glide.Glide
 import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Coupon
 import com.infinix.instalane.databinding.ItemOfferBinding
+import com.infinix.instalane.ui.home.checkout.AddCouponDialogFragment
 import com.infinix.instalane.utils.DateUtils
 import com.infinix.instalane.utils.inflate
 
 class OfferAdapter(val list : List<Coupon>) : RecyclerView.Adapter<OfferAdapter.ViewHolder>() {
+
+    lateinit var onUse : (Coupon) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
@@ -31,6 +34,9 @@ class OfferAdapter(val list : List<Coupon>) : RecyclerView.Adapter<OfferAdapter.
                 binding.mExpire.text = "Expires $sExpire"
             }
 
+            binding.mUse.setOnClickListener {
+                onUse.invoke(data)
+            }
         }
     }
 }

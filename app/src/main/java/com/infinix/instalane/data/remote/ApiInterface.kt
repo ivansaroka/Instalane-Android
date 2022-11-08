@@ -28,7 +28,7 @@ interface ApiInterface {
     @POST("logout")
     suspend fun logout(@Body request: LogoutRequest): Any
 
-    @POST("delete_account")
+    @HTTP(method = "DELETE", path = "delete_account", hasBody = true)
     suspend fun deleteAccount(@Body request: LogoutRequest): Any
 
     @POST("forgot_password")

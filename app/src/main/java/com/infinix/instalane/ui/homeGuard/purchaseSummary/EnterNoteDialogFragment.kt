@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.infinix.instalane.R
+import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Note
 import com.infinix.instalane.databinding.FragmentEnterCodeBinding
 import com.infinix.instalane.databinding.FragmentEnterNoteBinding
@@ -45,16 +46,15 @@ class EnterNoteDialogFragment(private val mNote:String?, private val mStatus:Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        if (!mNote.isNullOrEmpty()){
-
-        }
+        val user = AppPreferences.getUser()
+        binding.mUsername.text = user?.fullname
 
         binding.mStatus1.setOnClickListener {
             status = Note.ALL_SCANNED_PAID
             binding.mStatus1.alpha = 1f
             binding.mStatus2.alpha = 0.5f
             binding.mStatus3.alpha = 0.5f
-            binding.mConfirm.isEnabled = binding.mNote.text.toString().isNotEmpty()
+            binding.mConfirm.isEnabled = true
         }
 
         binding.mStatus2.setOnClickListener {
@@ -75,6 +75,8 @@ class EnterNoteDialogFragment(private val mNote:String?, private val mStatus:Int
 
         binding.mNote.listenerAfterTextChanged {
             binding.mConfirm.isEnabled = it.isNotEmpty() && status!=null
+            if (status==Note.ALL_SCANNED_PAID)
+                binding.mConfirm.isEnabled = true
         }
 
         binding.mConfirm.setOnClickListener {

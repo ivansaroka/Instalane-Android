@@ -86,8 +86,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/item_product" />
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_order" />
 
                 <View style="@style/DividerStyle" />
 
@@ -106,20 +106,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextStyleSemiBold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/subtotal"
                         android:textColor="@color/textGray"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleSemiBold"/>
 
                     <TextView
-                        style="@style/TextStyleBold"
+                        android:id="@+id/mSubtotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$38.50"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleBold"/>
 
                 </LinearLayout>
 
@@ -130,20 +131,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextStyleSemiBold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/total_discount"
                         android:textColor="@color/textGray"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleSemiBold"/>
 
                     <TextView
-                        style="@style/TextStyleBold"
+                        android:id="@+id/mDiscount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$2.80"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleBold"/>
 
                 </LinearLayout>
 
@@ -154,20 +156,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextStyleSemiBold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/instalane_fee"
                         android:textColor="@color/textGray"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleSemiBold"/>
 
                     <TextView
-                        style="@style/TextStyleBold"
+                        android:id="@+id/mFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$1.50"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleBold"/>
 
                 </LinearLayout>
 
@@ -178,20 +181,21 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextStyleSemiBold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/taxes"
                         android:textColor="@color/textGray"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleSemiBold"/>
 
                     <TextView
-                        style="@style/TextStyleBold"
+                        android:id="@+id/mTaxes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$0.78"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        style="@style/TextStyleBold"/>
 
                 </LinearLayout>
 
@@ -212,12 +216,28 @@
                         android:textColor="@color/textGray"
                         android:textSize="@dimen/text_size_small" />
 
-                    <TextView
-                        style="@style/TextStyleBold"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$35.70"
-                        android:textSize="@dimen/text_size_big" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/mTotal"
+                            style="@style/TextStyleBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$35.70"
+                            android:textSize="@dimen/text_size_big" />
+
+                        <View
+                            android:layout_below="@+id/mTotal"
+                            android:layout_alignStart="@+id/mTotal"
+                            android:layout_alignEnd="@+id/mTotal"
+                            android:background="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="3dp"/>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
@@ -234,43 +254,37 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="90dp">
+                    android:layout_height="60dp">
 
                     <ImageView
+                        android:id="@+id/mCardPhoto"
                         android:layout_width="@dimen/ic_card_size"
                         android:layout_height="@dimen/ic_card_size"
-                        android:src="@drawable/sample_card"
+                        android:src="@drawable/ic_stripe"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/mProfileTitle1"
+                        android:text="Stripe"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_small"
                         style="@style/ProfileOptionTitleStyle"
-                        android:text="Visa Debit"
-                        app:layout_constraintBottom_toTopOf="@+id/mViewMiddle"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        android:gravity="center_vertical"
+                        app:layout_constraintBottom_toBottomOf="@+id/mCardPhoto"
+                        app:layout_constraintTop_toTopOf="@+id/mCardPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/mCardPhoto"/>
 
-                    <View
-                        android:id="@+id/mViewMiddle"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/ProfileOptionDescriptionStyle"
-                        android:text="2049 •••• 2049 3890 "
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/mViewMiddle" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View style="@style/DividerStyle" />
 
                 <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:id="@+id/mQR"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/sample_qr" />
 
@@ -339,7 +353,7 @@
                                 android:id="@+id/mRate1"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/rate1"
+                                android:src="@drawable/ic_star_rate"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/margin_normal"
                                 android:background="@drawable/circle_gray"/>
@@ -355,7 +369,7 @@
                                 android:id="@+id/mRate2"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/rate2"
+                                android:src="@drawable/ic_star_rate"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/margin_normal"
                                 android:background="@drawable/circle_gray"/>
@@ -370,7 +384,7 @@
                                 android:id="@+id/mRate3"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/rate3"
+                                android:src="@drawable/ic_star_rate"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/margin_normal"
                                 android:background="@drawable/circle_gray"/>
@@ -385,7 +399,7 @@
                                 android:id="@+id/mRate4"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/rate4"
+                                android:src="@drawable/ic_star_rate"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/margin_normal"
                                 android:background="@drawable/circle_gray"/>
@@ -400,7 +414,7 @@
                                 android:id="@+id/mRate5"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/rate5"
+                                android:src="@drawable/ic_star_rate"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/margin_normal"
                                 android:background="@drawable/circle_gray"/>
@@ -438,7 +452,6 @@
                             android:maxLines="5"
                             android:inputType="textCapSentences|textMultiLine" />
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"

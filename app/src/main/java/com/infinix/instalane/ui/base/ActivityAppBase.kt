@@ -151,9 +151,10 @@ open class ActivityAppBase : AppCompatActivity() {
         val biometricPrompt = BiometricPrompt(this, ContextCompat.getMainExecutor(this),
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS)
+                    if (errorCode == BiometricPrompt.ERROR_NO_BIOMETRICS){
                         showErrorAlert("You need to configure biometric unlock in your device")
-                    else if (errorCode == BiometricPrompt.ERROR_LOCKOUT){
+                        onError(true)
+                    } else if (errorCode == BiometricPrompt.ERROR_LOCKOUT){
                         showErrorAlertDismiss("Access to de application has been blocked. You can try again in 30s")
                         onError(true)
                         return

@@ -47,6 +47,8 @@ class Order {
         var qty: Int? = 0
         @SerializedName("confirmed")
         var confirmed: Boolean? = false
+        @SerializedName("price")
+        var price: Float? = null
         @SerializedName("product")
         var product: Product? = null
     }

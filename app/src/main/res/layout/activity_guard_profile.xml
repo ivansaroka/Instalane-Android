@@ -96,7 +96,7 @@
                     />
 
                 <TextView
-                    android:text="Costco"
+                    android:id="@+id/mCompanyName"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />
@@ -118,7 +118,7 @@
                     />
 
                 <TextView
-                    android:text="Costco Tererboro"
+                    android:id="@+id/mStoreName"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />
@@ -140,7 +140,7 @@
                     />
 
                 <TextView
-                    android:text="#12"
+                    android:id="@+id/mStoreId"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />
@@ -162,7 +162,7 @@
                     />
 
                 <TextView
-                    android:text="929982882-000"
+                    android:id="@+id/mEmployeeID"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />
@@ -184,7 +184,6 @@
                     />
 
                 <TextView
-                    android:text="12/12/2021"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />

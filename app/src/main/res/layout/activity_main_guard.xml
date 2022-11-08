@@ -78,6 +78,13 @@
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_app">
 
+            <ImageView
+                android:id="@+id/mPhoto"
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:layout_marginHorizontal="@dimen/margin_app"
+                android:layout_height="100dp"/>
+
             <TextView
                 android:id="@+id/mCompanyName"
                 android:layout_width="280dp"
@@ -85,18 +92,13 @@
                 android:layout_marginTop="@dimen/margin_app"
                 android:text="Washington Food Plaza"
                 android:gravity="center"
-                android:textColor="#E30707"
+                android:textColor="@color/textGray"
                 style="@style/TextStyleBold"
-                android:textSize="30dp"
-                android:textAllCaps="true"
-                android:shadowColor="#AC0000"
-                android:shadowDx="2.5"
-                android:shadowDy="2.5"
-                android:shadowRadius="2.0"/>
+                android:textSize="@dimen/text_size_big_title"/>
 
             <ImageView
-                android:layout_width="220dp"
-                android:layout_height="220dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_marginVertical="@dimen/margin_small"
                 android:src="@drawable/ic_qr_home"/>
 
@@ -114,6 +116,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 style="@style/TextStyleMedium"
+                android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textGray"
                 android:paddingHorizontal="@dimen/margin_app"
                 android:layout_marginBottom="@dimen/margin_app"

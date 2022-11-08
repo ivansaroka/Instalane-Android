@@ -78,7 +78,9 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
                 binding.mConfirm.isEnabled = false
                 binding.mConfirm.text = getString(R.string.confirm_order)
             } else {
-                binding.mConfirm.isEnabled = true
+
+                binding.mConfirm.isEnabled = mStatus != null
+
                 if (it.size == 1)
                     binding.mConfirm.text = "${getString(R.string.confirm_order)} - 1 Item"
                 else

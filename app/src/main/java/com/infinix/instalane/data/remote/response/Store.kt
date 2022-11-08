@@ -45,6 +45,22 @@ class Store {
     @SerializedName("region_tax")
     var regionTax: String? = null
 
+    @SerializedName("ratings")
+    var ratingsList: List<Rate>? = null
+
+    class Rate {
+        @SerializedName("rating")
+        val rating : Int = 0
+        @SerializedName("comment")
+        var comment: String? = null
+        @SerializedName("store_id")
+        var storeId: String? = null
+        @SerializedName("id")
+        var id: String? = null
+        @SerializedName("user")
+        var user: String? = null
+    }
+
     class Region {
         @SerializedName("id")
         var id: String? = null

@@ -77,7 +77,13 @@ class SeeAllActivity : ActivityAppBase() {
     }
 
     private fun showDiscounts(list:List<Coupon>){
-        binding.mList.adapter = OfferAdapter(list)
+        val adapterOffer = OfferAdapter(list)
+        adapterOffer.onUse = { coupon ->
+            val dialog = CouponDialogFragment(coupon)
+            dialog.onUse = { }
+            dialog.show(supportFragmentManager, "")
+        }
+        binding.mList.adapter = adapterOffer
     }
 
     private fun showReviews(list:List<Review>) {

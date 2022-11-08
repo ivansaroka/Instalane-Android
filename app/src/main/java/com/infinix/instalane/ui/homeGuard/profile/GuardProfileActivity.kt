@@ -38,6 +38,11 @@ class GuardProfileActivity : ActivityAppBase() {
         binding.mEmail.text = user?.email
         binding.mPhoto.clipToOutline = true
         Glide.with(this).load(user?.profilePicture).placeholder(R.drawable.placeholder_user_profile).circleCrop().into(binding.mPhoto)
+
+
+        binding.mCompanyName.text = user!!.region?.company?.name
+        binding.mEmployeeID.text = user.employeeId
+        //binding.mStoreName.text = user.region.company.s
     }
 
     private fun logout() {

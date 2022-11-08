@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="@+id/mName"
-        app:layout_constraintBottom_toBottomOf="@+id/mMark"
+        app:layout_constraintBottom_toBottomOf="@+id/mName"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/sample_product"
         android:layout_gravity="center_vertical"/>
@@ -24,26 +24,14 @@
         android:text="Jalapeño"
         style="@style/TextStyleSemiBold"
         android:textSize="@dimen/text_size_small"
-        android:lines="1"
+        android:lines="2"
+        android:gravity="center_vertical"
         android:ellipsize="end"
         android:layout_marginHorizontal="@dimen/margin_app"
        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mPrice"
         app:layout_constraintStart_toEndOf="@+id/mPhoto"/>
 
-    <TextView
-        android:id="@+id/mMark"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Ranch Dip"
-        style="@style/TextStyleSemiBold"
-        android:lines="1"
-        android:ellipsize="end"
-        android:textSize="@dimen/text_size_small"
-        android:layout_marginHorizontal="@dimen/margin_app"
-        app:layout_constraintTop_toBottomOf="@+id/mName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mPhoto"/>
 
     <TextView
         android:id="@+id/mPrice"
@@ -56,7 +44,7 @@
         android:ellipsize="end"
         android:textColor="@color/orange"
         app:layout_constraintTop_toTopOf="@+id/mName"
-        app:layout_constraintBottom_toBottomOf="@+id/mMark"
+        app:layout_constraintBottom_toBottomOf="@+id/mName"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 

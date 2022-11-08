@@ -91,18 +91,37 @@ class UserProfileActivity : ActivityAppBase() {
                         showBiometricDialog({
                             AppPreferences.setBiometric(true)
                             binding.mSwitchFaceId.isChecked = true
+
+                            AppDialog.showDialog(this@UserProfileActivity,
+                                title = getString(R.string.app_name),
+                                body = getString(R.string.biometric_successfully))
+
                         }, { binding.mSwitchFaceId.isChecked = false })
                     }
                 }
             )
         } else {
-            showBiometricDialog({
-                AppPreferences.setBiometric(false)
-                binding.mSwitchFaceId.isChecked = false
-            }, { binding.mSwitchFaceId.isChecked = true })
+
+            AppDialog.showDialog(this@UserProfileActivity,
+                title = getString(R.string.app_name),
+                body = getString(R.string.want_to_remove_biometric),
+                confirm = getString(R.string.ok),
+                cancel = getString(R.string._cancel),
+                cancelListener = object : AppDialog.CancelListener{
+                    override fun onCancel() {
+                        binding.mSwitchFaceId.isChecked = true
+                    }
+                },
+                confirmListener = object : AppDialog.ConfirmListener{
+                    override fun onClick() {
+                        showBiometricDialog({
+                            AppPreferences.setBiometric(false)
+                            binding.mSwitchFaceId.isChecked = false
+                        }, { binding.mSwitchFaceId.isChecked = true })
+                    }
+                }
+            )
         }
-
-
     }
 
     private fun completeData() {

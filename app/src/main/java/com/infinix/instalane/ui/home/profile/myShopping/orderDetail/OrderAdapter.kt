@@ -9,7 +9,7 @@ import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ItemOrderBinding
 import com.infinix.instalane.utils.inflate
 
-class OrderAdapter(val list : List<Order.ItemOrder>, val isCheckout:Boolean? = false, val store: Store?=null) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter(val list : List<Order.ItemOrder>, val store: Store?=null) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
@@ -23,10 +23,10 @@ class OrderAdapter(val list : List<Order.ItemOrder>, val isCheckout:Boolean? = f
 
         fun bind(data: Order.ItemOrder) {
 
+            binding.mPrice.text = "$${data.price}"
             data.product?.let {
                 binding.mName.text = it.name
-                //binding.mMark.text =
-                binding.mPrice.text = "$${it.getPriceByRegion(store?.region)}"
+                //binding.mPrice.text = "$${it.getPriceByRegion(store?.region)}"
                 Glide.with(itemView.context).load(it.picture).into(binding.mPhoto)
             }
         }

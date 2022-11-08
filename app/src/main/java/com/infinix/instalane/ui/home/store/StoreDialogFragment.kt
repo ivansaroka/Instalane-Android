@@ -111,12 +111,19 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
 
         binding.mContBestOffers.visibility = View.VISIBLE
         binding.mSeeAllOffers.visibility = View.INVISIBLE
-        if (list.size > 10) {
-            binding.mList.adapter = OfferAdapter(list.subList(0, 10))
+        val adapterOffer = if (list.size > 10) {
             binding.mSeeAllOffers.visibility = View.VISIBLE
+            OfferAdapter(list.subList(0, 10))
         } else
-            binding.mList.adapter = OfferAdapter(list)
+            OfferAdapter(list)
+        binding.mSeeAllOffers.visibility = View.VISIBLE
 
+        adapterOffer.onUse = { coupon ->
+            val dialog = CouponDialogFragment(coupon)
+            dialog.onUse = { }
+            dialog.show(childFragmentManager, "")
+        }
+        binding.mList.adapter = adapterOffer
         binding.mSeeAllOffers.setOnClickListener { startActivity(SeeAllActivity.getIntent(requireContext(), getString(R.string.best_offers), store)) }
     }
 
