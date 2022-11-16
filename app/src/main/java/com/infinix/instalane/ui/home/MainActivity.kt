@@ -6,10 +6,6 @@ import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.media.AudioAttributes
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +16,10 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonLocation
@@ -39,7 +39,7 @@ import java.io.IOException
 import java.util.*
 
 
-class MainActivity : ActivityAppBase() {
+class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
     private val viewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java].apply {
@@ -56,6 +56,7 @@ class MainActivity : ActivityAppBase() {
     private var locationRequest: LocationRequest?=null
     private lateinit var locationCallback: LocationCallback
     private var locationFound = false
+    private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,13 +68,24 @@ class MainActivity : ActivityAppBase() {
         binding.mContProfile.setOnClickListener { startActivity(Intent(this, UserProfileActivity::class.java)) }
         binding.mNotification.setOnClickListener { startActivity(Intent(this, NotificationActivity::class.java))  }
 
-        getCurrentLocation()
         viewModel.sendDeviceToken()
 
         if (AppPreferences.mustShowTutorial()){
             val dialog = ShowTutorialDialog()
             dialog.show(supportFragmentManager, null)
         }
+
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        googleMap.uiSettings.isMyLocationButtonEnabled = false
+        googleMap.uiSettings.isCompassEnabled = false
+
+        mMap = googleMap
+        getCurrentLocation()
     }
 
     override fun onResume() {
@@ -96,6 +108,7 @@ class MainActivity : ActivityAppBase() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ).subscribe { granted: Boolean? ->
                 if (granted != null && granted) {
+                    mMap.isMyLocationEnabled = true
                     getLocationUpdates()
                     if(locationRequest!=null) {
                         fusedLocationClient.requestLocationUpdates(
@@ -111,6 +124,7 @@ class MainActivity : ActivityAppBase() {
                                     locationFound = true
                                     Log.i("GETDATA", "2")
                                     getData(loc)
+                                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(loc.latitude, loc.longitude), 12f))
                                 }
                             }
                     }, 2000)
@@ -179,8 +193,11 @@ class MainActivity : ActivityAppBase() {
                 if (!locationFound) {
                     locationFound = true
                     Log.i("GETDATA", "1")
-                    if (locationResult.locations.isNotEmpty())
+                    if (locationResult.locations.isNotEmpty()){
                         getData(locationResult.lastLocation)
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude), 12f))
+                    }
+
                 }
             }
         }

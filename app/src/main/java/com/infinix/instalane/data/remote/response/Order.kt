@@ -39,6 +39,8 @@ class Order {
     var notes: List<Note>? = null
     @SerializedName("client")
     var client: User? = null
+    @SerializedName("guard")
+    var guard: User? = null
 
     class ItemOrder {
         @SerializedName("id")

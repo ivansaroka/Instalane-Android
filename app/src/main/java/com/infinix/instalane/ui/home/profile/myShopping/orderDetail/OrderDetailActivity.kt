@@ -56,7 +56,11 @@ class OrderDetailActivity : ActivityAppBase() {
         intent.getStringExtra(ARG_SHOPPING)!!.let {
             mPurchaseHistory = Gson().fromJson(it, PurchaseHistory::class.java)
             setToolbar(mPurchaseHistory?.store?.name)
+
+            binding.mNameStore.text = mPurchaseHistory?.store?.name
             binding.mAddress.text = mPurchaseHistory?.store?.address
+            val sDate = DateUtils().convertDate(mPurchaseHistory?.date!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_ORDER_DATE_COMPLETE)
+            binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
             Glide.with(this).load(mPurchaseHistory?.store?.picture).into(binding.mPhoto)
         }
 

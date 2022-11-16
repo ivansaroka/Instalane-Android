@@ -6,6 +6,7 @@ import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Notification
 import com.infinix.instalane.databinding.ActivityNotificationBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
+import com.infinix.instalane.ui.base.EmptyAdapter
 
 class NotificationActivity : ActivityAppBase() {
 
@@ -26,7 +27,9 @@ class NotificationActivity : ActivityAppBase() {
     }
 
     private fun showData(list : List<Notification>){
-        binding.mList.adapter = NotificationAdapter(list)
+        if (list.isEmpty())
+            binding.mList.adapter = EmptyAdapter(getString(R.string.empty_notification))
+        else
+            binding.mList.adapter = NotificationAdapter(list)
     }
-
 }

@@ -15,10 +15,12 @@ import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ActivityPurchaseSummaryBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.barcode.ProductAdapter
+import com.infinix.instalane.utils.DateUtils
 import com.infinix.instalane.utils.showErrorMessage
 import com.infinix.instalane.utils.showMessage
 import net.glxn.qrgen.android.QRCode
 import net.glxn.qrgen.core.image.ImageType
+import java.util.Calendar
 
 class PurchaseSummaryActivity : ActivityAppBase() {
 
@@ -64,6 +66,9 @@ class PurchaseSummaryActivity : ActivityAppBase() {
 
         binding.mTitleStore.text = mStore?.name
         binding.mAddress.text = mStore?.address
+
+        val sDate = DateUtils().convertFromDateToString(Calendar.getInstance().time, DateUtils.FORMAT_ORDER_DATE_COMPLETE)
+        binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
 
         viewModel.getProducts()
         completeTotal()

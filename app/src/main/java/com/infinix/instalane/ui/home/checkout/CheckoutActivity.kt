@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.infinix.instalane.R
@@ -67,15 +68,6 @@ class CheckoutActivity : ActivityAppBase() {
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
 
-        /*
-        binding.mListCoupons.adapter = CouponAppliedAdapter(ArrayList())
-        (binding.mListCoupons.adapter as CouponAppliedAdapter).onRemoveAll = {
-            binding.mTitleCouponApplied.visibility = View.GONE
-            binding.mListCoupons.visibility = View.GONE
-            completeTotal()
-        }
-         */
-
         binding.mCoupon.setOnClickListener {
             mProduct = null
             showCouponDialog()
@@ -125,6 +117,7 @@ class CheckoutActivity : ActivityAppBase() {
     }
 
     private fun createOrder() {
+        mustAskForBiometric = false
         showProgressDialog()
         viewModel.createOrder(subtotal, discount, fee, taxes, total, mStore!!.id!!, couponList)
     }

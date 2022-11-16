@@ -98,14 +98,24 @@
                 android:layout_marginVertical="@dimen/margin_normal"
                 android:text="@string/near_you"/>
 
-            <ImageView
-                android:id="@+id/mMap"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/margin_app"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_box"
-                android:src="@drawable/sample_map"/>
+                android:layout_height="130dp">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:id="@+id/mMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

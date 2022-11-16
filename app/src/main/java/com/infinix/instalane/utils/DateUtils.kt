@@ -41,6 +41,8 @@ class DateUtils {
 
         const val FORMAT_NOTIFICATION_API = "yyyy-MM-dd hh:mm:ss"
         const val FORMAT_NOTIFICATION_APP = "MM-dd-yy hh:mm aa"
+
+        const val FORMAT_ORDER_DATE_COMPLETE = "hh:mm:ss aa MM/dd/yyyy"
     }
 
 

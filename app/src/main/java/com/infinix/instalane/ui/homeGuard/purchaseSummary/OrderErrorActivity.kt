@@ -31,6 +31,7 @@ class OrderErrorActivity : AppCompatActivity() {
 
         binding.mClose.setOnClickListener { finish() }
 
+        binding.mGuard.text = mOrder!!.guard?.fullname
         binding.mAddress.text = mOrder!!.store?.name
         val sDate = DateUtils().convertDate(mOrder!!.updatedAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_ORDER_DATE)
         val sTime = DateUtils().convertDate(mOrder!!.updatedAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_HOUR)

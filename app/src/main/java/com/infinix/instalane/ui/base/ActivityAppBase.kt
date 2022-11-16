@@ -31,15 +31,19 @@ open class ActivityAppBase : AppCompatActivity() {
     var onGoogleAuthSuccess: ((GoogleSignInAccount, String?) -> Unit?)? = null
     var isInBackground = false
 
+    protected var mustAskForBiometric = true
+
     override fun onResume() {
         super.onResume()
-        val myApp = this.application as InstalaneApplication
-        if (myApp.wasInBackground) {
-            if (AppPreferences.getUser()!= null && AppPreferences.hasBiometric()){
-                showBiometricDialog( {  }, { if (!it) finishAffinity() } )
+        if(mustAskForBiometric){
+            val myApp = this.application as InstalaneApplication
+            if (myApp.wasInBackground) {
+                if (AppPreferences.getUser()!= null && AppPreferences.hasBiometric()){
+                    showBiometricDialog( {  }, { if (!it) finishAffinity() } )
+                }
             }
+            myApp.stopActivityTransitionTimer()
         }
-        myApp.stopActivityTransitionTimer()
     }
 
     override fun onPause() {

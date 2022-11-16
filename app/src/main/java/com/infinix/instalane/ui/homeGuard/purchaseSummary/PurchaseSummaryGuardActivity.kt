@@ -59,18 +59,18 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
     private fun showData(order: Order){
         hideProgressDialog()
 
+        if(order.status == Order.STATE_DELIVERED) {
+            startActivity(OrderErrorActivity.getIntent(this, order))
+            finish()
+            return
+        }
+
         binding.mContClient.visibility = View.GONE
         if (order.client!=null){
             binding.mContClient.visibility = View.VISIBLE
             binding.mUsernameClient.text = order.client?.fullname
             binding.mProfileClient.clipToOutline = true
             Glide.with(this).load(order.client?.profilePicture).circleCrop().placeholder(R.drawable.placeholder_user_profile).into(binding.mProfileClient)
-        }
-
-        if(order.status == Order.STATE_DELIVERED) {
-            startActivity(OrderErrorActivity.getIntent(this, order))
-            finish()
-            return
         }
 
         binding.mList.adapter = ProductGuardAdapter(order.items!!.filter { it.product!=null }){

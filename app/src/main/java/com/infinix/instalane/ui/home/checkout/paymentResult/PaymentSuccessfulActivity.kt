@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.google.gson.Gson
+import com.infinix.instalane.InstalaneApplication
 import com.infinix.instalane.R
 import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Order
@@ -38,6 +39,10 @@ class PaymentSuccessfulActivity : ActivityAppBase() {
         setContentView(binding.root)
         intent.getStringExtra(ARG_STORE)?.let { mStore = Gson().fromJson(it, Store::class.java) }
         intent.getStringExtra(ARG_ORDER)?.let { mOrder = Gson().fromJson(it, Order::class.java) }
+
+        mustAskForBiometric = false
+        val myApp = this.application as InstalaneApplication
+        myApp.wasInBackground = false
 
         binding.mClose.setOnClickListener {
             if (AppPreferences.getUser()?.isUser()==true)

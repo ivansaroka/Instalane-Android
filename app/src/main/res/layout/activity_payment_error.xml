@@ -52,12 +52,13 @@
                 android:text="Security guard"/>
 
             <TextView
+                android:id="@+id/mGuard"
                 android:layout_width="wrap_content"
                 style="@style/TextStyleSemiBold"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small"
-                android:text="@string/adriane_thuer"/>
+                tools:text="@string/adriane_thuer"/>
 
         </LinearLayout>
 
@@ -83,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small"
-                android:text="Washington Food Plaza"/>
+                tools:text="Washington Food Plaza"/>
 
         </LinearLayout>
 
@@ -109,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small"
-                android:text="Jan 25, 2022"/>
+                tools:text="Jan 25, 2022"/>
 
         </LinearLayout>
 
@@ -134,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small"
-                android:text="12:34 AM"/>
+                tools:text="12:34 AM"/>
 
         </LinearLayout>
 
