@@ -110,6 +110,12 @@ class OrderDetailActivity : ActivityAppBase() {
         binding.mFee.text = "$${String.format("%.2f", order!!.fee)}"
         binding.mTaxes.text = "$${String.format("%.2f", order!!.taxes)}"
         binding.mTotal.text = "$${String.format("%.2f", order!!.amount)}"
+
+
+        if (!order.paymentMethodBrand.isNullOrEmpty()){
+            binding.mCardData.visible()
+            binding.mCardData.text = "${order.paymentMethodBrand} **** ${order.paymentMethodLast4}"
+        }
     }
 
     private fun unselectAll(selectItem : ImageView, rate:Int){

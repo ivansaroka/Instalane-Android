@@ -38,6 +38,11 @@ class CheckoutActivity : ActivityAppBase() {
             }
             productsLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::showData)
             orderLiveData.observe(this@CheckoutActivity){ mNewOrder = it }
+            updateOrderLiveData.observe(this@CheckoutActivity){
+                hideProgressDialog()
+                mNewOrder = it
+                paymentSuccessful(mNewOrder!!)
+            }
             paymentIntentLiveData.observe(this@CheckoutActivity, this@CheckoutActivity::onPaymentIntentSuccess)
             onError.observe(this@CheckoutActivity) { hideProgressDialog() }
         }
@@ -229,8 +234,6 @@ class CheckoutActivity : ActivityAppBase() {
             PaymentSheet.Configuration(
                 merchantDisplayName = "Order",
                 customer = customerConfig,
-                // Set `allowsDelayedPaymentMethods` to true if your business
-                // can handle payment methods that complete payment after a delay, like SEPA Debit and Sofort.
                 allowsDelayedPaymentMethods = false
             )
         )
@@ -245,8 +248,11 @@ class CheckoutActivity : ActivityAppBase() {
                 print("Error: ${paymentSheetResult.error}")
             }
             is PaymentSheetResult.Completed -> {
-                if (mNewOrder!=null)
-                    paymentSuccessful(mNewOrder!!)
+                if (mNewOrder!=null){
+                    showProgressDialog()
+                    viewModel.getOrder(mNewOrder!!.id!!)
+                    //paymentSuccessful(mNewOrder!!)
+                }
                 //changeStatus(Order.STATUS_COMPLETED, mOrder)
             }
         }

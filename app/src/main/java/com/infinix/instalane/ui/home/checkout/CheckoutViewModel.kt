@@ -20,6 +20,7 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
     val orderLiveData = MutableLiveData<Order>()
     val paymentIntentLiveData = MutableLiveData<PaymentIntentResponse>()
     val couponLiveData = MutableLiveData<List<Coupon>>()
+    val updateOrderLiveData = MutableLiveData<Order>()
 
     fun getProducts() =
         viewModelScope.launch {
@@ -66,7 +67,7 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
     }
 
 
-    fun pay(order: Order){
+    private fun pay(order: Order){
         viewModelScope.launch {
             val request = PaymentRequest().apply {
                 this.accessToken = AppPreferences.getUser()!!.accessToken
@@ -76,6 +77,19 @@ class CheckoutViewModel(application: Application) : BaseViewModel(application) {
             ApiClient.service::paymentIntent.callApi(request).collect{
                 if(it.isSuccess)
                     it.getOrNull()?.let { paymentIntentLiveData.postValue(it) }
+                else
+                    onError.postValue(it.exceptionOrNull())
+            }
+        }
+    }
+
+    fun getOrder(orderID:String) {
+        viewModelScope.launch {
+            ApiClient.service::getOrder.callApi(AppPreferences.getUser()!!.accessToken!!, orderID).collect {
+                if (it.isSuccess)
+                    it.getOrNull()?.let { order ->
+                        updateOrderLiveData.postValue(order)
+                    }
                 else
                     onError.postValue(it.exceptionOrNull())
             }

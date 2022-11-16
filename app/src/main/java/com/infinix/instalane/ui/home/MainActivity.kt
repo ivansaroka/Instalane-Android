@@ -195,7 +195,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
                     Log.i("GETDATA", "1")
                     if (locationResult.locations.isNotEmpty()){
                         getData(locationResult.lastLocation)
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude), 12f))
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude), 15f))
                     }
 
                 }

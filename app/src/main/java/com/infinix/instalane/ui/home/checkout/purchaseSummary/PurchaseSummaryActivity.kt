@@ -18,6 +18,7 @@ import com.infinix.instalane.ui.home.barcode.ProductAdapter
 import com.infinix.instalane.utils.DateUtils
 import com.infinix.instalane.utils.showErrorMessage
 import com.infinix.instalane.utils.showMessage
+import com.infinix.instalane.utils.visible
 import net.glxn.qrgen.android.QRCode
 import net.glxn.qrgen.core.image.ImageType
 import java.util.Calendar
@@ -74,6 +75,11 @@ class PurchaseSummaryActivity : ActivityAppBase() {
         completeTotal()
         generateQR()
         AppPreferences.cleanDraft(mStore!!)
+
+        if (!mOrder?.paymentMethodBrand.isNullOrEmpty()){
+            binding.mCardData.visible()
+            binding.mCardData.text = "${mOrder?.paymentMethodBrand} **** ${mOrder?.paymentMethodLast4}"
+        }
     }
 
     private fun generateQR(){

@@ -253,16 +253,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/mProfileTitle1"
-                    android:text="Stripe"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:orientation="vertical"
                     android:layout_marginStart="@dimen/margin_small"
-                    style="@style/ProfileOptionTitleStyle"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/mCardPhoto"
                     app:layout_constraintTop_toTopOf="@+id/mCardPhoto"
-                    app:layout_constraintStart_toEndOf="@+id/mCardPhoto"/>
+                    app:layout_constraintStart_toEndOf="@+id/mCardPhoto">
+
+                    <TextView
+                        android:id="@+id/mProfileTitle1"
+                        android:text="Stripe"
+                        android:layout_marginStart="@dimen/margin_small"
+                        style="@style/ProfileOptionTitleStyle"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <TextView
+                        android:id="@+id/mCardData"
+                        android:visibility="gone"
+                        android:text="Visa **** 1234"
+                        android:layout_marginStart="@dimen/margin_small"
+                        style="@style/TextStyleRegular"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

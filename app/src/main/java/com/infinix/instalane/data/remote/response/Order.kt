@@ -42,6 +42,13 @@ class Order {
     @SerializedName("guard")
     var guard: User? = null
 
+    @SerializedName("payment_method_type")
+    var paymentMethodType: String? = null
+    @SerializedName("payment_method_brand")
+    var paymentMethodBrand: String? = null
+    @SerializedName("payment_method_last4")
+    var paymentMethodLast4: String? = null
+
     class ItemOrder {
         @SerializedName("id")
         var id: String? = null
