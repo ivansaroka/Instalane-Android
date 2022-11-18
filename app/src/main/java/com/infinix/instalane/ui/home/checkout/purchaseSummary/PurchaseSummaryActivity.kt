@@ -78,7 +78,7 @@ class PurchaseSummaryActivity : ActivityAppBase() {
 
         if (!mOrder?.paymentMethodBrand.isNullOrEmpty()){
             binding.mCardData.visible()
-            binding.mCardData.text = "${mOrder?.paymentMethodBrand} **** ${mOrder?.paymentMethodLast4}"
+            binding.mCardData.text = "${mOrder?.paymentMethodBrand} **** **** **** ${mOrder?.paymentMethodLast4}"
         }
     }
 
@@ -88,11 +88,11 @@ class PurchaseSummaryActivity : ActivityAppBase() {
     }
 
     private fun completeTotal() {
-        binding.mSubtotal.text = "$${String.format("%.2f", mOrder!!.subTotal)}"
-        binding.mDiscount.text = "-$${String.format("%.2f", mOrder!!.discount)}"
-        binding.mFee.text = "$${String.format("%.2f", mOrder!!.fee)}"
-        binding.mTaxes.text = "$${String.format("%.2f", mOrder!!.taxes)}"
-        binding.mTotal.text = "$${String.format("%.2f", mOrder!!.amount)}"
+        binding.mSubtotal.text = "$${String.format("%.2f", mOrder!!.subTotal)}".replace(",", ".")
+        binding.mDiscount.text = "-$${String.format("%.2f", mOrder!!.discount)}".replace(",", ".")
+        binding.mFee.text = "$${String.format("%.2f", mOrder!!.fee)}".replace(",", ".")
+        binding.mTaxes.text = "$${String.format("%.2f", mOrder!!.taxes)}".replace(",", ".")
+        binding.mTotal.text = "$${String.format("%.2f", mOrder!!.amount)}".replace(",", ".")
     }
 
     private fun showData(list : List<Product> ){

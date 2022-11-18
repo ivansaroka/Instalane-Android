@@ -41,7 +41,7 @@ class Product {
     fun hasPriceForThisRegion(region: Store.Region?) : Boolean{
         if (region==null) return false
         priceRegion?.forEach {
-            if (it.regionId == region.id && it.price!=null)
+            if (it.regionId == region.id && it.priceShowInApp!=null)
                 return true
         }
         return false
@@ -50,8 +50,17 @@ class Product {
     fun getPriceByRegion(region: Store.Region?) : Float{
         if (region==null) return 0f
         priceRegion?.forEach {
-            if (it.regionId == region.id && it.price!=null)
-                return it.price!!
+            if (it.regionId == region.id && it.priceShowInApp!=null)
+                return it.priceShowInApp!!
+        }
+        return 0f
+    }
+
+    fun getTaxByRegion(region: Store.Region?) : Float{
+        if (region==null) return 0f
+        priceRegion?.forEach {
+            if (it.regionId == region.id && it.taxPercent!=null)
+                return it.taxPercent!!
         }
         return 0f
     }
@@ -64,8 +73,12 @@ class Product {
     class PriceRegion{
         @SerializedName("price")
         var price: Float? = null
+        @SerializedName("price_shown_in_the_app")
+        var priceShowInApp: Float? = null
         @SerializedName("region_id")
         var regionId: String? = null
+        @SerializedName("tax_percent")
+        var taxPercent: Float? = null
         @SerializedName("product_id")
         var productId: String? = null
         @SerializedName("createdAt")

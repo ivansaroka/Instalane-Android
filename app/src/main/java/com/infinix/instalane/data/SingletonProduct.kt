@@ -20,6 +20,18 @@ class SingletonProduct private constructor() {
         return subtotal
     }
 
+    fun getTotalTaxes():Float{
+        //price_show_in_the_app - discount * tax / 100
+        var taxes = 0f
+        productList.forEach { prod->
+            if (prod.couponApplied?.discount != null)
+                taxes+= (prod.getPriceByRegion(store?.region) - prod.couponApplied!!.discount!!) * prod.getTaxByRegion(store?.region) / 100
+            else
+                taxes+= (prod.getPriceByRegion(store?.region)) * prod.getTaxByRegion(store?.region) / 100
+        }
+        return taxes
+    }
+
     fun clearList(){
         productList.clear()
     }

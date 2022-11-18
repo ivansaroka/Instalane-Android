@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.infinix.instalane.R
-import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Note
 import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.databinding.ActivityPurchaseSummaryGuardBinding
@@ -96,10 +95,15 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
     }
 
     private fun orderConfirmed() {
+        val items = (binding.mList.adapter as ProductGuardAdapter).listSelected
+        if (items.isEmpty()){
+            showErrorAlertDismiss(getString(R.string.must_confirm_products))
+            return
+        }
+
         showProgressDialog()
         intent.getStringExtra(ORDER_ID).let { orderId ->
             showProgressDialog()
-            val items = (binding.mList.adapter as ProductGuardAdapter).listSelected
             viewModel.confirmOrder(orderId!!, items)
         }
     }

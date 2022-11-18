@@ -165,6 +165,7 @@
     <string name="confirm_order">Confirm order</string>
     <string name="add_note">Add note</string>
     <string name="edit_note">Edit note</string>
+    <string name="must_confirm_products">You must confirm the products in the order first.</string>
 
     <!-- PROFILE GUARD -->
     <string name="company_name">Company Name</string>

@@ -55,7 +55,7 @@ class CheckoutActivity : ActivityAppBase() {
 
     private var subtotal = 0f
     private var discount = 0f
-    private var mStripeFee = 0f
+    //private var mStripeFee = 0f
     private var fee = 0f
     private var taxes = 0f
     private var total = 0f
@@ -90,34 +90,29 @@ class CheckoutActivity : ActivityAppBase() {
         subtotal = SingletonProduct.instance.getSubtotal()
         //discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
 
+        fee = 1.2f
+        //taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
+        taxes = SingletonProduct.instance.getTotalTaxes()
 
-        fee = 1.5f
-        taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
 
         val discountBasket = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).calculateDiscount() else 0f
         discount = discountBasket
 
-        mStripeFee = ((subtotal - discount) * 2.9f) / 100
-        subtotal += mStripeFee
-
         total = subtotal - discount + fee + taxes
         total = String.format("%.2f", total).replace(",", ".").toFloat()
 
-        binding.mSubtotal.text = "$${String.format("%.2f", subtotal)}"
-        if (discount == 0f)
-            binding.mDiscount.text = "$${String.format("%.2f", discount)}"
-        else
-            binding.mDiscount.text = "-$${String.format("%.2f", discount)}"
 
-        binding.mStripeFee.text = "$${String.format("%.2f", mStripeFee)}"
-        binding.mFee.text = "$${String.format("%.2f", fee)}"
-        binding.mTaxes.text = "$${String.format("%.2f", taxes)}"
-        binding.mTotal.text = "$${String.format("%.2f", total)}"
+        binding.mSubtotal.text = "$${String.format("%.2f", subtotal)}".replace(",", ".")
+        if (discount == 0f)
+            binding.mDiscount.text = "$${String.format("%.2f", discount)}".replace(",", ".")
+        else
+            binding.mDiscount.text = "-$${String.format("%.2f", discount)}".replace(",", ".")
+        binding.mFee.text = "$${String.format("%.2f", fee)}".replace(",", ".")
+        binding.mTaxes.text = "$${String.format("%.2f", taxes)}".replace(",", ".")
+        binding.mTotal.text = "$${String.format("%.2f", total)}".replace(",", ".")
 
         couponList.clear()
-        //val generalCouponList = (binding.mListCoupons.adapter as CouponAppliedAdapter).getCouponIdList()
         val productCouponList = if (binding.mList.adapter!=null) (binding.mList.adapter as ProductAdapter).getCouponIdList() else ArrayList()
-        //couponList.addAll(generalCouponList)
         couponList.addAll(productCouponList)
     }
 
@@ -129,6 +124,7 @@ class CheckoutActivity : ActivityAppBase() {
 
     private fun paymentSuccessful(order: Order) {
         hideProgressDialog()
+        order.taxes = taxes
         startActivity(PaymentSuccessfulActivity.getIntent(this, mStore!!,order))
         val intent = Intent()
         setResult(Activity.RESULT_OK, intent)

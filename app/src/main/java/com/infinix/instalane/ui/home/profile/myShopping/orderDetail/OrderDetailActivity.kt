@@ -114,7 +114,7 @@ class OrderDetailActivity : ActivityAppBase() {
 
         if (!order.paymentMethodBrand.isNullOrEmpty()){
             binding.mCardData.visible()
-            binding.mCardData.text = "${order.paymentMethodBrand} **** ${order.paymentMethodLast4}"
+            binding.mCardData.text = "${order.paymentMethodBrand} **** **** **** ${order.paymentMethodLast4}"
         }
     }
 
