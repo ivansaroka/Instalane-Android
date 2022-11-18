@@ -194,8 +194,11 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
                     locationFound = true
                     Log.i("GETDATA", "1")
                     if (locationResult.locations.isNotEmpty()){
+
+                        SingletonLocation.instance.myLocation = LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude)
+
                         getData(locationResult.lastLocation)
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude), 15f))
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SingletonLocation.instance.myLocation!!, 15f))
                     }
 
                 }

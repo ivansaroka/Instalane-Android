@@ -6,11 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toBitmap
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -23,10 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonLocation
 import com.infinix.instalane.data.remote.response.Store
@@ -34,8 +33,11 @@ import com.infinix.instalane.databinding.ActivityMapsBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.store.StoreDialogFragment
 import com.infinix.instalane.utils.AppDialog
+import com.infinix.instalane.utils.gone
+import com.infinix.instalane.utils.visible
 import com.tbruyelle.rxpermissions3.RxPermissions
 import java.util.*
+
 
 class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
 
@@ -56,6 +58,7 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.mStoreList.gone()
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
@@ -68,9 +71,31 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
             showPreview(it)
             true
         }
-
         mMap = googleMap
         moveToMyLocation()
+
+        binding.mSearchHere.setOnClickListener {
+            binding.mSearchHere.gone()
+            clearMapAndGetNewData(mMap.cameraPosition.target)
+        }
+
+        mMap.setOnCameraMoveStartedListener {reason->
+            Log.i("MAPEVENT", "started int: $reason")
+            var reasonText = "UNKNOWN_REASON"
+            when (reason) {
+                GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE -> {
+                    reasonText = "GESTURE"
+                    Handler(Looper.myLooper()!!)
+                        .postDelayed({
+                            binding.mSearchHere.visible()
+                        }, 1000)
+
+                }
+                GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION -> { reasonText = "API_ANIMATION" }
+                GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION -> { reasonText = "DEVELOPER_ANIMATION" }
+            }
+            Log.i("MAPEVENT", "started int: $reasonText")
+        }
     }
 
     private fun showStores(list:List<Store>){
@@ -82,6 +107,12 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
             val dialog = StoreDialogFragment(it)
             dialog.show(supportFragmentManager, "")
         }
+
+        if (list.isEmpty())
+            binding.mStoreList.gone()
+        else
+            binding.mStoreList.visible()
+
         binding.mStoreList.apply {
             offscreenPageLimit = 1
             val recyclerView = getChildAt(0) as RecyclerView
@@ -174,14 +205,34 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
                         .addOnSuccessListener { loc->
                             if (loc != null) {
                                 SingletonLocation.instance.locationSelected = null
-                                SingletonLocation.instance.myLocation = LatLng(loc.latitude, loc.longitude)
-                                mMap.clear()
-                                stores.clear()
-                                viewModel.getStores(SingletonLocation.instance.myLocation!!)
+                                if (SingletonLocation.instance.myLocation==null)
+                                    SingletonLocation.instance.myLocation = LatLng(loc.latitude, loc.longitude)
                                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SingletonLocation.instance.myLocation!!, 12f))
+                                clearMapAndGetNewData(SingletonLocation.instance.myLocation!!)
                             }
                         }
                 }
             }
+    }
+
+    private fun clearMapAndGetNewData(lng: LatLng){
+        mMap.clear()
+        stores.clear()
+        viewModel.getStores(lng, getMapVisibleRadius())
+    }
+
+    private fun getMapVisibleRadius(): Double {
+        val visibleRegion: VisibleRegion = mMap.projection.visibleRegion
+        val diagonalDistance = FloatArray(1)
+        val farLeft = visibleRegion.farLeft
+        val nearRight = visibleRegion.nearRight
+        Location.distanceBetween(
+            farLeft.latitude,
+            farLeft.longitude,
+            nearRight.latitude,
+            nearRight.longitude,
+            diagonalDistance
+        )
+        return (diagonalDistance[0] / 2).toDouble()
     }
 }

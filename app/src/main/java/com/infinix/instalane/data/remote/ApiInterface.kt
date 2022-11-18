@@ -53,7 +53,7 @@ interface ApiInterface {
     suspend fun addMembership(@Body request: AddMemberRequest): Memberships
 
     @GET("get_stores")
-    suspend fun getStores(@Query("access_token") accessToken: String, @Query("lat") lat: Double?=null, @Query("long") long: Double?=null, @Query("radius") radius: Int?=null, @Query("store_id") storeId: Int?=null): List<Store>
+    suspend fun getStores(@Query("access_token") accessToken: String, @Query("lat") lat: Double?=null, @Query("long") long: Double?=null, @Query("radius") radius: Float?=null, @Query("store_id") storeId: Int?=null): List<Store>
 
     @GET("get_store_reviews")
     suspend fun getStoreReviews(@Query("access_token") accessToken: String, @Query("store_id") storeId: String, @Query("page") page:Int): List<Review>

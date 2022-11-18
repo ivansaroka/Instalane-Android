@@ -11,6 +11,7 @@ import com.infinix.instalane.data.remote.ApiClient
 import com.infinix.instalane.data.remote.ApiClient.callApi
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.utils.BaseViewModel
+import com.infinix.instalane.utils.ConstantValue
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
@@ -23,15 +24,17 @@ class MapViewModel(application: Application) : BaseViewModel(application) {
 
     val nearStoreLiveData = MutableLiveData<List<Store>>()
 
-    fun getStores(location: LatLng) =
+    fun getStores(location: LatLng, radius: Double) =
         viewModelScope.launch {
 
             val accessToken = AppPreferences.getUser()!!.accessToken!!
-            val lat = null//location.latitude
-            val long = null//location.longitude
-            val radius = null//ConstantValue.RADIUS
+            val lat = location.latitude
+            val long = location.longitude
+            //val radius = ConstantValue.RADIUS
 
-            ApiClient.service::getStores.callApi(accessToken,lat, long,radius, null).collect {
+            val radiusMiles = radius * 0.000621371
+
+            ApiClient.service::getStores.callApi(accessToken,lat, long, radiusMiles.toFloat(), null).collect {
                 if (it.isSuccess)
                     it.getOrNull()?.let { stores ->
                         stores.forEach { it.calculateDistance(SingletonLocation.instance.myLocation!!) }
