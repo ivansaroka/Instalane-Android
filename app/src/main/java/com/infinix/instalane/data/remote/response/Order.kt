@@ -13,6 +13,8 @@ class Order {
 
     @SerializedName("id")
     var id: String? = null
+    @SerializedName("order_id")
+    var lastOrderId: String? = null
     @SerializedName("date")
     var date: String? = null
     @SerializedName("amount")

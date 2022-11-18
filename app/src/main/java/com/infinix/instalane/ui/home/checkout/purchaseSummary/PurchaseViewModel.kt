@@ -21,6 +21,7 @@ class PurchaseViewModel(application: Application) : BaseViewModel(application) {
 
     val productsLiveData = MutableLiveData<List<Product>>()
     val orderLiveData = MutableLiveData<Order>()
+    val lastOrderLiveData = MutableLiveData<Order>()
     val addReviewLiveData = MutableLiveData<Any>()
     val addNoteLiveData = MutableLiveData<Any>()
     val confirmOrderLiveData = MutableLiveData<Any>()
@@ -38,11 +39,17 @@ class PurchaseViewModel(application: Application) : BaseViewModel(application) {
                 else
                     onError.postValue(it.exceptionOrNull())
             }
+        }
+    }
 
-            /*
-            val list = ArrayList<Product>()
-            for (i in 0.. 5){ list.add(Product()) }
-             */
+    fun getLastOrder(orderId:String){
+        viewModelScope.launch {
+            ApiClient.service::getOrder.callApi(AppPreferences.getUser()!!.accessToken!!, orderId).collect {
+                if (it.isSuccess)
+                    it.getOrNull()?.let { purchase -> lastOrderLiveData.postValue(purchase) }
+                else
+                    onError.postValue(it.exceptionOrNull())
+            }
         }
     }
 

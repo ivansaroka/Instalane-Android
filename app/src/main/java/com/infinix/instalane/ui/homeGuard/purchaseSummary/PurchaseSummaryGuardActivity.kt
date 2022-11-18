@@ -32,6 +32,7 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
         ViewModelProvider(this)[PurchaseViewModel::class.java].apply {
             addNoteLiveData.observe(this@PurchaseSummaryGuardActivity){onAddNoteSuccess()}
             orderLiveData.observe(this@PurchaseSummaryGuardActivity, this@PurchaseSummaryGuardActivity::showData)
+            lastOrderLiveData.observe(this@PurchaseSummaryGuardActivity, this@PurchaseSummaryGuardActivity::showLastOrder)
             onError.observe(this@PurchaseSummaryGuardActivity) {
                 hideProgressDialog()
                 showErrorAlertString(it)
@@ -91,13 +92,27 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
             mNote = order.notes!![0].note
             mStatus = order.notes!![0].status
             showStatus(mStatus!!)
+        } else {
+            if (!order.lastOrderId.isNullOrEmpty()){
+                showProgressDialog()
+                viewModel.getLastOrder(order.lastOrderId!!)
+            }
+        }
+    }
+
+    private fun showLastOrder(order: Order){
+        hideProgressDialog()
+        if (!order.notes.isNullOrEmpty()){
+            mNote = order.notes!![0].note
+            mStatus = order.notes!![0].status
+            showStatus(mStatus!!)
         }
     }
 
     private fun orderConfirmed() {
         val items = (binding.mList.adapter as ProductGuardAdapter).listSelected
         if (items.isEmpty()){
-            showErrorAlertDismiss(getString(R.string.must_confirm_products))
+            showErrorAlert(getString(R.string.must_confirm_products))
             return
         }
 
