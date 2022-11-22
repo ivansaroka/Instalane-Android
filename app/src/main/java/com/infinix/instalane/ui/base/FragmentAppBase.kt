@@ -2,6 +2,8 @@ package com.infinix.instalane.ui.base
 
 import androidx.fragment.app.Fragment
 import com.infinix.instalane.R
+import com.infinix.instalane.data.remote.ApiErrorParser
+import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.LoaderDialog
 
 open class FragmentAppBase : Fragment() {
@@ -21,5 +23,10 @@ open class FragmentAppBase : Fragment() {
             if (mDialog != null && mDialog!!.isShowing)
                 mDialog?.dismiss()
         }
+    }
+
+    protected fun showErrorAlert(throwable: Throwable?){
+        val text = ApiErrorParser.parseErrorInstalane(requireContext(), throwable)
+        AppDialog.showDialog(requireContext(),getString(R.string.app_name), text)
     }
 }

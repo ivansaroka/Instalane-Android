@@ -23,8 +23,10 @@ class SplashActivity : ActivityAppBase() {
         setContentView(binding.root)
 
         Handler(Looper.myLooper()!!).postDelayed({
-            if (AppPreferences.getUser()==null)
+            if (AppPreferences.getUser()==null){
                 startActivity(Intent(this,LoginActivity::class.java))
+                finish()
+            }
             else {
                 if (AppPreferences.hasBiometric())
                     showBiometricDialog( { goToMain() }, { if (!it) finish() } )

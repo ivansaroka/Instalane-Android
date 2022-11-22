@@ -207,8 +207,11 @@ class MapsActivity : ActivityAppBase(), OnMapReadyCallback {
                                 SingletonLocation.instance.locationSelected = null
                                 if (SingletonLocation.instance.myLocation==null)
                                     SingletonLocation.instance.myLocation = LatLng(loc.latitude, loc.longitude)
-                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SingletonLocation.instance.myLocation!!, 12f))
-                                clearMapAndGetNewData(SingletonLocation.instance.myLocation!!)
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SingletonLocation.instance.myLocation!!, 12f), 1000, object : GoogleMap.CancelableCallback{
+                                    override fun onCancel() { clearMapAndGetNewData(SingletonLocation.instance.myLocation!!) }
+
+                                    override fun onFinish() { clearMapAndGetNewData(SingletonLocation.instance.myLocation!!) }
+                                })
                             }
                         }
                 }

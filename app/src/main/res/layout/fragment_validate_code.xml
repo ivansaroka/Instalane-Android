@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             style="@style/TextStyleBold"
-            android:text="Ingresa el código que recibiste"
+            android:text="Enter the code you received"
             android:textSize="20sp" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             style="@style/TextStyleRegular"
-            android:text="Ingresa tu código aquí"
+            android:text="Enter your code here"
             android:textColor="@color/black"
             android:textSize="12sp" />
 

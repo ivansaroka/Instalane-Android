@@ -16,11 +16,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="@dimen/margin_big"
             style="@style/TextStyleBold"
             android:gravity="center_horizontal"
-            android:text="Te enviaremos un SMS para validar tu número de celular"
+            android:text="We will send you a sms to validate the mobile phone number"
             android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/mCheckTwoFactor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activate 2 factor"/>
 
         <TextView
             android:layout_marginTop="@dimen/margin_app"

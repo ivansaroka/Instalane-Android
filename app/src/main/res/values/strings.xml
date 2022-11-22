@@ -77,11 +77,13 @@
     <string name="delete_description">Are you sure you want to delete your account?</string>
     <string name="successfully_edited">The user was successfully edited</string>
     <string name="want_to_add_biometric">Do you want to enable Biometric ID?</string>
-    <string name="want_to_remove_biometric">Do you want to remote the Biometric ID?</string>
+    <string name="want_to_remove_biometric">Do you want to remove the Biometric ID?</string>
     <string name="biometric_successfully">Biometric ID has been successfully added!</string>
     <string name="empty_shopping">At the moment, you have no purchase history. Make a purchase and you will see it here.</string>
     <string name="empty_membership">At the moment, you have no memberships.</string>
     <string name="empty_notification">You don\'t have notifications.</string>
+    <string name="two_factor_successfully">2-factor authentication has been successfully added!</string>
+    <string name="want_to_disable_biometric">Do you want to disable 2-factor authentication?</string>
 
     <!-- ADD CARD -->
     <string name="add_new_card">Add New Card</string>

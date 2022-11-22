@@ -30,6 +30,9 @@ class User {
     @SerializedName("user_role")
     var userRole: String? = null
 
+    @SerializedName("twofactor")
+    var twofactor: Boolean? = false
+
     @SerializedName("fb_id")
     var fbId: String? = null
     @SerializedName("fb_token")

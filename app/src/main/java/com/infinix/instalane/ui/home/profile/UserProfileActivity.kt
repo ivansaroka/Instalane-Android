@@ -58,12 +58,17 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
         binding.mSwitchFaceId.setOnClickListener { openBiometricDialog() }
 
-        binding.mContAuth.setOnClickListener { result2FactorAuthLauncher.launch(Intent(this, TwoFactorAuthActivity::class.java)) }
+        binding.mContAuth.setOnClickListener { result2FactorAuthLauncher.launch(TwoFactorAuthActivity.getIntent(this, false)) }
     }
 
     private var result2FactorAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            result.data?.getStringExtra("phone")?.apply {
+                viewModel.setTwoFactor(true, this, AppPreferences.getUser()!!.accessToken!!)
+            }
+            AppDialog.showDialog(this@UserProfileActivity,
+                title = getString(R.string.app_name),
+                body = getString(R.string.two_factor_successfully))
         }
     }
 

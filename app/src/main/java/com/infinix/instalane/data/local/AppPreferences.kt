@@ -31,7 +31,7 @@ object AppPreferences {
         return Gson().fromJson(json, User::class.java)
     }
 
-    fun setUser(user: User) = getPreferences().edit()?.putString(USER, Gson().toJson(user))?.apply()
+    fun setUser(user: User?) = getPreferences().edit()?.putString(USER, Gson().toJson(user))?.apply()
 
 
     private fun setDraftProduct(draftProducts: DraftProducts?) = getPreferences().edit()?.putString(DRAFT_PRODUCTS, Gson().toJson(draftProducts))?.apply()

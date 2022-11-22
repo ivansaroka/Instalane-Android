@@ -1,5 +1,6 @@
 package com.infinix.instalane.ui.start.login
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.*
@@ -21,6 +23,7 @@ import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.databinding.ActivityLoginBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.MainActivity
+import com.infinix.instalane.ui.home.profile.twoFactorAuth.TwoFactorAuthActivity
 import com.infinix.instalane.ui.homeGuard.MainGuardActivity
 import com.infinix.instalane.ui.start.forgotPassword.ForgotPasswordActivity
 import com.infinix.instalane.ui.start.register.SelectRoleActivity
@@ -135,8 +138,13 @@ class LoginActivity : ActivityAppBase() {
     private fun loginResultSocialNet(result: Any) { showMain() }
 
     private fun showMain() {
-        if (AppPreferences.getUser()?.isUser()==true)
-            showMainUser()
+        hideProgressDialog()
+        if (AppPreferences.getUser()?.isUser()==true){
+            if (AppPreferences.getUser()!!.twofactor==true)
+                result2FactorAuthLauncher.launch(TwoFactorAuthActivity.getIntent(this, true))
+            else
+                showMainUser()
+        }
         else
             showMainGuard()
     }
@@ -147,6 +155,12 @@ class LoginActivity : ActivityAppBase() {
             Intent(this, MainActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         )
+    }
+
+    private var result2FactorAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            showMainUser()
+        }
     }
 
     private fun showMainGuard() {

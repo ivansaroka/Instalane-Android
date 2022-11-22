@@ -8,8 +8,8 @@ import com.infinix.instalane.data.remote.ApiClient
 import com.infinix.instalane.data.remote.ApiClient.callApi
 import com.infinix.instalane.data.remote.request.EditRequest
 import com.infinix.instalane.data.remote.request.LogoutRequest
+import com.infinix.instalane.data.remote.request.TwoFactorRequest
 import com.infinix.instalane.utils.BaseViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -41,6 +41,24 @@ class UserProfileViewModel(application: Application) : BaseViewModel(application
                 deleteLiveData.postValue("")
             else
                 onError.postValue(it.exceptionOrNull())
+        }
+    }
+
+    fun setTwoFactor(twofactor:Boolean, phone:String?, accessToke:String){
+        viewModelScope.launch {
+            val request = TwoFactorRequest(
+                accessToken = accessToke,
+                twofactor = twofactor,
+                mobileNumber = phone,
+            )
+
+            ApiClient.service::setTwoFactor.callApi(request).collect {
+                if (it.isSuccess) {
+                    it.getOrNull()?.let { user -> AppPreferences.setUser(user) }
+                    editLiveData.postValue(it)
+                } else
+                    onError.postValue(it.exceptionOrNull())
+            }
         }
     }
 
