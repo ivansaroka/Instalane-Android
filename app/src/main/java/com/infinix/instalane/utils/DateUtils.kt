@@ -43,6 +43,7 @@ class DateUtils {
         const val FORMAT_NOTIFICATION_APP = "MM-dd-yy hh:mm aa"
 
         const val FORMAT_ORDER_DATE_COMPLETE = "hh:mm:ss aa MM/dd/yyyy"
+        const val FORMAT_LAST_ACTIVITY = "MM/dd/yyyy"
     }
 
 
@@ -217,13 +218,8 @@ class DateUtils {
     fun calculateDateDifference(date: Date): String {
 
         try {
-            /* val messageDate = convertFromDateToString(date, DATE_SCHEDULE_COMPLETE)
-             val today = convertFromDateToString(Date(), DATE_SCHEDULE_COMPLETE)
-             val myFormat = SimpleDateFormat(DATE_SCHEDULE_COMPLETE)
-
-             val date1: Date = myFormat.parse(messageDate)
-             val date2: Date = myFormat.parse(today)
-             val diff = date2.time - date1.time
+             val date2: Date = Calendar.getInstance().time
+             val diff = date2.time - date.time
              val days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
 
              return when (days) {
@@ -231,35 +227,7 @@ class DateUtils {
                  1 -> "Yesterday"
                  in 2..6 -> convertFromDateToString(date, FORMAT_MESSAGE_WEEK)
                  else -> convertFromDateToString(date, FORMAT_MESSAGE_OLD)
-             }*/
-
-            val yesterdayCalendar = Calendar.getInstance()
-            yesterdayCalendar.add(Calendar.DATE, -1)
-
-            val lastWeekCalendar = Calendar.getInstance()
-            lastWeekCalendar.add(Calendar.DATE, -6)
-            lastWeekCalendar.set(Calendar.HOUR, 0)
-            lastWeekCalendar.set(Calendar.MINUTE, 0)
-            lastWeekCalendar.set(Calendar.SECOND, 0)
-
-            val otherCalendar = Calendar.getInstance()
-            otherCalendar.time = date
-
-            return when {
-                DateUtils.isToday(date.time) ->
-                    "Today"
-
-                yesterdayCalendar.get(Calendar.YEAR) == otherCalendar.get(Calendar.YEAR) &&
-                        yesterdayCalendar.get(Calendar.MONTH) == otherCalendar.get(Calendar.MONTH) &&
-                        yesterdayCalendar.get(Calendar.DATE) == otherCalendar.get(Calendar.DATE) ->
-                    "Yesterday"
-
-                otherCalendar.timeInMillis > lastWeekCalendar.timeInMillis ->
-                    convertFromDateToString(date, FORMAT_MESSAGE_WEEK)
-
-                else ->
-                    convertFromDateToString(date, FORMAT_MESSAGE_OLD)
-            }
+             }
 
         } catch (e: Exception) {
         }

@@ -12,6 +12,7 @@ import com.infinix.instalane.ui.home.profile.changePassword.ChangePasswordActivi
 import com.infinix.instalane.ui.home.profile.editProfile.EditProfileActivity
 import com.infinix.instalane.ui.start.login.LoginActivity
 import com.infinix.instalane.utils.AppDialog
+import com.infinix.instalane.utils.DateUtils
 
 class GuardProfileActivity : ActivityAppBase() {
 
@@ -39,6 +40,25 @@ class GuardProfileActivity : ActivityAppBase() {
         binding.mPhoto.clipToOutline = true
         Glide.with(this).load(user?.profilePicture).placeholder(R.drawable.placeholder_user_profile).circleCrop().into(binding.mPhoto)
 
+        val dateUtils = DateUtils()
+
+        binding.mLastActivity.text = ""
+        if (user?.lastActivity != null) {
+            val sDate = dateUtils.convertDate(user.lastActivity!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_LAST_ACTIVITY)
+            binding.mLastActivity.text = sDate
+        }
+
+        binding.mLoginTime.text = ""
+        if (user?.loginTime != null) {
+            val sDate = dateUtils.convertDate(user.loginTime!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_HOUR)
+            binding.mLoginTime.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
+        }
+
+        binding.mLogoutTime.text = ""
+        if (user?.logoutTime != null) {
+            val sDate = dateUtils.convertDate(user.logoutTime!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_HOUR)
+            binding.mLogoutTime.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
+        }
 
         binding.mCompanyName.text = user!!.region?.company?.name
         binding.mEmployeeID.text = user.employeeId

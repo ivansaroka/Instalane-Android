@@ -40,7 +40,6 @@ class TwoFactorAuthViewModel(application: Application) : BaseViewModel(applicati
                         //validateCodeLiveData.postValue(sucess)
                     }
                 }
-
                 else
                     onError.postValue(it.exceptionOrNull())
             }

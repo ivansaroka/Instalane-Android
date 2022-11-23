@@ -37,6 +37,7 @@ class TwoFactorAuthActivity : ActivityAppBase() {
     private val binding by lazy { ActivityTwoFactorAuthBinding.inflate(layoutInflater) }
     private var phoneNumber :String?=null
     private var accessToken :String?=null
+    private var isFromLogin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +46,12 @@ class TwoFactorAuthActivity : ActivityAppBase() {
 
         accessToken = AppPreferences.getUser()?.accessToken
 
-        var isFromLogin = false
         intent?.getBooleanExtra(ARG_FROM_LOGIN, false)?.apply {
             isFromLogin = this
         }
+
+        if(isFromLogin)
+            phoneNumber = AppPreferences.getUser()?.mobileNumber
 
         val fragment = SendCodeFragment()
         val bundle = Bundle()
@@ -59,7 +62,14 @@ class TwoFactorAuthActivity : ActivityAppBase() {
     }
 
     fun sendCode(phone:String){
-        phoneNumber = phone
+        if(isFromLogin && !phoneNumber.isNullOrEmpty()){
+            if (phoneNumber != phone) {
+                val last = phoneNumber!!.length
+                showErrorAlert("The registered number for this action is ****${phoneNumber!!.substring(last-4, last)} ")
+                return
+            }
+        } else
+            phoneNumber = phone
         showProgressDialog()
         viewModel.sendCode(phone,accessToken!!)
     }

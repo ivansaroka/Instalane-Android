@@ -52,6 +52,13 @@ class User {
     @SerializedName("region_id")
     var region: Region? = null
 
+    @SerializedName("login_time")
+    var loginTime: String? = null
+    @SerializedName("logout_time")
+    var logoutTime: String? = null
+    @SerializedName("last_activity")
+    var lastActivity: String? = null
+
     fun isUser():Boolean { return userRole == ROLE_USER }
 
     class Region {
