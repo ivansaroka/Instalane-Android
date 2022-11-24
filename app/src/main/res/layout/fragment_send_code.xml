@@ -57,6 +57,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPhoneNumber"
                     style="@style/EditTextStyle"
+                    android:hint="+X XXXXXXXXXX"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
