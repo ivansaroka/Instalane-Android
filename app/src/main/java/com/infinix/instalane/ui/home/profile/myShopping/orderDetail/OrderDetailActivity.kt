@@ -111,10 +111,38 @@ class OrderDetailActivity : ActivityAppBase() {
         binding.mTaxes.text = "$${String.format("%.2f", order!!.taxes)}"
         binding.mTotal.text = "$${String.format("%.2f", order!!.amount)}"
 
-
+        Glide.with(this).load(R.drawable.ic_stripe).into(binding.mCardPhoto)
+        binding.mCardBrand.text = "Stripe"
         if (!order.paymentMethodBrand.isNullOrEmpty()){
             binding.mCardData.visible()
-            binding.mCardData.text = "${order.paymentMethodBrand} **** **** **** ${order.paymentMethodLast4}"
+            binding.mCardData.text = "**** **** **** ${order.paymentMethodLast4}"
+
+            when(order.paymentMethodBrand?.toLowerCase()){
+                "visa"-> {
+                    binding.mCardBrand.text = order.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.sample_card).into(binding.mCardPhoto)
+                }
+
+                "mastercard"-> {
+                    binding.mCardBrand.text = order.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.ic_master_card).into(binding.mCardPhoto)
+                }
+
+                "amex"-> {
+                    binding.mCardBrand.text = "American Express"
+                    Glide.with(this).load(R.drawable.ic_american_express).into(binding.mCardPhoto)
+                }
+
+                "discover"-> {
+                    binding.mCardBrand.text = order.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.ic_discover).into(binding.mCardPhoto)
+                }
+                else -> {
+                    binding.mCardBrand.text = "Stripe"
+                    Glide.with(this).load(R.drawable.ic_stripe).into(binding.mCardPhoto)
+                    binding.mCardData.text = "**** **** **** ${order.paymentMethodLast4}"
+                }
+            }
         }
     }
 

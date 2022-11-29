@@ -270,7 +270,8 @@
                         android:id="@+id/mCardPhoto"
                         android:layout_width="@dimen/ic_card_size"
                         android:layout_height="@dimen/ic_card_size"
-                        android:src="@drawable/ic_stripe"
+                        tools:src="@drawable/ic_stripe"
+                        android:scaleType="centerInside"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -286,8 +287,8 @@
                         app:layout_constraintStart_toEndOf="@+id/mCardPhoto">
 
                         <TextView
-                            android:id="@+id/mProfileTitle1"
-                            android:text="Stripe"
+                            android:id="@+id/mCardBrand"
+                            tools:text="Stripe"
                             android:layout_marginStart="@dimen/margin_small"
                             style="@style/ProfileOptionTitleStyle"
                             android:gravity="center_vertical"

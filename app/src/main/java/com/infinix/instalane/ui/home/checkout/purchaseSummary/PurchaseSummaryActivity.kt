@@ -76,9 +76,38 @@ class PurchaseSummaryActivity : ActivityAppBase() {
         generateQR()
         AppPreferences.cleanDraft(mStore!!)
 
+        Glide.with(this).load(R.drawable.ic_stripe).into(binding.mCardPhoto)
+        binding.mCardBrand.text = "Stripe"
         if (!mOrder?.paymentMethodBrand.isNullOrEmpty()){
             binding.mCardData.visible()
-            binding.mCardData.text = "${mOrder?.paymentMethodBrand} **** **** **** ${mOrder?.paymentMethodLast4}"
+            binding.mCardData.text = "**** **** **** ${mOrder!!.paymentMethodLast4}"
+
+            when(mOrder!!.paymentMethodBrand?.toLowerCase()){
+                "visa"-> {
+                    binding.mCardBrand.text = mOrder!!.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.sample_card).into(binding.mCardPhoto)
+                }
+
+                "mastercard"-> {
+                    binding.mCardBrand.text = mOrder!!.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.ic_master_card).into(binding.mCardPhoto)
+                }
+
+                "amex"-> {
+                    binding.mCardBrand.text = "American Express"
+                    Glide.with(this).load(R.drawable.ic_american_express).into(binding.mCardPhoto)
+                }
+
+                "discover"-> {
+                    binding.mCardBrand.text = mOrder!!.paymentMethodBrand?.capitalize()
+                    Glide.with(this).load(R.drawable.ic_discover).into(binding.mCardPhoto)
+                }
+                else -> {
+                    binding.mCardBrand.text = "Stripe"
+                    Glide.with(this).load(R.drawable.ic_stripe).into(binding.mCardPhoto)
+                    binding.mCardData.text = "**** **** **** ${mOrder!!.paymentMethodLast4}"
+                }
+            }
         }
     }
 
