@@ -63,7 +63,8 @@ class TwoFactorAuthActivity : ActivityAppBase() {
 
     fun sendCode(phone:String){
         if(isFromLogin && !phoneNumber.isNullOrEmpty()){
-            if (phoneNumber != phone) {
+            if (phoneNumber!!.replace(" ", "").replace("-", "") !=
+                phone.replace(" ", "").replace("-", "")) {
                 val last = phoneNumber!!.length
                 showErrorAlert("The registered number for this action is ****${phoneNumber!!.substring(last-4, last)} ")
                 return

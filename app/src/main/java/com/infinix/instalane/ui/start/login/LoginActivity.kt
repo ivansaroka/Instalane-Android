@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -140,9 +142,13 @@ class LoginActivity : ActivityAppBase() {
     private fun showMain() {
         hideProgressDialog()
         if (AppPreferences.getUser()?.isUser()==true){
-            if (AppPreferences.getUser()!!.twofactor==true)
+            if (AppPreferences.getUser()!!.twofactor==true){
                 result2FactorAuthLauncher.launch(TwoFactorAuthActivity.getIntent(this, true))
-            else
+                Handler(Looper.myLooper()!!).postDelayed({
+                    binding.confirm.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null)
+                }, 200)
+
+            } else
                 showMainUser()
         }
         else

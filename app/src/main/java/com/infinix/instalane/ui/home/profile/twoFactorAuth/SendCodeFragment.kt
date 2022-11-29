@@ -34,6 +34,8 @@ class SendCodeFragment : FragmentAppBase() {
     private val binding by lazy { FragmentSendCodeBinding.inflate(layoutInflater) }
     private val accessToken by lazy { AppPreferences.getUser()!!.accessToken!! }
 
+    private var isFromLogin = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,12 +44,11 @@ class SendCodeFragment : FragmentAppBase() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var isFromLogin = false
         arguments?.getBoolean(TwoFactorAuthActivity.ARG_FROM_LOGIN, false)?.apply {
             isFromLogin = this
         }
 
-        if (isFromLogin){
+        if (isFromLogin || AppPreferences.getUser() == null){
             AppPreferences.setUser(null)
             binding.mCheckTwoFactor.gone()
         } else {
