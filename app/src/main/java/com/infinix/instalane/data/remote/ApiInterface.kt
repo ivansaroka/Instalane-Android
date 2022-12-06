@@ -103,5 +103,6 @@ interface ApiInterface {
     @POST("validate_code")
     suspend fun validateCode(@Body request: ValidateCodeRequest): Any
 
-
+    @GET("get_faqs")
+    suspend fun getFaqs(): List<Faqs>
 }

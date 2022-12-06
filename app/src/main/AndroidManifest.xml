@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instalane">
         <activity
+            android:name=".ui.home.profile.faqs.FaqsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.start.legal.LegalActivity"
             android:exported="false">
             <meta-data

@@ -68,6 +68,7 @@
     <string name="manage_your_password">Manage your password</string>
     <string name="_2_factor_authentication">2-factor authentication</string>
     <string name="face_id">Biometric ID</string>
+    <string name="faqs">FAQs</string>
     <string name="manage_your_face_id_access">Manage your Biometric ID access</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add_an_extra_layer_of_security">Add an extra layer of security</string>

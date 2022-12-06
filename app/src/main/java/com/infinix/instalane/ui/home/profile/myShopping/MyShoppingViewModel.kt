@@ -24,7 +24,7 @@ class MyShoppingViewModel(application: Application) : BaseViewModel(application)
         viewModelScope.launch {
             ApiClient.service::getPurchaseHistory.callApi(AppPreferences.getUser()!!.accessToken!!, PAGE).collect {
                 if (it.isSuccess)
-                    it.getOrNull()?.let { purchase -> myPurchaseHistoryLiveData.postValue(purchase) }
+                    it.getOrNull()?.let { purchase -> myPurchaseHistoryLiveData.postValue(purchase.sortedByDescending { it.date }) }
                 else
                     onError.postValue(it.exceptionOrNull())
             }

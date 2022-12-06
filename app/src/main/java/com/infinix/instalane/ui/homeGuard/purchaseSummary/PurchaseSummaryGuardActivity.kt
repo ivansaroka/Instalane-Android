@@ -103,7 +103,7 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
     private fun showLastOrder(order: Order){
         hideProgressDialog()
         if (!order.notes.isNullOrEmpty()){
-            mNote = order.notes!![0].note
+            //mNote = order.notes!![0].note
             mStatus = order.notes!![0].status
             showStatus(mStatus!!)
         }

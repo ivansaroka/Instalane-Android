@@ -338,6 +338,48 @@
             <View style="@style/DividerStyle" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mContFaqs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_profile_size"
+                    android:layout_height="@dimen/ic_profile_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_faqs"/>
+
+                <TextView
+                    android:id="@+id/mProfileTitle7"
+                    android:text="@string/faqs"
+                    style="@style/ProfileOptionTitleStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:text="@string/add_an_extra_layer_of_security"
+                    style="@style/ProfileOptionDescriptionStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mProfileTitle7"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/ic_profile_size"
+                    android:layout_height="@dimen/ic_profile_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_arrow_right"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/DividerStyle" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mContDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

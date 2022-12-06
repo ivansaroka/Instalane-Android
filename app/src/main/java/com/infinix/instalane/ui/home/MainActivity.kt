@@ -171,7 +171,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
                     val obj = addresses[0]
                     binding.mLocation.text = if(obj.locality.isEmpty()) obj.locality else obj.subAdminArea
 
-                    viewModel.getNearStores()
+                    viewModel.getVisitedStore()
                     viewModel.getRecommendedStores()
                     viewModel.getDiscounts()
                 }

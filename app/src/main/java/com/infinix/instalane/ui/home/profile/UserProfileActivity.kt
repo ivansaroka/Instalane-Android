@@ -14,6 +14,7 @@ import com.infinix.instalane.databinding.ActivityUserProfileBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.home.profile.changePassword.ChangePasswordActivity
 import com.infinix.instalane.ui.home.profile.editProfile.EditProfileActivity
+import com.infinix.instalane.ui.home.profile.faqs.FaqsActivity
 import com.infinix.instalane.ui.home.profile.memberships.MembershipsActivity
 import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingActivity
 import com.infinix.instalane.ui.home.profile.paymentMethods.PaymentMethodsActivity
@@ -54,6 +55,7 @@ class UserProfileActivity : ActivityAppBase() {
                 delete()
         }
         binding.mLogout.setOnClickListener { logout() }
+        binding.mContFaqs.setOnClickListener { startActivity(Intent(this, FaqsActivity::class.java)) }
 
         binding.mSwitchFaceId.isChecked = AppPreferences.hasBiometric()
         binding.mSwitchFaceId.setOnClickListener { openBiometricDialog() }

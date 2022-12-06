@@ -16,7 +16,6 @@ import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.utils.BaseViewModel
 import com.infinix.instalane.utils.ConstantValue
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -24,14 +23,14 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     val recommendationLiveData = MutableLiveData<List<Store>>()
     val couponLiveData = MutableLiveData<List<Coupon>>()
 
-    fun getNearStores() =
+    fun getVisitedStore() =
         viewModelScope.launch {
             val accessToken = AppPreferences.getUser()!!.accessToken!!
             val lat = null//SingletonLocation.instance.getLocation()!!.latitude
             val long = null//SingletonLocation.instance.getLocation()!!.longitude
             val radius = null//ConstantValue.RADIUS
 
-            ApiClient.service::getStores.callApi(accessToken,lat, long,radius, null).collect {
+            ApiClient.service::getStores.callApi(accessToken,lat, long, radius, null).collect {
                 if (it.isSuccess)
                     it.getOrNull()?.let { stores ->
                         stores.forEach { it.calculateDistance(SingletonLocation.instance.myLocation!!) }
@@ -47,7 +46,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             val accessToken = AppPreferences.getUser()!!.accessToken!!
             val lat = null//SingletonLocation.instance.getLocation()!!.latitude
             val long = null//SingletonLocation.instance.getLocation()!!.longitude
-            val radius = null//ConstantValue.RADIUS
+            val radius = null//ConstantValue.RADIUS * 0.000621371f
 
             ApiClient.service::getStores.callApi(accessToken,lat, long,radius, null).collect {
                 if (it.isSuccess)
