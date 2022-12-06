@@ -85,6 +85,7 @@
     <string name="empty_notification">You don\'t have notifications.</string>
     <string name="two_factor_successfully">2-factor authentication has been successfully added!</string>
     <string name="want_to_disable_biometric">Do you want to disable 2-factor authentication?</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
 
     <!-- ADD CARD -->
     <string name="add_new_card">Add New Card</string>
