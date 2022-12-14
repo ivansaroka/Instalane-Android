@@ -91,6 +91,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         completeData()
+        mustAskForBiometric = true
     }
 
     private fun completeData() {
@@ -102,35 +103,41 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
-        val disposePermission = RxPermissions(this)
-            .request(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ).subscribe { granted: Boolean? ->
-                if (granted != null && granted) {
-                    mMap.isMyLocationEnabled = true
-                    getLocationUpdates()
-                    if(locationRequest!=null) {
-                        fusedLocationClient.requestLocationUpdates(
-                            locationRequest!!,
-                            locationCallback,
-                            Looper.getMainLooper()
-                        )
+        val isGranted = RxPermissions(this).isGranted(Manifest.permission.ACCESS_FINE_LOCATION)
+        if (!isGranted){
+            mustAskForBiometric = false
+            val disposePermission = RxPermissions(this)
+                .request(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ).subscribe { granted: Boolean? ->
+                    if (granted != null && granted) {
+                        mMap.isMyLocationEnabled = true
+                        getLocationUpdates()
+                        getDataAfterAcceptPermission()
                     }
-                    Handler(Looper.myLooper()!!).postDelayed({
-                        fusedLocationClient.lastLocation
-                            .addOnSuccessListener { loc->
-                                if (!locationFound) {
-                                    locationFound = true
-                                    Log.i("GETDATA", "2")
-                                    getData(loc)
-                                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(loc.latitude, loc.longitude), 12f))
-                                }
-                            }
-                    }, 2000)
-
                 }
-            }
+        } else
+            getDataAfterAcceptPermission()
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getDataAfterAcceptPermission(){
+        Handler(Looper.myLooper()!!).postDelayed({
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { loc->
+                    if (!locationFound) {
+                        if (loc!=null){
+                            locationFound = true
+                            Log.i("GETDATA", "2")
+                            getData(loc)
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(loc.latitude, loc.longitude), 12f))
+                        } else
+                            showErrorAlert("Check if your GPS is turned on")
+                    }
+                }
+        }, 2000)
     }
 
     private fun showNearStores(list:List<Store>){
@@ -182,6 +189,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
             showErrorAlert("Check if your GPS is turned on")
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLocationUpdates() {
         locationRequest = LocationRequest()
         locationRequest!!.interval = 50000
@@ -204,5 +212,10 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
                 }
             }
         }
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest!!,
+            locationCallback,
+            Looper.getMainLooper()
+        )
     }
 }
