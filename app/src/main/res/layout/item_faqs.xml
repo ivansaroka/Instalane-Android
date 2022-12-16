@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         style="@style/TextStyleBold"
         android:textSize="@dimen/text_size_semi_big"
-        android:background="@color/grayLight"
+        android:background="@color/green"
+        android:textColor="@color/white"
         android:paddingHorizontal="@dimen/margin_app"
         android:paddingVertical="@dimen/margin_normal"
         android:text="Title"/>

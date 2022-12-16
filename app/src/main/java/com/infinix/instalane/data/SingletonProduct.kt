@@ -24,10 +24,13 @@ class SingletonProduct private constructor() {
         //price_show_in_the_app - discount * tax / 100
         var taxes = 0f
         productList.forEach { prod->
-            if (prod.couponApplied?.discount != null)
-                taxes+= (prod.getPriceByRegion(store?.region) - prod.couponApplied!!.discount!!) * prod.getTaxByRegion(store?.region) / 100
+            val productPrice = prod.getPriceByRegion(store?.region)
+            if (prod.couponApplied?.discount != null){
+                val discountPercent = productPrice * prod.couponApplied!!.discount!! / 100
+                taxes+= (productPrice - discountPercent) * prod.getTaxByRegion(store?.region) / 100
+            }
             else
-                taxes+= (prod.getPriceByRegion(store?.region)) * prod.getTaxByRegion(store?.region) / 100
+                taxes+= productPrice * prod.getTaxByRegion(store?.region) / 100
         }
         return taxes
     }

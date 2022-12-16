@@ -37,6 +37,9 @@ class PurchaseSummaryGuardActivity : ActivityAppBase() {
                 hideProgressDialog()
                 showErrorAlertString(it)
             }
+            onErrorHideDialog.observe(this@PurchaseSummaryGuardActivity) {
+                hideProgressDialog()
+            }
             confirmOrderLiveData.observe(this@PurchaseSummaryGuardActivity) { onSuccess() }
         }
     }

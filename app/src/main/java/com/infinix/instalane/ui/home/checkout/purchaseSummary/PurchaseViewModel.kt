@@ -25,6 +25,7 @@ class PurchaseViewModel(application: Application) : BaseViewModel(application) {
     val addReviewLiveData = MutableLiveData<Any>()
     val addNoteLiveData = MutableLiveData<Any>()
     val confirmOrderLiveData = MutableLiveData<Any>()
+    val onErrorHideDialog = MutableLiveData<Throwable?>()
 
     fun getProducts() =
         viewModelScope.launch {
@@ -48,7 +49,7 @@ class PurchaseViewModel(application: Application) : BaseViewModel(application) {
                 if (it.isSuccess)
                     it.getOrNull()?.let { purchase -> lastOrderLiveData.postValue(purchase) }
                 else
-                    onError.postValue(it.exceptionOrNull())
+                    onErrorHideDialog.postValue(it.exceptionOrNull())
             }
         }
     }

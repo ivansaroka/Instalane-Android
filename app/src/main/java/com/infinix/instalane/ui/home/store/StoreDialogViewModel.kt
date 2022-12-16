@@ -29,7 +29,7 @@ class StoreDialogViewModel(application: Application) : BaseViewModel(application
             ApiClient.service::getCoupons.callApi(AppPreferences.getUser()!!.accessToken!!, store.id, null).collect {
                 if (it.isSuccess)
                     it.getOrNull()?.let { stores ->
-                        couponLiveData.postValue(stores.filter { it.firstPurchase != true })
+                        couponLiveData.postValue(stores.filter { it.firstPurchase != true && !it.code.isNullOrEmpty() })
                     }
                 else
                     onError.postValue(it.exceptionOrNull())
@@ -40,18 +40,13 @@ class StoreDialogViewModel(application: Application) : BaseViewModel(application
         viewModelScope.launch {
             val accessToken = AppPreferences.getUser()!!.accessToken!!
             ApiClient.service::getStoreReviews.callApi(accessToken, store.id!!, PAGE).collect {
-                if (it.isSuccess)
+                if (it.isSuccess){
+                    PAGE++
                     it.getOrNull()?.let { reviews -> reviewLiveData.postValue(reviews) }
+                }
                 else
                     onError.postValue(it.exceptionOrNull())
             }
-
-            /*
-            val list = ArrayList<Review>()
-            for (i in 0.. 5){ list.add(Review()) }
-            reviewLiveData.postValue(list)
-             */
-
         }
 
     fun getNearStores() =

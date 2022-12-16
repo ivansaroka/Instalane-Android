@@ -10,8 +10,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -149,6 +154,10 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
         }
         binding.mStoreVisitedList.adapter = adapter
         binding.mSeeAllStoreVisited.setOnClickListener { startActivity(SeeAllActivity.getIntent(this, getString(R.string.stores_visited))) }
+
+
+        val snapHelper = GravitySnapHelper(Gravity.START)
+        snapHelper.attachToRecyclerView(binding.mStoreVisitedList)
     }
 
     private fun showRecommendedStores(list:List<Store>){
@@ -160,11 +169,17 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
         }
         binding.mRecommendationList.adapter = adapter
         binding.mSeeAllRecommendation.setOnClickListener { startActivity(SeeAllActivity.getIntent(this, getString(R.string.recommendations_near_you))) }
+
+        val snapHelper = GravitySnapHelper(Gravity.START)
+        snapHelper.attachToRecyclerView(binding.mRecommendationList)
     }
 
     private fun showDiscounts(list:List<Coupon>) {
         hideProgressDialog()
         binding.mDiscountList.adapter = DiscountAdapter(list)
+
+        val snapHelper = GravitySnapHelper(Gravity.START)
+        snapHelper.attachToRecyclerView(binding.mDiscountList)
     }
 
     private fun getData(loc:Location?){

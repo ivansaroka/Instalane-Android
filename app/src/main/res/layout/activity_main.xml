@@ -141,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:textColor="@color/textGray"
                         android:layout_marginStart="@dimen/margin_app"
-                        android:text="We choose Markets and close to you."/>
+                        android:text="We choose markets close to you."/>
 
                 </LinearLayout>
 
@@ -199,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:textColor="@color/textGray"
                         android:layout_marginStart="@dimen/margin_app"
-                        android:text="We choose Markets and close to you."/>
+                        android:text="We choose markets close to you."/>
 
                 </LinearLayout>
 

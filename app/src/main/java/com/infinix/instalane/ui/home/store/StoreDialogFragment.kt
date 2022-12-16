@@ -130,10 +130,10 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
     private fun showReviews(list:List<Review>) {
         binding.mSeeAllReviews.visibility = View.INVISIBLE
         if (list.size > 2) {
-            binding.mListReviews.adapter = ReviewAdapter(list.subList(0,2))
+            binding.mListReviews.adapter = ReviewAdapter(ArrayList(list.subList(0,2)))
             binding.mSeeAllReviews.visibility = View.VISIBLE
         } else
-            binding.mListReviews.adapter = ReviewAdapter(list)
+            binding.mListReviews.adapter = ReviewAdapter(ArrayList(list))
 
         binding.mTotalReviews.text = String.format(getString(R.string.total_reviews), list.size)
 

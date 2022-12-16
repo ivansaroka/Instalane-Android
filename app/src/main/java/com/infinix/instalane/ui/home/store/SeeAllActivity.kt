@@ -87,7 +87,7 @@ class SeeAllActivity : ActivityAppBase() {
     }
 
     private fun showReviews(list:List<Review>) {
-        binding.mList.adapter = ReviewAdapter(list)
+        binding.mList.adapter = ReviewAdapter(ArrayList(list))
     }
 
     private fun showNearStores(list:List<Store>){

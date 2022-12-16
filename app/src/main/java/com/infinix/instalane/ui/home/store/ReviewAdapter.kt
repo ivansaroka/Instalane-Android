@@ -7,13 +7,18 @@ import com.infinix.instalane.data.remote.response.Review
 import com.infinix.instalane.databinding.ItemReviewBinding
 import com.infinix.instalane.utils.inflate
 
-class ReviewAdapter(val list : List<Review>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
+class ReviewAdapter(val list : ArrayList<Review>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(list[position])
 
     override fun getItemCount() = list.size
+
+    fun addPage(newPageList : List<Review>){
+        list.addAll(newPageList)
+        notifyItemRangeInserted(list.size - newPageList.size, list.size)
+    }
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_review)) {
 
