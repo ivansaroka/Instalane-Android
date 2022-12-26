@@ -90,7 +90,7 @@ class CheckoutActivity : ActivityAppBase() {
         subtotal = SingletonProduct.instance.getSubtotal()
         //discount = (binding.mListCoupons.adapter as CouponAppliedAdapter).getTotalDiscount(subtotal)
 
-        fee = 1.2f
+        fee = 1.99f
         //taxes = if (!mStore?.regionTax.isNullOrEmpty()) mStore?.regionTax!!.replace(",", ".").toFloat() else 0f
         taxes = SingletonProduct.instance.getTotalTaxes()
 
