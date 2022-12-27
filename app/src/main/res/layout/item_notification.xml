@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mContResult"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,11 +10,13 @@
 
     <TextView
         android:id="@+id/mName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Lorem ipsum"
         style="@style/TextStyleSemiBold"
         android:lines="1"
+        android:layout_marginEnd="@dimen/margin_small"
+        app:layout_constraintEnd_toStartOf="@id/mDate"
         app:layout_constraintStart_toStartOf="parent"
         android:ellipsize="end"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -25,8 +28,6 @@
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         style="@style/TextStyleRegular"
         android:textColor="@color/textGray"
-        android:ellipsize="end"
-        android:maxLines="2"
         android:textSize="@dimen/text_size_small"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
         android:id="@+id/mDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2min ago"
+        tools:text="2min ago"
         style="@style/TextStyleRegular"
         android:textColor="@color/textGray"
         android:textSize="@dimen/text_size_micro_small"

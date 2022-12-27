@@ -9,6 +9,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.infinix.instalane.R
+import com.infinix.instalane.data.SingletonNotification
 import com.infinix.instalane.ui.start.SplashActivity
 
 class AppMessagingService : FirebaseMessagingService() {
@@ -27,14 +28,15 @@ class AppMessagingService : FirebaseMessagingService() {
             NotificationCompat.Builder(this, getString(R.string.notification_channel_id))
                 .setContentTitle(remoteMessage.notification?.title)
                 .setContentText(remoteMessage.notification?.body)
-                .setSmallIcon(R.drawable.ic_app_white)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .build()
 
         NotificationManagerCompat.from(applicationContext).notify(System.currentTimeMillis().toInt(), notification)
-
         Log.i("notification", remoteMessage.data.toString())
+
+        SingletonNotification.instance.onNotificationReceived?.invoke()
     }
 
     override fun onNewToken(token: String) {

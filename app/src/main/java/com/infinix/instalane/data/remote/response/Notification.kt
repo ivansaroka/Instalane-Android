@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 class Notification {
 
     @SerializedName("id")
-    var id: Int? = null
+    var id: String? = null
 
     @SerializedName("coupon")
     var coupon: Coupon? = null

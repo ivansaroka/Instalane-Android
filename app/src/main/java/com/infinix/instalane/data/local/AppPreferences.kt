@@ -23,6 +23,8 @@ object AppPreferences {
 
     private const val DRAFT_PRODUCTS = "DRAFT_PRODUCTS"
 
+    private const val LAST_DATE_NOTIFICATION = "LAST_DATE_NOTIFICATION"
+
     private fun getPreferences() =
         InstalaneApplication.instance.getSharedPreferences(InstalaneApplication.appContext.getString(R.string.app_preference), Context.MODE_PRIVATE)
 
@@ -116,4 +118,12 @@ object AppPreferences {
     fun hasBiometric(): Boolean = getPreferences().getBoolean(HAS_BIOMETRIC, false)
 
     fun setBiometric(hasBiometric: Boolean) = getPreferences().edit()?.putBoolean(HAS_BIOMETRIC, hasBiometric)?.apply()
+
+    fun setLastDateNotification(){
+        getPreferences().edit()?.putLong(LAST_DATE_NOTIFICATION, System.currentTimeMillis())?.apply()
+    }
+
+    fun getLastDateNotification():Long {
+        return getPreferences().getLong(LAST_DATE_NOTIFICATION, 0L)
+    }
 }

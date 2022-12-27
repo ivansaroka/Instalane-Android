@@ -39,7 +39,7 @@ class DateUtils {
         const val FORMAT_EXPIRED = "MMM dd, yyyy"
         const val FORMAT_SHOPPING = "MMMM dd, yyyy"
 
-        const val FORMAT_NOTIFICATION_API = "yyyy-MM-dd hh:mm:ss"
+        const val FORMAT_NOTIFICATION_API = "MM-dd-yyyy hh:mm:ss"
         const val FORMAT_NOTIFICATION_APP = "MM-dd-yy hh:mm aa"
 
         const val FORMAT_ORDER_DATE_COMPLETE = "hh:mm:ss aa MM/dd/yyyy"
@@ -223,7 +223,7 @@ class DateUtils {
              val days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
 
              return when (days) {
-                 0 -> if (DateUtils.isToday(date.time)) "Today" else "Yesterday"
+                 0 -> if (DateUtils.isToday(date.time)) convertFromDateToString(date, FORMAT_HOUR) else "Yesterday"
                  1 -> "Yesterday"
                  in 2..6 -> convertFromDateToString(date, FORMAT_MESSAGE_WEEK)
                  else -> convertFromDateToString(date, FORMAT_MESSAGE_OLD)
@@ -233,29 +233,6 @@ class DateUtils {
         }
 
         return ""
-    }
-
-    fun isSameMinute(date1: Date, date2: Date): Boolean {
-        try {
-            val oldMessage = convertFromDateToString(date1, DATE_SCHEDULE_COMPLETE)
-            val newMessage = convertFromDateToString(date2, DATE_SCHEDULE_COMPLETE)
-
-            val myFormat = SimpleDateFormat(DATE_SCHEDULE_COMPLETE)
-
-            val date1: Date = myFormat.parse(oldMessage)
-            val date2: Date = myFormat.parse(newMessage)
-            val diff = date2.time - date1.time
-            val minutes =
-                TimeUnit.MINUTES.convert(diff.absoluteValue, TimeUnit.MILLISECONDS).toInt()
-            return when (minutes) {
-                0 -> true
-                else -> false
-            }
-
-        } catch (e: Exception) {
-        }
-
-        return false
     }
 
     fun generateEventDateTime(

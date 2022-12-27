@@ -28,6 +28,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonLocation
+import com.infinix.instalane.data.SingletonNotification
 import com.infinix.instalane.data.local.AppPreferences
 import com.infinix.instalane.data.remote.response.Coupon
 import com.infinix.instalane.data.remote.response.Store
@@ -51,6 +52,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
             nearStoreLiveData.observe(this@MainActivity, this@MainActivity::showNearStores)
             recommendationLiveData.observe(this@MainActivity, this@MainActivity::showRecommendedStores)
             couponLiveData.observe(this@MainActivity, this@MainActivity::showDiscounts)
+            notificationLiveData.observe(this@MainActivity, this@MainActivity::checkNotificationIcon)
             onError.observe(this@MainActivity) { hideProgressDialog() }
         }
     }
@@ -71,9 +73,13 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
         binding.mMap.clipToOutline = true
 
         binding.mContProfile.setOnClickListener { startActivity(Intent(this, UserProfileActivity::class.java)) }
-        binding.mNotification.setOnClickListener { startActivity(Intent(this, NotificationActivity::class.java))  }
+        binding.mNotification.setOnClickListener {
+            binding.mNotification.setImageResource(R.drawable.ic_notification)
+            startActivity(Intent(this, NotificationActivity::class.java))
+        }
 
         viewModel.sendDeviceToken()
+        viewModel.getNotifications()
 
         if (AppPreferences.mustShowTutorial()){
             val dialog = ShowTutorialDialog()
@@ -82,6 +88,19 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        SingletonNotification.instance.onNotificationReceived = {
+            checkNotificationIcon(true)
+        }
+    }
+
+    private fun checkNotificationIcon(showRedIcon : Boolean){
+        runOnUiThread {
+            if (showRedIcon)
+                binding.mNotification.setImageResource(R.drawable.ic_notification_on)
+            else
+                binding.mNotification.setImageResource(R.drawable.ic_notification)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

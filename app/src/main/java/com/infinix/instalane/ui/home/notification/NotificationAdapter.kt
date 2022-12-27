@@ -4,10 +4,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Notification
+import com.infinix.instalane.data.remote.response.Review
 import com.infinix.instalane.databinding.ItemNotificationBinding
+import com.infinix.instalane.utils.DateUtils
 import com.infinix.instalane.utils.inflate
 
-class NotificationAdapter(val list : List<Notification>) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
+class NotificationAdapter(val list : ArrayList<Notification>) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
@@ -15,12 +17,27 @@ class NotificationAdapter(val list : List<Notification>) : RecyclerView.Adapter<
 
     override fun getItemCount() = list.size
 
+    fun addPage(newPageList : List<Notification>){
+        list.addAll(newPageList)
+        notifyItemRangeInserted(list.size - newPageList.size, list.size)
+    }
+
+
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_notification)) {
 
         val binding = ItemNotificationBinding.bind(itemView)
 
         fun bind(data: Notification) {
-
+            binding.mName.text = data.title
+            binding.mDescription.text = data.message
+            binding.mDate.text = "Unknown"
+            if (!data.date.isNullOrEmpty()) {
+                val date = DateUtils().convertFromStringToDate(data.date!!, DateUtils.FORMAT_NOTIFICATION_API)
+                if (date != null) {
+                    val sDate =  DateUtils().calculateDateDifference(date)
+                    binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
+                }
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import com.infinix.instalane.data.remote.response.Coupon
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.utils.BaseViewModel
 import com.infinix.instalane.utils.ConstantValue
+import com.infinix.instalane.utils.DateUtils
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
@@ -22,6 +23,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     val nearStoreLiveData = MutableLiveData<List<Store>>()
     val recommendationLiveData = MutableLiveData<List<Store>>()
     val couponLiveData = MutableLiveData<List<Coupon>>()
+    val notificationLiveData = MutableLiveData<Boolean>()
 
     fun getVisitedStore() =
         viewModelScope.launch {
@@ -90,4 +92,32 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 }
             })
     }
+
+    fun getNotifications() =
+        viewModelScope.launch {
+            val accessToken = AppPreferences.getUser()!!.accessToken!!
+            ApiClient.service::getNotifications.callApi(accessToken, 1).collect {
+                if (it.isSuccess){
+                    it.getOrNull()?.let { list ->
+                        val lastDate = AppPreferences.getLastDateNotification()
+                        if (lastDate != 0L){
+                            var contUnread = 0
+                            list.forEach { notification ->
+                                if (!notification.date.isNullOrEmpty()) {
+                                   val date =  DateUtils().convertFromStringToDate(notification.date!!, DateUtils.FORMAT_NOTIFICATION_API)
+                                    if (date?.time!! > lastDate)
+                                        contUnread++
+                                }
+                            }
+                            if (contUnread==0)
+                                notificationLiveData.postValue(false)
+                            else
+                                notificationLiveData.postValue(true)
+                        } else
+                            notificationLiveData.postValue(false)
+                    }
+                }
+                else onError.postValue(it.exceptionOrNull())
+            }
+        }
 }
