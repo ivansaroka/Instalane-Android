@@ -39,7 +39,7 @@ class DateUtils {
         const val FORMAT_EXPIRED = "MMM dd, yyyy"
         const val FORMAT_SHOPPING = "MMMM dd, yyyy"
 
-        const val FORMAT_NOTIFICATION_API = "MM-dd-yyyy hh:mm:ss"
+        const val FORMAT_NOTIFICATION_API = "MM-dd-yyyy HH:mm:ss"
         const val FORMAT_NOTIFICATION_APP = "MM-dd-yy hh:mm aa"
 
         const val FORMAT_ORDER_DATE_COMPLETE = "hh:mm:ss aa MM/dd/yyyy"
@@ -76,9 +76,7 @@ class DateUtils {
     fun convertFromStringToDate(dateToConvert: String, dateFormatIn: String): Date? {
 
         try {
-            val dateFormat = SimpleDateFormat(dateFormatIn)
-            //dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-
+            val dateFormat = SimpleDateFormat(dateFormatIn, Locale.ENGLISH)
             var convertedDate = dateFormat.parse(dateToConvert)
             val convertCalendar = Calendar.getInstance()
             convertCalendar.time = convertedDate
@@ -105,14 +103,6 @@ class DateUtils {
         return output.format(date).capitalize()
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun convertDateTToLocalUTC(date: Date): Date {
-        val output = SimpleDateFormat(DATE_EVENT)
-        output.timeZone = TimeZone.getTimeZone("UTC")
-        val sResult = output.format(date)
-        val newDate = convertFromStringToDate(sResult, DATE_EVENT)
-        return newDate!!
-    }
 
     fun getDayNumberSuffix(day: Int): String {
         if (day in 11..13) {

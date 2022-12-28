@@ -17,6 +17,7 @@ import com.infinix.instalane.utils.BaseViewModel
 import com.infinix.instalane.utils.ConstantValue
 import com.infinix.instalane.utils.DateUtils
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -113,8 +114,10 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                                 notificationLiveData.postValue(false)
                             else
                                 notificationLiveData.postValue(true)
-                        } else
+                        } else {
+                            AppPreferences.setLastDateNotification()
                             notificationLiveData.postValue(false)
+                        }
                     }
                 }
                 else onError.postValue(it.exceptionOrNull())

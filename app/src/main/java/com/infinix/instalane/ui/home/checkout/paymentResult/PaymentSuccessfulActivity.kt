@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import com.google.gson.Gson
 import com.infinix.instalane.InstalaneApplication
 import com.infinix.instalane.R
@@ -52,8 +53,11 @@ class PaymentSuccessfulActivity : ActivityAppBase() {
 
         if (AppPreferences.getUser()?.isUser()==true)
             binding.mTitle.text = getString(R.string.your_payment_was_successful)
-        else
+        else {
             binding.mTitle.text = getString(R.string.order_confirmed)
+            binding.mDescription.visibility = View.GONE
+            binding.mDescription2.visibility = View.GONE
+        }
 
         val mediaPlayer = MediaPlayer.create(this, R.raw.success_payment)
         mediaPlayer.start()

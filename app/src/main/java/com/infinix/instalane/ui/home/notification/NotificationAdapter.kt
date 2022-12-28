@@ -4,10 +4,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Notification
-import com.infinix.instalane.data.remote.response.Review
 import com.infinix.instalane.databinding.ItemNotificationBinding
 import com.infinix.instalane.utils.DateUtils
 import com.infinix.instalane.utils.inflate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NotificationAdapter(val list : ArrayList<Notification>) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
@@ -34,7 +35,11 @@ class NotificationAdapter(val list : ArrayList<Notification>) : RecyclerView.Ada
             if (!data.date.isNullOrEmpty()) {
                 val date = DateUtils().convertFromStringToDate(data.date!!, DateUtils.FORMAT_NOTIFICATION_API)
                 if (date != null) {
-                    val sDate =  DateUtils().calculateDateDifference(date)
+
+                    val timeZone: String = Calendar.getInstance().timeZone.id
+                    val local = Date(date.time + TimeZone.getTimeZone(timeZone).getOffset(date.time))
+
+                    val sDate =  DateUtils().calculateDateDifference(local)
                     binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
                 }
             }

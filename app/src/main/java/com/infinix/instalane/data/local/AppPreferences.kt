@@ -7,6 +7,9 @@ import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.data.remote.response.User
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 object AppPreferences {
     private const val PREFS_NAME = "INSTALANE_PREFENCES"
@@ -120,7 +123,11 @@ object AppPreferences {
     fun setBiometric(hasBiometric: Boolean) = getPreferences().edit()?.putBoolean(HAS_BIOMETRIC, hasBiometric)?.apply()
 
     fun setLastDateNotification(){
-        getPreferences().edit()?.putLong(LAST_DATE_NOTIFICATION, System.currentTimeMillis())?.apply()
+        val date = Date()
+        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        val gmt = Date(sdf.format(date))
+        getPreferences().edit()?.putLong(LAST_DATE_NOTIFICATION, gmt.time)?.apply()
     }
 
     fun getLastDateNotification():Long {

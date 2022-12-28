@@ -14,8 +14,8 @@ android {
         applicationId "com.instalane.app"
         minSdk 24
         targetSdk 32
-        versionCode 11
-        versionName "1.9.1"
+        versionCode 12
+        versionName "1.9.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -62,8 +62,8 @@ android {
             // DEV
             resValue "string", "app_name", "Instalane"
             //applicationIdSuffix '.dev'
-            resValue 'string', 'base_url', '"https://instalane.xanthops.com/api/v1/"'
-            //resValue 'string', 'base_url', '"https://admin.instalaneusa.com/api/v1/"'
+            //resValue 'string', 'base_url', '"https://instalane.xanthops.com/api/v1/"'
+            resValue 'string', 'base_url', '"https://admin.instalaneusa.com/api/v1/"'
             resValue "string", "app_preference", "INSTALANE_PREFENCES_DEV"
             resValue "string", "facebook_app_id", "420617202795316"
             resValue "string", "fb_login_protocol_scheme", "fb420617202795316"
