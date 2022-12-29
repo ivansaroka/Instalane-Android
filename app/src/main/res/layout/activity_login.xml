@@ -42,6 +42,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 style="@style/EditTextStyle"
+                android:hint="@string/_email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,6 +63,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 style="@style/EditTextStyle"
+                android:hint="******"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 

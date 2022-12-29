@@ -21,8 +21,6 @@ class CouponDialogFragment (val coupon: Coupon) : BottomSheetDialogFragment() {
 
     private val binding by lazy { FragmentCouponBinding.inflate(layoutInflater) }
 
-    lateinit var onUse: ()->Unit
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.NoDraggingBottomSheetDialogTheme)
@@ -55,7 +53,6 @@ class CouponDialogFragment (val coupon: Coupon) : BottomSheetDialogFragment() {
         }
 
         binding.mUseCoupon.setOnClickListener {
-            onUse()
             dismiss()
         }
 

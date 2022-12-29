@@ -11,6 +11,8 @@ import com.infinix.instalane.utils.inflate
 
 class DiscountAdapter(val list : List<Coupon>) : RecyclerView.Adapter<DiscountAdapter.ViewHolder>() {
 
+    lateinit var onCouponSelected : (Coupon) -> Unit
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(list[position])
@@ -25,10 +27,11 @@ class DiscountAdapter(val list : List<Coupon>) : RecyclerView.Adapter<DiscountAd
             binding.mPhoto.clipToOutline = true
             Glide.with(itemView.context).load(data.icon).into(binding.mPhoto)
             binding.mDiscount.text = "${data.discount?.toInt()}% off"
-            //binding.mTitle.text = data.name
+            binding.mTitle.text = data.name
             binding.mExtraView.visibility = View.GONE
             if (adapterPosition == list.size-1)
                 binding.mExtraView.visibility = View.VISIBLE
+            itemView.setOnClickListener { onCouponSelected.invoke(data) }
         }
     }
 }

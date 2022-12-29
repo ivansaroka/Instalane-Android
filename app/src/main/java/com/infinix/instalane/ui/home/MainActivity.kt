@@ -2,6 +2,7 @@ package com.infinix.instalane.ui.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
@@ -12,9 +13,6 @@ import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.android.gms.location.LocationCallback
@@ -26,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
 import com.infinix.instalane.R
 import com.infinix.instalane.data.SingletonLocation
 import com.infinix.instalane.data.SingletonNotification
@@ -34,9 +33,11 @@ import com.infinix.instalane.data.remote.response.Coupon
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ActivityMainBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
+import com.infinix.instalane.ui.home.checkout.CheckoutActivity
 import com.infinix.instalane.ui.home.map.MapsActivity
 import com.infinix.instalane.ui.home.notification.NotificationActivity
 import com.infinix.instalane.ui.home.profile.UserProfileActivity
+import com.infinix.instalane.ui.home.store.CouponDialogFragment
 import com.infinix.instalane.ui.home.store.SeeAllActivity
 import com.infinix.instalane.ui.home.store.StoreDialogFragment
 import com.infinix.instalane.utils.ShowTutorialDialog
@@ -49,7 +50,6 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
     private val viewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java].apply {
-            nearStoreLiveData.observe(this@MainActivity, this@MainActivity::showNearStores)
             recommendationLiveData.observe(this@MainActivity, this@MainActivity::showRecommendedStores)
             couponLiveData.observe(this@MainActivity, this@MainActivity::showDiscounts)
             notificationLiveData.observe(this@MainActivity, this@MainActivity::checkNotificationIcon)
@@ -64,6 +64,7 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
     private lateinit var locationCallback: LocationCallback
     private var locationFound = false
     private lateinit var mMap: GoogleMap
+    private var mNotificationStatus = MainViewModel.EMPTY_NOTIFICATION
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,8 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
         binding.mContProfile.setOnClickListener { startActivity(Intent(this, UserProfileActivity::class.java)) }
         binding.mNotification.setOnClickListener {
-            binding.mNotification.setImageResource(R.drawable.ic_notification)
+            if (mNotificationStatus == MainViewModel.UNREAD_NOTIFICATION)
+                binding.mNotification.setImageResource(R.drawable.ic_notification)
             startActivity(Intent(this, NotificationActivity::class.java))
         }
 
@@ -90,16 +92,18 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         SingletonNotification.instance.onNotificationReceived = {
-            checkNotificationIcon(true)
+            checkNotificationIcon( MainViewModel.UNREAD_NOTIFICATION )
         }
     }
 
-    private fun checkNotificationIcon(showRedIcon : Boolean){
+    private fun checkNotificationIcon(notificationStatus : Int){
         runOnUiThread {
-            if (showRedIcon)
-                binding.mNotification.setImageResource(R.drawable.ic_notification_on)
-            else
-                binding.mNotification.setImageResource(R.drawable.ic_notification)
+            mNotificationStatus = notificationStatus
+            when(notificationStatus){
+                MainViewModel.EMPTY_NOTIFICATION ->  binding.mNotification.setImageResource(R.drawable.ic_notification_empty)
+                MainViewModel.ALL_READ ->  binding.mNotification.setImageResource(R.drawable.ic_notification)
+                MainViewModel.UNREAD_NOTIFICATION ->  binding.mNotification.setImageResource(R.drawable.ic_notification_on)
+            }
         }
     }
 
@@ -164,21 +168,6 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
         }, 2000)
     }
 
-    private fun showNearStores(list:List<Store>){
-        hideProgressDialog()
-        val adapter = StoreAdapter(list)
-        adapter.onItemSelected = {
-            val dialog = StoreDialogFragment(it)
-            dialog.show(supportFragmentManager, "")
-        }
-        binding.mStoreVisitedList.adapter = adapter
-        binding.mSeeAllStoreVisited.setOnClickListener { startActivity(SeeAllActivity.getIntent(this, getString(R.string.stores_visited))) }
-
-
-        val snapHelper = GravitySnapHelper(Gravity.START)
-        snapHelper.attachToRecyclerView(binding.mStoreVisitedList)
-    }
-
     private fun showRecommendedStores(list:List<Store>){
         hideProgressDialog()
         val adapter = StoreAdapter(list)
@@ -195,7 +184,12 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
     private fun showDiscounts(list:List<Coupon>) {
         hideProgressDialog()
-        binding.mDiscountList.adapter = DiscountAdapter(list)
+        val adapterDiscount = DiscountAdapter(list)
+        adapterDiscount.onCouponSelected = { coupon ->
+            val dialog = CouponDialogFragment(coupon)
+            dialog.show(supportFragmentManager, "")
+        }
+        binding.mDiscountList.adapter =adapterDiscount
 
         val snapHelper = GravitySnapHelper(Gravity.START)
         snapHelper.attachToRecyclerView(binding.mDiscountList)
@@ -212,7 +206,6 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
                     val obj = addresses[0]
                     binding.mLocation.text = if(obj.locality.isEmpty()) obj.locality else obj.subAdminArea
 
-                    viewModel.getVisitedStore()
                     viewModel.getRecommendedStores()
                     viewModel.getDiscounts()
                 }

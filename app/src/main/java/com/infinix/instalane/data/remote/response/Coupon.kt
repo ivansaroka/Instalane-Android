@@ -10,6 +10,9 @@ class Coupon {
     @SerializedName("code")
     val code: String? = null
 
+    @SerializedName("name")
+    val name: String? = null
+
     @SerializedName("icon")
     val icon: String? = null
 

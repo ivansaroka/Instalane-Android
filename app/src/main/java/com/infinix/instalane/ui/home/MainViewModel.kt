@@ -14,19 +14,23 @@ import com.infinix.instalane.data.remote.request.DeviceTokenRequest
 import com.infinix.instalane.data.remote.response.Coupon
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.utils.BaseViewModel
-import com.infinix.instalane.utils.ConstantValue
 import com.infinix.instalane.utils.DateUtils
 import kotlinx.coroutines.launch
-import java.util.*
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-    val nearStoreLiveData = MutableLiveData<List<Store>>()
     val recommendationLiveData = MutableLiveData<List<Store>>()
     val couponLiveData = MutableLiveData<List<Coupon>>()
-    val notificationLiveData = MutableLiveData<Boolean>()
+    val notificationLiveData = MutableLiveData<Int>()
 
-    fun getVisitedStore() =
+    companion object{
+        const val EMPTY_NOTIFICATION = 0
+        const val ALL_READ = 1
+        const val UNREAD_NOTIFICATION = 2
+    }
+
+
+    fun getRecommendedStores() =
         viewModelScope.launch {
             val accessToken = AppPreferences.getUser()!!.accessToken!!
             val lat = null//SingletonLocation.instance.getLocation()!!.latitude
@@ -34,24 +38,6 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             val radius = null//ConstantValue.RADIUS
 
             ApiClient.service::getStores.callApi(accessToken,lat, long, radius, null).collect {
-                if (it.isSuccess)
-                    it.getOrNull()?.let { stores ->
-                        stores.forEach { it.calculateDistance(SingletonLocation.instance.myLocation!!) }
-                        nearStoreLiveData.postValue(stores)
-                    }
-                else
-                    onError.postValue(it.exceptionOrNull())
-            }
-        }
-
-    fun getRecommendedStores() =
-        viewModelScope.launch {
-            val accessToken = AppPreferences.getUser()!!.accessToken!!
-            val lat = null//SingletonLocation.instance.getLocation()!!.latitude
-            val long = null//SingletonLocation.instance.getLocation()!!.longitude
-            val radius = null//ConstantValue.RADIUS * 0.000621371f
-
-            ApiClient.service::getStores.callApi(accessToken,lat, long,radius, null).collect {
                 if (it.isSuccess)
                     it.getOrNull()?.let { stores ->
                         stores.forEach { it.calculateDistance(SingletonLocation.instance.myLocation!!) }
@@ -66,7 +52,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
         viewModelScope.launch {
             ApiClient.service::getCoupons.callApi(AppPreferences.getUser()!!.accessToken!!, null, null).collect {
                 if (it.isSuccess)
-                    it.getOrNull()?.let { stores -> couponLiveData.postValue(stores) }
+                    it.getOrNull()?.let { stores -> couponLiveData.postValue(stores.filter {!it.code.isNullOrEmpty() }) }
                 else
                     onError.postValue(it.exceptionOrNull())
             }
@@ -100,6 +86,12 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
             ApiClient.service::getNotifications.callApi(accessToken, 1).collect {
                 if (it.isSuccess){
                     it.getOrNull()?.let { list ->
+
+                        if (list.isEmpty()){
+                            notificationLiveData.postValue(EMPTY_NOTIFICATION)
+                            return@let
+                        }
+
                         val lastDate = AppPreferences.getLastDateNotification()
                         if (lastDate != 0L){
                             var contUnread = 0
@@ -111,12 +103,12 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                                 }
                             }
                             if (contUnread==0)
-                                notificationLiveData.postValue(false)
+                                notificationLiveData.postValue(ALL_READ)
                             else
-                                notificationLiveData.postValue(true)
+                                notificationLiveData.postValue(UNREAD_NOTIFICATION)
                         } else {
                             AppPreferences.setLastDateNotification()
-                            notificationLiveData.postValue(false)
+                            notificationLiveData.postValue(ALL_READ)
                         }
                     }
                 }

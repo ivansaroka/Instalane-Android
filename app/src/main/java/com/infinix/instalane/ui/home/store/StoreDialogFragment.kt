@@ -120,7 +120,6 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
 
         adapterOffer.onUse = { coupon ->
             val dialog = CouponDialogFragment(coupon)
-            dialog.onUse = { }
             dialog.show(childFragmentManager, "")
         }
         binding.mList.adapter = adapterOffer

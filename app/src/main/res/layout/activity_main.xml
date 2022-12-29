@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="@dimen/margin_app_middle"
-        android:src="@drawable/ic_notification"/>
+        android:src="@drawable/ic_notification_empty"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -115,65 +115,6 @@
                     android:layout_height="match_parent"/>
 
             </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/margin_app"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TitleHomeStyle"
-                        android:layout_marginHorizontal="@dimen/margin_app"
-                        android:layout_marginVertical="@dimen/margin_normal"
-                        android:text="@string/stores_visited"/>
-
-                    <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/textGray"
-                        android:layout_marginStart="@dimen/margin_app"
-                        android:text="We choose markets close to you."/>
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/mSeeAllStoreVisited"
-                    style="@style/SeeAllStyle"
-                    android:text="@string/see_all"/>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mStoreVisitedList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginTop="@dimen/margin_normal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_store"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mDiscountList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginTop="@dimen/margin_app"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_discount"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,6 +162,19 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_store"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mDiscountList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="@dimen/margin_app"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_discount"/>
+
+
 
 
         </LinearLayout>

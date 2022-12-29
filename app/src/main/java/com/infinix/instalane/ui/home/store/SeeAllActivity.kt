@@ -80,7 +80,6 @@ class SeeAllActivity : ActivityAppBase() {
         val adapterOffer = OfferAdapter(list)
         adapterOffer.onUse = { coupon ->
             val dialog = CouponDialogFragment(coupon)
-            dialog.onUse = { }
             dialog.show(supportFragmentManager, "")
         }
         binding.mList.adapter = adapterOffer
