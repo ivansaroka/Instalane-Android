@@ -61,7 +61,7 @@ class StoreAdapter(val list : List<Store>, private var isSeeAll :Boolean = false
 
             binding.mBubble.visibility = View.GONE
             binding.mBestDiscount.visibility = View.GONE
-            if (data.bestDiscount!=null){
+            if (data.bestDiscount!=null && data.bestDiscount!=0){
                 binding.mBubble.visibility = View.VISIBLE
                 binding.mBestDiscount.visibility = View.VISIBLE
                 binding.mBestDiscount.text = "${data.bestDiscount}% off"

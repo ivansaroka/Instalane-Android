@@ -163,6 +163,31 @@
                 tools:itemCount="10"
                 tools:listitem="@layout/item_store"/>
 
+            <LinearLayout
+                android:id="@+id/mContSearchAgain"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_height="200dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_normal"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:text="@string/there_are_no_stores_near_you"/>
+
+                <TextView
+                    android:id="@+id/mSearchAgain"
+                    style="@style/SeeAllStyle"
+                    android:layout_margin="0dp"
+                    android:text="@string/search_again"/>
+
+
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mDiscountList"
                 android:layout_width="match_parent"

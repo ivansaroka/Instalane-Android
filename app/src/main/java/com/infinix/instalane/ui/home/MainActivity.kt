@@ -40,7 +40,10 @@ import com.infinix.instalane.ui.home.profile.UserProfileActivity
 import com.infinix.instalane.ui.home.store.CouponDialogFragment
 import com.infinix.instalane.ui.home.store.SeeAllActivity
 import com.infinix.instalane.ui.home.store.StoreDialogFragment
+import com.infinix.instalane.utils.AppDialog
 import com.infinix.instalane.utils.ShowTutorialDialog
+import com.infinix.instalane.utils.gone
+import com.infinix.instalane.utils.visible
 import com.tbruyelle.rxpermissions3.RxPermissions
 import java.io.IOException
 import java.util.*
@@ -170,6 +173,15 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
     private fun showRecommendedStores(list:List<Store>){
         hideProgressDialog()
+
+        if (list.isEmpty()) {
+            showSearchAgain()
+            return
+        }
+
+        binding.mRecommendationList.visible()
+        binding.mContSearchAgain.gone()
+
         val adapter = StoreAdapter(list)
         adapter.onItemSelected = {
             val dialog = StoreDialogFragment(it)
@@ -180,6 +192,21 @@ class MainActivity : ActivityAppBase(), OnMapReadyCallback {
 
         val snapHelper = GravitySnapHelper(Gravity.START)
         snapHelper.attachToRecyclerView(binding.mRecommendationList)
+    }
+
+    private fun showSearchAgain(){
+        binding.mRecommendationList.gone()
+        binding.mContSearchAgain.visible()
+        binding.mSearchAgain.setOnClickListener {
+
+            AppDialog.showDialog(this, getString(R.string.app_name), getString(R.string.do_you_want_to_search),
+                getString(R.string._yes), getString(R.string._no), confirmListener = object : AppDialog.ConfirmListener{
+                    override fun onClick() {
+                        showProgressDialog()
+                        viewModel.getRecommendedStores()
+                    }
+                })
+        }
     }
 
     private fun showDiscounts(list:List<Coupon>) {
