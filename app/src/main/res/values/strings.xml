@@ -222,4 +222,6 @@
     <string name="search_again">Search again</string>
     <string name="do_you_want_to_search">Do you want to search for stores again in a larger area?</string>
 
+    <string name="are_you_sure_delete_notification">Are you sure you want to delete this notification?</string>
+
 </resources>

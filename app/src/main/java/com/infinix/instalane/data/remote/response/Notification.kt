@@ -1,6 +1,8 @@
 package com.infinix.instalane.data.remote.response
 
 import com.google.gson.annotations.SerializedName
+import com.infinix.instalane.utils.DateUtils
+import java.util.*
 
 class Notification {
 
@@ -18,5 +20,14 @@ class Notification {
 
     @SerializedName("created_datetime")
     var date: String? = null
+
+    fun convertToDate() : Date? {
+        val date = DateUtils().convertFromStringToDate(date!!, DateUtils.FORMAT_NOTIFICATION_API)
+        if (date != null) {
+            val timeZone: String = Calendar.getInstance().timeZone.id
+            return Date(date.time + TimeZone.getTimeZone(timeZone).getOffset(date.time))
+        }
+        return null
+    }
 
 }

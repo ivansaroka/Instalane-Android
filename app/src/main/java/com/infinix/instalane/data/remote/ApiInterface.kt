@@ -76,6 +76,9 @@ interface ApiInterface {
     @GET("get_notifications")
     suspend fun getNotifications(@Query("access_token") accessToken: String, @Query("page") page: Int): List<Notification>
 
+    @POST("hide_notification")
+    suspend fun hideNotification(@Body request: HideNotificationRequest): Any
+
     @GET("get_order")
     suspend fun getOrder(@Query("access_token") accessToken: String, @Query("order_id") orderId: String): Order
 

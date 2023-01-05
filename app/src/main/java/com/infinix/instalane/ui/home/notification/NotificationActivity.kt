@@ -11,6 +11,7 @@ import com.infinix.instalane.data.remote.response.Notification
 import com.infinix.instalane.databinding.ActivityNotificationBinding
 import com.infinix.instalane.ui.base.ActivityAppBase
 import com.infinix.instalane.ui.base.EmptyAdapter
+import com.infinix.instalane.utils.AppDialog
 
 class NotificationActivity : ActivityAppBase() {
 
@@ -63,6 +64,21 @@ class NotificationActivity : ActivityAppBase() {
                 (binding.mList.adapter as NotificationAdapter).addPage(list)
                 if (list.isEmpty())
                     endOfPage = true
+            }
+
+            (binding.mList.adapter as NotificationAdapter).onDeleteNotification = { notification, pos ->
+                AppDialog.showDialog(this,
+                    title= getString(R.string.app_name),
+                    body = getString(R.string.are_you_sure_delete_notification),
+                    confirm = getString(R.string._yes),
+                    cancel = getString(R.string._no),
+                    confirmListener =  object : AppDialog.ConfirmListener {
+                        override fun onClick() {
+                            viewModel.removeNotification(notification)
+                            (binding.mList.adapter as NotificationAdapter).removeNotification(pos)
+                        }
+                    }
+                )
             }
         }
 

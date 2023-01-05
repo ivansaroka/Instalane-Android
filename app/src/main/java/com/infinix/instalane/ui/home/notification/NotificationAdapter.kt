@@ -18,11 +18,17 @@ class NotificationAdapter(val list : ArrayList<Notification>) : RecyclerView.Ada
 
     override fun getItemCount() = list.size
 
+    var onDeleteNotification : ((Notification, Int) -> Unit?)? =null
+
     fun addPage(newPageList : List<Notification>){
         list.addAll(newPageList)
         notifyItemRangeInserted(list.size - newPageList.size, list.size)
     }
 
+    fun removeNotification(pos:Int){
+        list.removeAt(pos)
+        notifyItemRemoved(pos)
+    }
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_notification)) {
 
@@ -42,6 +48,11 @@ class NotificationAdapter(val list : ArrayList<Notification>) : RecyclerView.Ada
                     val sDate =  DateUtils().calculateDateDifference(local)
                     binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
                 }
+            }
+
+            binding.mContButtons.setOnClickListener {
+                binding.swipeLayout.close()
+                onDeleteNotification?.invoke(data, absoluteAdapterPosition)
             }
         }
     }

@@ -24,7 +24,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
     val couponLiveData = MutableLiveData<List<Coupon>>()
     val notificationLiveData = MutableLiveData<Int>()
     var radius = 0
-    
+
     companion object{
         const val EMPTY_NOTIFICATION = 0
         const val ALL_READ = 1
