@@ -17,6 +17,7 @@ import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingViewModel
 import com.infinix.instalane.utils.*
 import net.glxn.qrgen.android.QRCode
 import net.glxn.qrgen.core.image.ImageType
+import java.util.*
 
 class OrderDetailActivity : ActivityAppBase() {
 
@@ -59,8 +60,18 @@ class OrderDetailActivity : ActivityAppBase() {
 
             binding.mNameStore.text = mPurchaseHistory?.store?.name
             binding.mAddress.text = mPurchaseHistory?.store?.address
-            val sDate = DateUtils().convertDate(mPurchaseHistory?.date!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_ORDER_DATE_COMPLETE)
-            binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
+
+            binding.mDate.text = ""
+            binding.mPhoto.setImageResource(0)
+            val date = DateUtils().convertFromStringToDate(mPurchaseHistory?.date!!, DateUtils.FORMAT_ORDER_API)
+            if (date != null) {
+                val timeZone: String = Calendar.getInstance().timeZone.id
+                val local = Date(date.time + TimeZone.getTimeZone(timeZone).getOffset(date.time))
+                val sDate =  DateUtils().convertFromDateToString(local, DateUtils.FORMAT_ORDER_DATE_COMPLETE)
+                binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
+            }
+            //val sDate = DateUtils().convertDate(mPurchaseHistory?.date!!, DateUtils.DATE_DEFAULT_API, DateUtils.FORMAT_ORDER_DATE_COMPLETE)
+            //binding.mDate.text = sDate.replace("a. m.", "AM").replace("p. m.", "PM")
             Glide.with(this).load(mPurchaseHistory?.store?.picture).into(binding.mPhoto)
         }
 

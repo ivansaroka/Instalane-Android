@@ -156,6 +156,7 @@ class LoginActivity : ActivityAppBase() {
     }
 
     private fun showMainUser() {
+        AppPreferences.setRememberMe(binding.mRememberMe.isChecked)
         hideProgressDialog()
         startActivity(
             Intent(this, MainActivity::class.java)
@@ -170,6 +171,7 @@ class LoginActivity : ActivityAppBase() {
     }
 
     private fun showMainGuard() {
+        AppPreferences.setRememberMe(binding.mRememberMe.isChecked)
         hideProgressDialog()
         startActivity(
             Intent(this, MainGuardActivity::class.java)

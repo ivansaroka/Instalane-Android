@@ -40,9 +40,10 @@ class DateUtils {
         const val FORMAT_SHOPPING = "MMMM dd, yyyy"
 
         const val FORMAT_NOTIFICATION_API = "MM-dd-yyyy HH:mm:ss"
+        const val FORMAT_ORDER_API = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         const val FORMAT_NOTIFICATION_APP = "MM-dd-yy hh:mm aa"
 
-        const val FORMAT_ORDER_DATE_COMPLETE = "hh:mm:ss aa MM/dd/yyyy"
+        const val FORMAT_ORDER_DATE_COMPLETE = "HH:mm:ss MM/dd/yyyy"
         const val FORMAT_LAST_ACTIVITY = "MM/dd/yyyy"
     }
 

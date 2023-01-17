@@ -16,6 +16,7 @@ object AppPreferences {
 
     private const val USER = "USER"
     private const val DEVICE_TOKEN = "DEVICE_TOKEN"
+    private const val REMEMBER_ME = "REMEMBER_ME"
 
     private const val SERVER_CLIENT_ID = "SERVER_CLIENT_ID"
     private const val CLIENT_SECRET = "CLIENT_SECRET"
@@ -38,6 +39,9 @@ object AppPreferences {
 
     fun setUser(user: User?) = getPreferences().edit()?.putString(USER, Gson().toJson(user))?.apply()
 
+    fun setRememberMe(rememberMe:Boolean){ getPreferences().edit()?.putBoolean(REMEMBER_ME, rememberMe)?.apply() }
+
+    fun isRememberMe():Boolean {return getPreferences().getBoolean(REMEMBER_ME, false)}
 
     private fun setDraftProduct(draftProducts: DraftProducts?) = getPreferences().edit()?.putString(DRAFT_PRODUCTS, Gson().toJson(draftProducts))?.apply()
 

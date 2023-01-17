@@ -111,14 +111,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="@string/store_name"
+                    android:text="@string/region"
                     style="@style/ProfileGuardOptionTitleStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
                 <TextView
-                    android:id="@+id/mStoreName"
+                    android:id="@+id/mRegionName"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />
@@ -140,7 +140,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/mStoreId"
+                    android:id="@+id/mStoreName"
                     style="@style/ProfileGuardOptionDescriptionStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     />

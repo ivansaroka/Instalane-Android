@@ -52,6 +52,9 @@ class User {
     @SerializedName("region_id")
     var region: Region? = null
 
+    @SerializedName("store_id")
+    var store: Store? = null
+
     @SerializedName("login_time")
     var loginTime: String? = null
     @SerializedName("logout_time")
@@ -64,6 +67,9 @@ class User {
     class Region {
         @SerializedName("id")
         var id: String? = null
+
+        @SerializedName("name")
+        var name: String? = null
 
         @SerializedName("company_id")
         var company: Company? = null

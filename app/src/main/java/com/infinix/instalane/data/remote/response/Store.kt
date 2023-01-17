@@ -37,7 +37,7 @@ class Store {
     @SerializedName("can_open")
     var canOpen: Boolean? = null
 
-    var distance: Float = 0f
+    var distance: Float? = 0f
 
     @SerializedName("region_id")
     var region: Region? = null
@@ -114,7 +114,7 @@ class Store {
 
 
         }
-        return distance * MILE
+        return distance!! * MILE
     }
 
     fun hasLocation():Boolean {

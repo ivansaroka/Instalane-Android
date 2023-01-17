@@ -19,6 +19,7 @@ import com.infinix.instalane.ui.home.profile.memberships.MembershipsActivity
 import com.infinix.instalane.ui.home.profile.myShopping.MyShoppingActivity
 import com.infinix.instalane.ui.home.profile.paymentMethods.PaymentMethodsActivity
 import com.infinix.instalane.ui.home.profile.twoFactorAuth.TwoFactorAuthActivity
+import com.infinix.instalane.ui.start.legal.LegalActivity
 import com.infinix.instalane.ui.start.login.LoginActivity
 import com.infinix.instalane.utils.AppDialog
 
@@ -48,6 +49,10 @@ class UserProfileActivity : ActivityAppBase() {
         binding.mContMyShopping.setOnClickListener { startActivity(Intent(this, MyShoppingActivity::class.java)) }
         binding.mContMemberships.setOnClickListener { startActivity(Intent(this, MembershipsActivity::class.java)) }
         binding.mContPassword.setOnClickListener { startActivity(Intent(this, ChangePasswordActivity::class.java)) }
+
+        binding.mContPrivacyPolicy.setOnClickListener { startActivity(LegalActivity.getIntent(this, true)) }
+        binding.mContTermsAndCondition.setOnClickListener { startActivity(LegalActivity.getIntent(this, false)) }
+
         binding.mContDelete.setOnClickListener {
             if (AppPreferences.hasBiometric())
                 showBiometricDialog( { delete() }, { } )

@@ -73,6 +73,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/mRememberMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TextStyleRegular"
@@ -176,7 +177,6 @@
             android:layout_height="50dp"
             style="@style/StyleButtonApp"
             android:elevation="@dimen/card_elevation"
-            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_normal"
             android:backgroundTint="@color/gray_button"
             android:orientation="horizontal">

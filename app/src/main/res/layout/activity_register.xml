@@ -136,7 +136,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPasscode"
                 style="@style/EditTextStyle"
-                android:hint="******"
                 android:inputType="textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
 

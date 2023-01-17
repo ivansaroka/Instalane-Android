@@ -10,6 +10,7 @@ import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Order
 import com.infinix.instalane.databinding.ActivityPaymentErrorBinding
 import com.infinix.instalane.utils.DateUtils
+import java.util.*
 
 class OrderErrorActivity : AppCompatActivity() {
 
@@ -33,10 +34,21 @@ class OrderErrorActivity : AppCompatActivity() {
 
         binding.mGuard.text = mOrder!!.guard?.fullname
         binding.mAddress.text = mOrder!!.store?.name
-        val sDate = DateUtils().convertDate(mOrder!!.updatedAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_ORDER_DATE)
-        val sTime = DateUtils().convertDate(mOrder!!.updatedAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_HOUR)
-        binding.mDate.text = sDate
-        binding.mTime.text = sTime
+
+        val date = DateUtils().convertFromStringToDate(mOrder!!.createdAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT)
+        if (date != null) {
+            val timeZone: String = Calendar.getInstance().timeZone.id
+            val local = Date(date.time + TimeZone.getTimeZone(timeZone).getOffset(date.time))
+            val sDate =  DateUtils().convertFromDateToString(local, DateUtils.FORMAT_ORDER_DATE)
+            val sTime = DateUtils().convertFromDateToString(local, DateUtils.FORMAT_HOUR)
+            binding.mDate.text = sDate
+            binding.mTime.text = sTime.replace("a. m.", "AM").replace("p. m.", "PM")
+        }else{
+            val sDate = DateUtils().convertDate(mOrder!!.createdAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_ORDER_DATE)
+            val sTime = DateUtils().convertDate(mOrder!!.createdAt!!, DateUtils.DATE_TIME_FORMAT_DEFAULT, DateUtils.FORMAT_HOUR)
+            binding.mDate.text = sDate
+            binding.mTime.text = sTime
+        }
 
         val mediaPlayer = MediaPlayer.create(this, R.raw.error_payment)
         mediaPlayer.start()

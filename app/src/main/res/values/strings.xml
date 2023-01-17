@@ -173,8 +173,9 @@
 
     <!-- PROFILE GUARD -->
     <string name="company_name">Company Name</string>
+    <string name="region">Region</string>
     <string name="store_name">Store Name</string>
-    <string name="store">#Store</string>
+    <string name="store">Store</string>
     <string name="employeed_id">Employee ID</string>
     <string name="last_activity">Last activity</string>
     <string name="login_time">Login time</string>

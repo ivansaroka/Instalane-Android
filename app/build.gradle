@@ -14,8 +14,8 @@ android {
         applicationId "com.instalane.app"
         minSdk 24
         targetSdk 32
-        versionCode 13
-        versionName "1.9.3"
+        versionCode 15
+        versionName "1.9.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
