@@ -39,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Washington Food Plaza"
+            tools:text="Washington Food Plaza"
+            android:text="-"
             android:textSize="@dimen/text_size_big_title"
             app:layout_constraintTop_toBottomOf="@+id/mPhoto"
             tools:layout_editor_absoluteX="16dp" />
@@ -68,7 +69,8 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/textGray"
                     android:drawableStart="@drawable/ic_pin_address"
-                    android:text="1337 Washington Ave, Miami Beach, FL 33139"
+                    tools:text="1337 Washington Ave, Miami Beach, FL 33139"
+                    android:text="-"
                     android:textSize="@dimen/text_size_small" />
 
                 <TextView
@@ -79,7 +81,8 @@
                     android:textColor="@color/textBlack"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/text_size_small"
-                    android:text="14:57:50 11/16/2022"/>
+                    android:text="-"
+                    tools:text="14:57:50 11/16/2022"/>
 
                 <TextView
                     style="@style/TextStyleBold"
@@ -128,7 +131,7 @@
                         android:id="@+id/mSubtotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$38.50"
+                        android:text="$0.00"
                         android:textSize="@dimen/text_size_small"
                         style="@style/TextStyleBold"/>
 
@@ -153,7 +156,7 @@
                         android:id="@+id/mDiscount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$2.80"
+                        android:text="$0.00"
                         android:textSize="@dimen/text_size_small"
                         style="@style/TextStyleBold"/>
 
@@ -178,7 +181,7 @@
                         android:id="@+id/mFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$1.50"
+                        android:text="$0.00"
                         android:textSize="@dimen/text_size_small"
                         style="@style/TextStyleBold"/>
 
@@ -203,7 +206,7 @@
                         android:id="@+id/mTaxes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$0.78"
+                        tools:text="$0.00"
                         android:textSize="@dimen/text_size_small"
                         style="@style/TextStyleBold"/>
 
@@ -236,7 +239,7 @@
                             style="@style/TextStyleBold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$35.70"
+                            android:text="$0.00"
                             android:textSize="@dimen/text_size_big" />
 
                         <View
