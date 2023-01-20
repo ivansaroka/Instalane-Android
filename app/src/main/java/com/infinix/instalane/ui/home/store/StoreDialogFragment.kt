@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Coupon
+import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Review
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.FragmentStoreBinding
@@ -24,6 +25,7 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
     private val viewModel by lazy {
         ViewModelProvider(this)[StoreDialogViewModel::class.java].apply {
             couponLiveData.observe(this@StoreDialogFragment, this@StoreDialogFragment::showData)
+            productsWithCouponLiveData.observe(this@StoreDialogFragment, this@StoreDialogFragment::showProductsWithDiscount)
             reviewLiveData.observe(this@StoreDialogFragment, this@StoreDialogFragment::showReviews)
             onError.observe(this@StoreDialogFragment) {  }
         }
@@ -104,7 +106,7 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
     }
 
     private fun showData(list:List<Coupon>) {
-        if (list.isNullOrEmpty()){
+        if (list.isEmpty()){
             binding.mContBestOffers.visibility = View.GONE
             return
         }
@@ -124,6 +126,14 @@ class StoreDialogFragment (private val store: Store) : BottomSheetDialogFragment
         }
         binding.mList.adapter = adapterOffer
         binding.mSeeAllOffers.setOnClickListener { startActivity(SeeAllActivity.getIntent(requireContext(), getString(R.string.best_offers), store)) }
+    }
+
+    private fun showProductsWithDiscount(list:List<Product>) {
+        if (list.isEmpty()){
+            binding.mContBestOffers.visibility = View.GONE
+            return
+        }
+        binding.mList.adapter = ProductWithDiscountAdapter(list, store)
     }
 
     private fun showReviews(list:List<Review>) {

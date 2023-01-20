@@ -3,11 +3,13 @@ package com.infinix.instalane.ui.home.store
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.infinix.instalane.R
 import com.infinix.instalane.data.remote.response.Coupon
+import com.infinix.instalane.data.remote.response.Product
 import com.infinix.instalane.data.remote.response.Review
 import com.infinix.instalane.data.remote.response.Store
 import com.infinix.instalane.databinding.ActivitySeeAllBinding
@@ -19,6 +21,7 @@ class SeeAllActivity : ActivityAppBase() {
     private val viewModel by lazy {
         ViewModelProvider(this)[StoreDialogViewModel::class.java].apply {
             couponLiveData.observe(this@SeeAllActivity, this@SeeAllActivity::showDiscounts)
+            productsWithCouponLiveData.observe(this@SeeAllActivity, this@SeeAllActivity::showProductsWithDiscount)
             reviewLiveData.observe(this@SeeAllActivity, this@SeeAllActivity::showReviews)
             nearLiveData.observe(this@SeeAllActivity, this@SeeAllActivity::showNearStores)
             recommendationLiveData.observe(this@SeeAllActivity, this@SeeAllActivity::showRecommendedStores)
@@ -83,6 +86,13 @@ class SeeAllActivity : ActivityAppBase() {
             dialog.show(supportFragmentManager, "")
         }
         binding.mList.adapter = adapterOffer
+    }
+
+    private fun showProductsWithDiscount(list:List<Product>) {
+        intent.getStringExtra(ARG_STORE).apply {
+            val store = Gson().fromJson(this, Store::class.java)
+            binding.mList.adapter = ProductWithDiscountAdapter(list, store)
+        }
     }
 
     private fun showReviews(list:List<Review>) {

@@ -102,7 +102,7 @@
             android:text="INSTA40%OFF"
             android:paddingStart="10dp"
             android:gravity="center"
-            android:background="@drawable/bg_coupon_ticket"
+            android:background="@drawable/bg_coupon_ticket_green"
             android:layout_marginTop="@dimen/margin_small"
             style="@style/TextStyleSemiBold"
             android:textColor="@color/white"

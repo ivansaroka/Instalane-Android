@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mContAll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingVertical="@dimen/margin_small"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:id="@+id/mPhoto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/sample_product"/>
+
+    <TextView
+        android:id="@+id/mName"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Jalapeño"
+        style="@style/TextStyleSemiBold"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_small"
+        android:layout_marginHorizontal="@dimen/margin_app"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mPhoto"/>
+
+    <TextView
+        android:id="@+id/mPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="$12.00"
+        android:visibility="gone"
+        style="@style/TextStyleBold"
+        android:textSize="@dimen/text_size_small"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textColor="@color/orange"
+        android:layout_marginHorizontal="@dimen/margin_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mName"
+        app:layout_constraintStart_toEndOf="@+id/mPhoto"/>
+
+
+    <View
+        android:id="@+id/mLineDivider"
+        style="@style/DividerStyle"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintStart_toEndOf="@+id/mPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/mPhoto"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

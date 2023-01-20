@@ -70,6 +70,10 @@ interface ApiInterface {
     @GET("get_product")
     suspend fun getProduct(@Query("access_token") accessToken: String, @Query("company_id") companyId: String, @Query("product_id") productId: Int?=null, @Query("code") code:String?=null): List<Product>
 
+    @POST("get_many_products")
+    suspend fun getManyProducts(@Body request : ManyProductsRequest): List<Product>
+
+
     @GET("get_categories")
     suspend fun getCategories(@Query("access_token") accessToken: String): List<Category>
 
